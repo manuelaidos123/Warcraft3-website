@@ -1,0 +1,282 @@
+p {
+    font-size: 2em;
+    text-align: center;
+}
+
+h3 {
+    font-size: 2em;
+    text-align: center;
+}
+
+.item {
+    background-color: cyan;
+    text-align: center;
+    color: white;
+    padding: 1vw;
+}
+
+.headerNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+}
+
+.navItem {
+    background-color: cyan;
+    text-align: center;
+    color: white;
+    padding: 1vw;
+}
+
+.headerContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    margin: 1vw 1vw
+}
+
+.homeWelcome {
+    padding: 20vh 10vw;
+}
+
+.homeText {
+    text-align: center;
+}
+
+.imageBoxReforged {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 15px;
+    margin: 2vw 2vw;
+    padding: 5vw 1vh
+
+}
+
+.imageItem1 {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.imageItem2 {
+    grid-column-start: 4;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.imageItem3 {
+    grid-column-start: 4;
+    grid-column-end: 6;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+
+
+.imageBig {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image {
+    height: 100%;
+    width: 100%;
+
+    /*object-fit: cover;*/
+}
+ 
+.infoWarcraft {
+    margin: 2vw 2vw;
+    padding-left: 5vw;
+    padding-right: 5vw; 
+}
+
+.infoWarcraftHeader {
+    text-align: center;
+    font-size: 2em;
+}
+
+.infoWarcraftParagraph {
+    padding: 2vw;
+    padding-left: 14vw;
+    padding-right: 14vw;
+    font-size: 2em;
+    margin-bottom: 0;
+}
+
+.warcraftPros {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 4vw 4vw;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.prosItem {
+    padding: 2vw;
+    max-width: 20vw;
+    margin: 1vw;
+    margin-top: 10vh;
+    margin-bottom: 0;
+    min-height: 45vh;
+    text-align: center;
+    justify-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    /*box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;*/
+    border-radius: 100px;
+}
+
+.proImage {
+    width: 144px;
+    height: 144px;
+
+}
+
+.prosItem h3 {
+    font-size: 3em;
+    text-align: center;
+}
+
+.prosItem p {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.enrollPart {
+    padding: 2vw;
+    margin-top: 15vh;
+    margin-bottom: 15vh;
+
+}
+
+.enroll {
+    display: flex;
+    flex-direction: row;
+    justify-content: center!important;
+    flex-wrap: wrap;
+    margin-left: 30vw;
+    margin-right: 30vw;
+    padding-left: 2vw;
+}
+
+.enroll p {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 7vh;
+}
+
+.enroll h3 {
+    font-size: 3em;
+    text-align: center;
+}
+
+.textBox {
+    width: 60%;
+    padding: 0.5rem 0.75rem;
+    height: 43px;
+    font-size: 1.5em;
+}
+
+.submitButton {
+    background-color: #2f89fc;
+    border-color: #2f89fc;
+    width: 20%;
+    font-size: 1.5em;
+    color: white;
+}
+
+.submitButton:hover {
+    background-color: #2f89fc;
+    border-color: #2f89fc;
+    width: 20%;
+    font-size: 1.5em;
+    color: white;
+    opacity: 0.7;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 4em 0;
+    background: #282d32;
+    color: #f0f9ff;
+
+}
+
+.listContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.listLeft {
+    margin-left: 5vw;
+    padding: 20px;
+}
+
+.listRight{
+    margin-right: 5vw;
+    padding: 20px;
+}
+
+
+.companyInfo {
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+}
+
+.socialIcon {
+    width: 50px;
+    height: 50px;
+    border: solid black;
+    border-radius: 40%;
+    padding: 15px;
+    margin: 15px;
+}
+
+.socialLinks {
+    margin-left: 20vw;
+    margin-right: 20vw;
+}
+
+.footer p {
+    opacity: 0.5;
+}
+
+.footerContainer {
+    margin-left: 20vw;
+    margin-right: 20vw;
+}
+
+.contactText {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+.copyrightText {
+    opacity: 0.4;
+}
+
+.footer ul{
+    list-style-type: none;
+    padding-inline-start: 0;
+}
+
+.footer ul li {
+    font-size: 1.5em;
+    opacity: 0.5;
+}
