@@ -342,6 +342,72 @@ h3 {
     Second Document
 */
 
-.mainInfo {
+.mainContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+}
 
+.mainInfo {
+    margin-top: 0;
+    padding: 5vw;
+    margin: 15vw;
+    margin-right: 5vw;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    padding-top: 5vh;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.mainInfo p {
+    font-size: 1em;
+}
+
+.mainInfo h4 {
+    margin-inline-start: 10px;
+}
+
+.mainList {
+    margin-top: 13vh;
+    margin-right: 10vw;
+    padding: 2vw;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.mainList ul{
+    list-style-type: none;
+    padding-inline-start: 0 ;
+}
+
+.mainList li {
+    padding: 1vh;
+    text-align: center;
+}
+
+.mainList li:hover {
+    transform: scale(1.1, 1.1);
+    transition: all 1s;
+}
+
+.imageContainer {
+    margin-top: 7vh;
+
+}
+
+.imageContainer img {
+    width: 15vw;
+    height: 20vh;
+    filter: brightness(85%);
+    border-radius: 10%;
+}
+
+.imageContainer img:hover {
+    transform: scale(1.05, 1.05);
+    transition: all 2s;
+}
+
+.imageContainer p {
+    font-size: 1em;
 }
