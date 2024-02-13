@@ -1,5 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+
 body {
-    font-family: 'Abyssinica SIL';
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
 }
 
 a {
@@ -8,13 +17,15 @@ a {
 }
 
 p {
-    font-size: 1.3em;
-    text-align: center;
+    margin-bottom: var(--spacing-unit);
 }
 
-h3 {
-    font-size: 1.6em;
-    text-align: center;
+h1{
+    font-size:var(--font-size-large);
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
 }
 
 .item {
@@ -69,12 +80,75 @@ h3 {
     padding-left: 5vw;
     padding-right: 5vw;
     background-color: #f8f9fa!important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
 }
+
+/* Center align tagline */
+.tagline {
+    text-align: center;
+  }
+  
+  /* Style value proposition */  
+  .value-prop {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  /* Style CTA button */
+  .btn {
+    display: block;
+    padding: 12px 24px;
+    margin: 0;
+    background: #e31837; 
+    color: white;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+
+  }
+  
+  .btn:hover {
+    background: #8f101c;
+  }
+  
+  /* Layout image and stats */
+  .stats {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .homeWelcome img {
+    display: block;
+    max-width: 600px;
+    margin: 30px auto;
+  }
+  
+  /* Testimonial */
+  .testimonial {
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 4px;
+}
+  
+.testimonial img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 10px;  
+}
+  
 
 .homeWelcome h1 {
     text-align: center;
     font-size: 2em;
+}
+
+.homeWelcome h3 {
+    text-align: center !important;
 }
 
 .imageBoxReforged {
@@ -431,3 +505,10 @@ td {
     padding: 2vh;
     width: 800px;
 }
+
+@media (max-width: 500px) {
+    .nav {
+      flex-direction: column;
+    }
+  }
+  
