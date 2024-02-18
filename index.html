@@ -3,12 +3,16 @@
     <head>
         <title>Warcraft 3</title>
         <meta charset="UTF-8">
-        <link href="https://fonts.googleapis.com/css?family=Abyssinica SIL' rel='stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Abyssinica+SIL" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="style.css"></noscript>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <header>
             <div class="headerContainer">
+            <div class="toggle-button">☰</div>
                 <div class="item"><img src="images/icons/logo.png" height="40px"></div>
                 <div class="headerNav">
                     <div class="navItem">Home</div>
@@ -160,9 +164,26 @@
                         <p>Telephone: 0-777-777-123</p>
                     </div>
                     <p class="copyrightText">Andrei Kornev 2024.</p>
-
                 </div>
             </div>
         </footer>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.querySelector('.toggle-button');
+            const headerNav = document.querySelector('.headerNav');
+            const currentPath = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.headerNav .navItem');
+
+            toggleButton.addEventListener('click', () => {
+                headerNav.classList.toggle('collapsed');
+            });
+
+            navLinks.forEach(link => {
+                if(link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        </script>
     </body>
 </html>

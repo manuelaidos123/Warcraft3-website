@@ -42,19 +42,48 @@ h1, h2, h3 {
 .headerNav {
     display: flex;
     flex-direction: row;
-    justify-content: baseline;
-    padding: 1vw;
+    justify-content: center;
+    padding: 0;
+    align-items: center;
+    list-style: none;
 }
 
 .navItem {
     text-align: center;
-    padding: 1vw;
+    padding: 10px;
     min-width: 3vw;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 5%;
     margin-right: 1vw;
-    transition: all 1.4s;
+    transition: color 0.3s ease;
     background-color: #292e343d;
+    margin: 0 20px;
+    cursor: pointer;
+}
+
+.navItem:hover, .navItem:focus {
+    color: #007bff; /* Change to your theme color */
+}
+
+.navItem.active {
+    color: #0056b3; /* Darker shade for active link */
+    border-bottom: 2px solid #0056b3; /* Underline effect for active link */
+}
+
+@media (max-width: 768px) {
+    .headerNav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navItem {
+        margin: 10px 0; /* Stack the nav items vertically with spacing */
+    }
+
+    /* Hide the navbar on small screens and toggle it via JavaScript */
+    .headerNav.collapsed {
+        display: none;
+    }
 }
 
 .headerNav div:hover {
@@ -431,28 +460,73 @@ h1, h2, h3 {
     opacity: 0.5;
 }
 
+.toggle-button {
+    display: none; /* Hide by default */
+}
+
+/* Show the toggle button on screens smaller than 768px */
+@media (max-width: 768px) {
+    .toggle-button {
+        display: block; /* Show only on small screens */
+    }
+}
 
 /* ---------------------- 
     Second Document
 */
 
+.character {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 24%;
+    margin-bottom: 20px;
+}
+
+.character img {
+    width: 100%; /* Adjust the width as necessary */
+    height: auto;
+    border-radius: 10%; /* Optional: Adds rounded corners to the images */
+    transition: transform 0.3s ease;
+}
+
+.character img:hover {
+    transform: scale(1.05); /* Optional: Adds a zoom effect on hover */
+}
+
+.character p {
+    margin-top: 10px; /* Adds space between the image and the text */
+}
+
 .mainContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: nowrap;
+    justify-content: space-between;
+    flex-wrap: wrap;
     align-items: flex-start;
+    margin: 20px;
+}
+
+@media (max-width: 768px) {
+    .mainContainer {
+        flex-direction: column;
+    }
+
+    .imageContainer img {
+        width: 100%; /* Full width on smaller screens */
+    }
 }
 
 .mainInfo {
     margin-top: 0;
     padding: 5vw;
-    margin: 15vw;
+    margin: 10px;
     margin-right: 5vw;
     margin-top: 10vh;
     margin-bottom: 10vh;
     padding-top: 5vh;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    flex: 1;
 }
 
 .mainInfo p {
@@ -485,20 +559,30 @@ h1, h2, h3 {
     transition: all 1s;
 }
 
-.imageContainer {
-    margin-top: 7vh;
+.mainInfo, .mainList {
+    flex: 1; /* Take up equal space */
+    margin: 10px;
+}
 
+.imageContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 20px;
 }
 
 .imageContainer img {
-    width: 15vw;
-    height: 20vh;
+    width: 100%;
+    height: auto;
     filter: brightness(85%);
     border-radius: 10%;
+    margin: 10px;
+    transition: transform 0.3s ease;
 }
 
 .imageContainer img:hover {
-    transform: scale(1.05, 1.05);
+    transform: scale(1.05);
     transition: all 2s;
 }
 
@@ -510,6 +594,15 @@ h1, h2, h3 {
     font-size: 1em;
 }
 
+.imageContainer a, .imageContainer p {
+    flex-basis: 24%; /* Adjusts the base width of each item */
+    text-align: center; /* Centers the text */
+    margin-bottom: 20px; /* Adds some space below each item */
+    flex: 1 1 24%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 table, th, td {
     border: 1px solid black;
@@ -530,4 +623,16 @@ td {
       flex-direction: column;
     }
   }
+
+@media (max-width: 768px) {
+    .imageContainer a, .imageContainer p {
+        flex: 1 1 48%; /* Adjusts the base width on smaller screens for fewer items per row */
+    }
+}
+
+@media (max-width: 480px) {
+    .imageContainer a, .imageContainer p {
+        flex: 1 1 100%; /* One item per row on very small screens */
+    }
+}
   
