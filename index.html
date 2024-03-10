@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <link href='https://fonts.googleapis.com/css?family=Abyssinica SIL' rel='stylesheet'>
         <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="scripts.js"></script>
     </head>
     <body>
         <header>
@@ -29,12 +30,39 @@
                 <h1 class = "infoWarcraftHeader">Warcraft Reforged</h1>
                 <hr width="200px"/>
             </div>
+            <!--
             <div class = "imageBoxReforged">
                 <div class = "imageItem1">
                     <img class="imageBig" src="images/reforged1.jpg">
                 </div>
                 <div class = "imageItem2"><img class="image" src="images/reforged2.jpg"></div>
                 <div class = "imageItem3"><img class="image" src="images/reforged3.jpg"></div>
+            </div>
+            -->
+            <div class="imageSlider">
+                <div class="Slide">
+                    <a class="prevButton" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="nextButton" onclick="plusSlides(1)">&#10095;</a>
+                    <img src="images/reforged1.jpg">
+                </div>
+                <div class="Slide">
+                    <a class="prevButton" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="nextButton" onclick="plusSlides(1)">&#10095;</a>
+                    <img src="images/reforged2.jpg">
+                </div>
+                <div class="Slide">    
+                    <a class="prevButton" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="nextButton" onclick="plusSlides(1)">&#10095;</a>
+                    <img src="images/reforged3.jpg">
+                </div>
+                
+               
+                <br>
+                <div class="dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
             </div>
             <div class = "infoWarcraft">
                 <h1 class = "infoWarcraftHeader">What is Warcraft 3?</h1>

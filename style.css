@@ -89,6 +89,81 @@ h3 {
 
 }
 
+.imageSlider {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 25%;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.Slide {
+    position: relative;
+    display: none;
+}
+
+.Slide img {
+    max-height: 50vh;
+    width: 100%;
+    height: 50%;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.dots {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 4px;
+    background-color: #bbbbbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+  
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+.prevButton {
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #ffffff;
+    position: absolute;
+    margin-top: 22vh;
+    padding: 16px;
+    float: left;
+}
+
+.nextButton {
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #ffffff;
+    position: absolute;
+    right: 0;
+    margin-top: 22vh;
+    padding: 16px;
+    float: right;
+    
+}
+
+.nextButton:hover {
+    transform: scale(1.2);
+    transition: all 1.4s;
+}
+
+.prevButton:hover {
+    transform: scale(1.2);
+    transition: all 1.4s;
+}
+
 .imageItem1 {
     grid-column-start: 1;
     grid-column-end: 4;
