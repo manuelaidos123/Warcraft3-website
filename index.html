@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <link href='https://fonts.googleapis.com/css?family=Abyssinica SIL' rel='stylesheet'>
         <link rel="stylesheet" type="text/css" href="style.css">
-        <script src="scripts.js"></script>
+        <script src="scripts.js" defer></script>
     </head>
     <body>
         <header>
@@ -40,28 +40,28 @@
             </div>
             -->
             <div class="imageSlider">
-                <div class="Slide">
-                    <a class="prevButton" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="nextButton" onclick="plusSlides(1)">&#10095;</a>
+                <div class="Slide fade-in">
+                    <a class="prevButton" onclick="changeSlides(-1)">&#10094;</a>
+                    <a class="nextButton" onclick="changeSlides(1)">&#10095;</a>
                     <img src="images/reforged1.jpg">
                 </div>
-                <div class="Slide">
-                    <a class="prevButton" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="nextButton" onclick="plusSlides(1)">&#10095;</a>
+                <div class="Slide fade-in">
+                    <a class="prevButton" onclick="changeSlides(-1)">&#10094;</a>
+                    <a class="nextButton" onclick="changeSlides(1)">&#10095;</a>
                     <img src="images/reforged2.jpg">
                 </div>
-                <div class="Slide">    
-                    <a class="prevButton" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="nextButton" onclick="plusSlides(1)">&#10095;</a>
+                <div class="Slide fade-in">    
+                    <a class="prevButton" onclick="changeSlides(-1)">&#10094;</a>
+                    <a class="nextButton" onclick="changeSlides(1)">&#10095;</a>
                     <img src="images/reforged3.jpg">
                 </div>
                 
                
                 <br>
                 <div class="dots">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
                 </div>
             </div>
             <div class = "infoWarcraft">
