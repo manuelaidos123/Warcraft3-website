@@ -1,11 +1,10 @@
 let slideIndex = 1;
-let time = 0
+let emailEntered = false;
 
 showSlides();
 
 
 function showSlides() {
-    setTimeout(time++, 1);
     
     let slides = document.getElementsByClassName("Slide");
     let dots = document.getElementsByClassName("dot");
@@ -62,3 +61,34 @@ function currentSlide(position) {
         slides[position-1].style.display = "block";  
         dots[position-1].className += " active";
     }
+
+
+function validateEmail() {
+    let email = document.getElementsByClassName("textBox")[0].value;
+    console.log(email);
+    let re = /^[a-zA-Z0-9. _-]+@[a-zA-Z0-9. -]+\. [a-zA-Z]{2,4}$/;
+    console.log(re.test(email));
+    displayResponse(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email));
+}
+
+function displayResponse(isEmail) {
+    if (emailEntered){
+        let elem = document.getElementsByClassName("email")[0];
+        elem.remove();
+    }
+
+    let html = document.createElement("h4");
+    html.className = "email";
+    if (isEmail) {
+        var inner = document.createTextNode("You will recieve answer on your E-mail soon..");    
+    }
+    else {
+        var inner = document.createTextNode("Invalid E-mail adress..");
+    }
+
+    html.appendChild(inner);
+    const appendAfter = document.getElementsByClassName("submitButton")[0]
+
+    appendAfter.parentNode.insertBefore(html, appendAfter.nextSibling);
+    emailEntered = true;
+}
