@@ -520,3 +520,60 @@ td {
     padding: 2vh;
     width: 800px;
 }
+
+/* TEST */
+
+.mainTest {
+    margin-top: 0;
+    padding: 5vw;   
+    margin:  5% auto;
+    padding-top: 5vh;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    min-width: 40%;
+}
+
+
+.question {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5% 5% 5% 0;
+}
+
+.option input[type=radio] {
+    transform: scale(1.5);
+    margin: 0 10px 0 0 ;
+}
+
+.submitTest {
+    background-color: #2f89fc;
+    border-color: #2f89fc;
+    width: 100%;
+    font-size: 1.3em;
+    color: white;
+    margin-top: 10%;
+    margin-bottom: 0;
+}
+.submitTest:hover {
+    background-color: #2f89fc;
+    border-color: #2f89fc;
+    transition: all 1s;
+    width: 100%;
+    font-size: 1.5em;
+    color: white;
+    opacity: 0.7;
+}
+
+.results {
+    margin-top: 5%;
+    text-align: center;
+}
