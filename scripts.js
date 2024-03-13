@@ -12,7 +12,6 @@ function showSlides() {
 
     for (let i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
-        //slides[i].className = slides[i].className.replace(" fade-in", "");
     }
 
     for( let i = 0; i < dots.length; ++i) {
@@ -23,8 +22,7 @@ function showSlides() {
     if (slideIndex > slides.length) {
         slideIndex = 1;
     }
-    //slides[slideIndex - 1].style += ";transition: left .8s cubic-bezier(0.77, 0, 0.175, 1)"
-    //slides[slideIndex - 1].className += " fade-in"
+
     slides[slideIndex-1].style.display = "block";
     dots[slideIndex - 1].className += " active";
     slideIndex++;
@@ -66,9 +64,7 @@ function currentSlide(position) {
 
 function validateEmail() {
     let email = document.getElementsByClassName("textBox")[0].value;
-    console.log(email);
     let re = /^[a-zA-Z0-9. _-]+@[a-zA-Z0-9. -]+\. [a-zA-Z]{2,4}$/;
-    console.log(re.test(email));
     displayResponse(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email));
 }
 
@@ -106,14 +102,11 @@ function SubmitTest() {
             let answerRadio = document.querySelector(`input[name="question${i + 1}"]:checked`);
             let answered = answerRadio.nextElementSibling.childNodes[1].getAttribute("src"); // Returns sounds/*.mp3 of chosen answer
             let answer = answered.split("/")[1]; // Returns second elemend of array (*.mp3) selected by user
-            console.log(answer);
             if(answer == answers[i]) 
                 score ++;
         }
         
         percentage = score / questions * 100;
-        console.log(score);
-        console.log(percentage);
     }
     catch(TypeError) {
         alert("You have not chosen all of the options!");
