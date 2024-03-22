@@ -188,8 +188,97 @@ h1, h2, h3 {
     margin-bottom: 2vw;
     margin-left: 5vw;
     margin-right: 5vw;
-    padding: 5vw 1vh
+    padding: 5vw 1vh;
+}
 
+.imageSlider {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 25%;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    
+}
+
+.Slide {
+    position: relative;
+    display: none;
+    filter: brightness(0.9);
+    /* transition: all .8s cubic-bezier(0.77, 0, 0.175, 1); */
+}
+
+.fade-in {
+    animation: fade-in 2s;
+  }
+
+@keyframes fade-in {
+    from {opacity: 0.6;} 
+    to {opacity: 1}
+}
+
+
+.Slide img {
+    max-height: 50vh;
+    width: 100%;
+    height: 50%;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    
+}
+
+
+.dots {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 4px;
+    background-color: #bbbbbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+  
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+.prevButton {
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #ffffff;
+    position: absolute;
+    margin-top: 22vh;
+    padding: 16px;
+    float: left;
+}
+
+.nextButton {
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #ffffff;
+    position: absolute;
+    right: 0;
+    margin-top: 22vh;
+    padding: 16px;
+    float: right;
+    
+}
+
+.nextButton:hover {
+    transform: scale(1.2);
+    transition: all 1.4s;
+}
+
+.prevButton:hover {
+    transform: scale(1.2);
+    transition: all 1.4s;
 }
 
 .imageItem1 {
@@ -618,6 +707,7 @@ td {
     width: 800px;
 }
 
+
 @media (max-width: 500px) {
     .nav {
       flex-direction: column;
@@ -635,4 +725,60 @@ td {
         flex: 1 1 100%; /* One item per row on very small screens */
     }
 }
-  
+/* TEST */
+
+.mainTest {
+    margin-top: 0;
+    padding: 5vw;   
+    margin:  5% auto;
+    padding-top: 5vh;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    min-width: 40%;
+}
+
+
+.question {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5% 5% 5% 0;
+}
+
+.option input[type=radio] {
+    transform: scale(1.5);
+    margin: 0 10px 0 0 ;
+}
+
+.submitTest {
+    background-color: #2f89fc;
+    border-color: #2f89fc;
+    width: 100%;
+    font-size: 1.3em;
+    color: white;
+    margin-top: 10%;
+    margin-bottom: 0;
+}
+.submitTest:hover {
+    background-color: #2f89fc;
+    border-color: #2f89fc;
+    transition: all 1s;
+    width: 100%;
+    font-size: 1.5em;
+    color: white;
+    opacity: 0.7;
+}
+
+.results {
+    margin-top: 5%;
+    text-align: center;
+}
+
