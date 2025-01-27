@@ -1,0 +1,579 @@
+body {
+    font-family: 'Abyssinica SIL';
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+p {
+    font-size: 1.3em;
+    text-align: center;
+}
+
+h3 {
+    font-size: 1.6em;
+    text-align: center;
+}
+
+.item {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    border-radius: 50%;
+    text-align: center;
+    margin: 1vh;
+    margin-bottom: 2vh;
+    padding: 1vw;
+    background-color: #292e343d;
+
+}
+
+.headerNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    padding: 1vw;
+}
+
+.navItem {
+    text-align: center;
+    padding: 1vw;
+    min-width: 3vw;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 5%;
+    margin-right: 1vw;
+    transition: all 1.4s;
+    background-color: #292e343d;
+}
+
+.headerNav div:hover {
+    /*width: 5vw;
+    height: 2vh;*/
+    transform: scale(1.2, 1.2);
+}
+
+.headerContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    background-color: #f0f9ff;
+    opacity: 0.9;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 2px ;
+    
+}
+
+.homeWelcome {
+    padding: 25vh 10vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    background-color: #f8f9fa!important;
+
+}
+
+.homeWelcome h1 {
+    text-align: center;
+    font-size: 2em;
+}
+
+.imageBoxReforged {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 60px;
+    margin-bottom: 2vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    padding: 5vw 1vh;
+}
+
+.imageSlider {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 25%;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    
+}
+
+.Slide {
+    position: relative;
+    display: none;
+    filter: brightness(0.9);
+    /* transition: all .8s cubic-bezier(0.77, 0, 0.175, 1); */
+}
+
+.fade-in {
+    animation: fade-in 2s;
+  }
+
+@keyframes fade-in {
+    from {opacity: 0.6;} 
+    to {opacity: 1}
+}
+
+
+.Slide img {
+    max-height: 50vh;
+    width: 100%;
+    height: 50%;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    
+}
+
+
+.dots {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 4px;
+    background-color: #bbbbbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+  
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+.prevButton {
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #ffffff;
+    position: absolute;
+    margin-top: 22vh;
+    padding: 16px;
+    float: left;
+}
+
+.nextButton {
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #ffffff;
+    position: absolute;
+    right: 0;
+    margin-top: 22vh;
+    padding: 16px;
+    float: right;
+    
+}
+
+.nextButton:hover {
+    transform: scale(1.2);
+    transition: all 1.4s;
+}
+
+.prevButton:hover {
+    transform: scale(1.2);
+    transition: all 1.4s;
+}
+
+.imageItem1 {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.imageItem2 {
+    grid-column-start: 4;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.imageItem3 {
+    grid-column-start: 4;
+    grid-column-end: 6;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.imageBig {
+    width: 100%;
+    height: 100%;
+    border-radius: 10%;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    object-fit: cover;
+}
+
+.imageBoxReforged img {
+    box-shadow: 10px 10px 5px #ccc;
+    filter: brightness(75%);
+}
+
+.imageBoxReforged img:hover {
+    transform: scale(1.01, 1.01);
+    transition: all 2s;
+}
+
+.image {
+    height: 100%;
+    width: 100%;
+    border-radius: 10%;
+    /*object-fit: cover;*/
+}
+ 
+.infoWarcraft {
+    padding: 4vw;
+    background-color: #e9eef5a1 !important;
+}
+
+.infoWarcraftHeader {
+    text-align: center;
+    font-size: 2em;
+}
+
+.WarcraftReforgedHeader {
+    margin-top: 7vh;
+}
+
+.infoWarcraftParagraph {
+    padding: 2vw;
+    padding-left: 14vw;
+    padding-right: 14vw;
+    font-size: 1.1em;
+    margin-bottom: 0;
+}
+
+.warcraftPros {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-left: 4vw; 
+    padding-right: 4vw;
+    padding-bottom: 8vh;
+    margin-bottom: 0;
+    margin-top: 0;
+    background-color: #f8f9fa!important;
+}
+
+.warcraftPros div:hover {
+    transform: scale(1.05, 1.05);
+    transition: all 2s;
+}
+
+.prosItem {
+    padding: 2vw;
+    max-width: 20vw;
+    margin: 1vw;
+    margin-top: 10vh;
+    margin-bottom: 0;
+    min-height: 55vh;
+    text-align: center;
+    justify-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    border-radius: 100px;
+}
+
+.proImage {
+    width: 100px;
+    height: 100px;
+
+}
+
+.prosItem h3 {
+    font-size: 2em;
+    text-align: center;
+}
+
+.prosItem p {
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.enrollPart {
+    padding: 2vw;
+    margin-top: 7vh;
+    margin-bottom: 15vh;
+
+}
+
+.enroll {
+    display: flex;
+    flex-direction: row;
+    justify-content: center!important;
+    flex-wrap: wrap;
+    margin-left: 30vw;
+    margin-right: 30vw;
+    padding-left: 2vw;
+}
+
+.enroll p {
+    font-size: 1.3em;
+    text-align: center;
+    margin-bottom: 7vh;
+}
+
+.enroll h3 {
+    font-size: 2em;
+    text-align: center;
+}
+
+.textBox {
+    width: 60%;
+    padding: 0.5rem 0.75rem;
+    height: 35px;
+    font-size: 1.3em;
+}
+
+.submitButton {
+    background-color: #2f89fc;
+    border-color: #2f89fc;
+    width: 20%;
+    font-size: 1.3em;
+    color: white;
+}
+
+.submitButton:hover {
+    background-color: #2f89fc;
+    border-color: #2f89fc;
+    transition: all 1s;
+    width: 20%;
+    font-size: 1.5em;
+    color: white;
+    opacity: 0.7;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 4em 0;
+    background: #282d32;
+    color: #f0f9ff;
+
+}
+
+.listContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.listLeft {
+    margin-left: 5vw;
+    padding: 20px;
+}
+
+.listRight{
+    margin-right: 5vw;
+    padding: 20px;
+}
+
+
+.companyInfo {
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+}
+
+.socialIcon {
+    width: 30px;
+    height: 30px;
+    border: solid black;
+    border-radius: 40%;
+    padding: 15px;
+    margin: 15px;
+}
+
+.socialLinks {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-left: 20vw;
+    margin-right: 20vw;
+}
+
+.footer p {
+    opacity: 0.5;
+}
+
+.footerContainer {
+    margin-left: 20vw;
+    margin-right: 20vw;
+}
+
+.contactText {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+.copyrightText {
+    opacity: 0.4;
+}
+
+.footer ul{
+    list-style-type: none;
+    padding-inline-start: 0;
+}
+
+.footer ul li {
+    font-size: 1.1em;
+    opacity: 0.5;
+}
+
+
+/* ---------------------- 
+    Second Document
+*/
+
+.mainContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+}
+
+.mainInfo {
+    margin-top: 0;
+    padding: 5vw;
+    margin: 15vw;
+    margin-right: 5vw;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    padding-top: 5vh;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.mainInfo p {
+    font-size: 1em;
+}
+
+.mainInfo h4 {
+    margin-inline-start: 10px;
+}
+
+.mainList {
+    margin-top: 13vh;
+    margin-right: 10vw;
+    padding: 2vw;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.mainList ul{
+    list-style-type: none;
+    padding-inline-start: 0 ;
+}
+
+.mainList li {
+    padding: 1vh;
+    text-align: center;
+}
+
+.mainList li:hover {
+    transform: scale(1.1, 1.1);
+    transition: all 1s;
+}
+
+.imageContainer {
+    margin-top: 7vh;
+
+}
+
+.imageContainer img {
+    width: 15vw;
+    height: 20vh;
+    filter: brightness(85%);
+    border-radius: 10%;
+}
+
+.imageContainer img:hover {
+    transform: scale(1.05, 1.05);
+    transition: all 2s;
+}
+
+.imageContainer h4 {
+    text-align: center;
+}
+
+.imageContainer p {
+    font-size: 1em;
+}
+
+
+table, th, td {
+    border: 1px solid black;
+    text-align: center;
+  }
+
+td {
+    padding: 1vh;
+}
+
+#mapImage {
+    padding: 2vh;
+    width: 800px;
+}
+
+/* TEST */
+
+.mainTest {
+    margin-top: 0;
+    padding: 5vw;   
+    margin:  5% auto;
+    padding-top: 5vh;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    min-width: 40%;
+}
+
+
+.question {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5% 5% 5% 0;
+}
+
+.option input[type=radio] {
+    transform: scale(1.5);
+    margin: 0 10px 0 0 ;
+}
+
+.submitTest {
+    background-color: #2f89fc;
+    border-color: #2f89fc;
+    width: 100%;
+    font-size: 1.3em;
+    color: white;
+    margin-top: 10%;
+    margin-bottom: 0;
+}
+.submitTest:hover {
+    background-color: #2f89fc;
+    border-color: #2f89fc;
+    transition: all 1s;
+    width: 100%;
+    font-size: 1.5em;
+    color: white;
+    opacity: 0.7;
+}
+
+.results {
+    margin-top: 5%;
+    text-align: center;
+}
