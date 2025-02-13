@@ -116,7 +116,7 @@ body {
 
 /* Card Styles */
 .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     border: none;
     border-radius: 0.5rem;
     overflow: hidden;
@@ -124,7 +124,7 @@ body {
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* Social Media Grid */
@@ -192,29 +192,73 @@ body {
     }
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    #mainNav .navbar-nav .nav-item .nav-link {
-        padding: 0.75rem;
-    }
-
-    .hero {
-        min-height: 40vh;
-    }
-
-    .image-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
+/* WarcraftPedia specific styles */
+.card {
+    border: none;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-/* Animations */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.nav-pills .nav-link {
+    color: var(--wc-dark);
+    background-color: var(--wc-gray);
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+.nav-pills .nav-link:hover {
+    background-color: var(--wc-primary);
+    color: var(--wc-light);
+}
+
+.nav-pills .nav-link.active {
+    background-color: var(--wc-primary);
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--wc-primary);
+    color: var(--wc-light);
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(47, 137, 252, 0.25);
+}
+
+.list-group-item {
+    border: none;
+    padding: 0.75rem 1.25rem;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+    background-color: var(--wc-gray);
+}
+
+.card-title {
+    color: var(--wc-primary);
+    border-bottom: 2px solid var(--wc-primary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Animation for content loading */
 .fade-in {
     animation: fadeIn 0.5s ease-in;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Accessibility */
@@ -237,4 +281,15 @@ body {
 
 :focus:not(:focus-visible) {
     outline: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .nav-pills .nav-link {
+        margin: 5px 0;
+    }
+    
+    .card {
+        margin-bottom: 2rem;
+    }
 }
