@@ -4,122 +4,257 @@
         <title>Warcraft 3</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Warcraft 3 fan website with information about factions, characters, and lore">
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
         <!-- Google Fonts -->
-        <link href='https://fonts.googleapis.com/css?family=Abyssinica+SIL' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap' rel='stylesheet'>
         <!-- Custom CSS -->
         <link rel="stylesheet" type="text/css" href="style.css">
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="images/icons/logo.png">
     </head>
-    <body>
+    <body class="bg-light">
         <!-- Enhanced Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3" id="mainNav">
+                <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3" id="mainNav">
+                    <div class="container px-4 px-lg-5">
+                        <a class="navbar-brand" href="index.html">
+                            <img src="images/icons/logo.png" alt="Warcraft 3 Logo" height="40" class="d-inline-block align-text-top">
+                            <span class="ms-2 fw-bold text-uppercase">Warcraft III</span>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link px-lg-3 py-3 py-lg-4 active" href="index.html">
+                                        <i class="fas fa-home me-1"></i>Home
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-lg-3 py-3 py-lg-4" href="story.html">
+                                        <i class="fas fa-book me-1"></i>Story
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-lg-3 py-3 py-lg-4" href="factions.html">
+                                        <i class="fas fa-flag me-1"></i>Factions
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-lg-3 py-3 py-lg-4" href="characters.html">
+                                        <i class="fas fa-users me-1"></i>Characters
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-lg-3 py-3 py-lg-4" href="pedia.html">
+                                        <i class="fas fa-scroll me-1"></i>WarcraftPedia
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-lg-3 py-3 py-lg-4" href="test.html">
+                                        <i class="fas fa-quiz me-1"></i>Test
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+        <!-- Hero Section -->
+        <section class="hero bg-dark text-white py-5 mb-5">
             <div class="container">
-                <a class="navbar-brand" href="index.html">
-                    <img src="images/icons/logo.png" alt="Warcraft 3 Logo" height="40" class="d-inline-block align-text-top">
-                    <span class="ms-2 fw-bold text-uppercase">Warcraft III</span>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="story.html">Story</a></li>
-                        <li class="nav-item"><a class="nav-link" href="fractions.html">Fractions</a></li>
-                        <li class="nav-item"><a class="nav-link" href="characters.html">Characters</a></li>
-                        <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
-                        <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
-                    </ul>
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="display-4 fw-bold">Welcome to Warcraft 3</h1>
+                        <p class="lead">Explore the epic world of strategy, heroes, and legendary battles.</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Image Carousel -->
+                        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
+                            </div>
+                            <div class="carousel-inner rounded shadow">
+                                <div class="carousel-item active">
+                                    <img src="images/reforged1.jpg" class="d-block w-100" alt="Warcraft 3 Reforged Screenshot 1">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/reforged2.jpg" class="d-block w-100" alt="Warcraft 3 Reforged Screenshot 2">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/reforged3.jpg" class="d-block w-100" alt="Warcraft 3 Reforged Screenshot 3">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/reforged4.jpg" class="d-block w-100" alt="Warcraft 3 Reforged Screenshot 4">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
+        </section>
 
-        <!-- Main Content -->
-        <main>
-            <!-- Welcome Section -->
-            <section class="hero bg-dark text-white py-5 mb-5">
-                <div class="container text-center">
-                    <h1 class="display-4">Welcome!</h1>
-                    <h3 class="lead">To the Best Warcraft 3 website.</h3>
-                </div>
-            </section>
-
-            <!-- Warcraft Reforged Section -->
-            <section class="py-5">
-                <div class="container">
-                    <h1 class="text-center mb-4">Warcraft Reforged</h1>
-                    <hr class="w-25 mx-auto mb-5">
-                    
-                    <!-- Image Slider -->
-                    <div id="imageSlider" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="images/reforged1.jpg" class="d-block w-100" alt="Reforged 1">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/reforged2.jpg" class="d-block w-100" alt="Reforged 2">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/reforged3.jpg" class="d-block w-100" alt="Reforged 3">
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#imageSlider" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#imageSlider" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Enroll Section -->
-            <section class="bg-light py-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8 text-center">
-                            <h3 class="mb-4">Don't waste your Time. Enroll now.</h3>
-                            <p class="mb-4">
-                                Embark on epic adventures, command powerful armies, and master strategic warfare in Warcraft 3. 
-                                Join me in this immersive world where heroes rise, alliances form, and battles shape destinies. 
-                                Let's unlock our tactical prowess, forge unforgettable memories, and conquer realms together!
-                            </p>
-                            <form class="row g-3 justify-content-center">
-                                <div class="col-md-8">
-                                    <input type="email" class="form-control form-control-lg" placeholder="Enter your email address.." required>
-                                </div>
-                                <div class="col-md-auto">
-                                    <button type="submit" class="btn btn-primary btn-lg" onclick="validateEmail()">Enroll</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <!-- Footer -->
-        <footer class="bg-dark text-light py-5">
+        <!-- Info Section -->
+        <section class="py-5 bg-white">
             <div class="container">
+                <h2 class="text-center mb-5">What is Warcraft 3?</h2>
                 <div class="row">
-                    <div class="col-md-4">
-                        <h3>Services</h3>
-                        <ul class="list-unstyled">
-                            <!-- Add your footer links here -->
-                        </ul>
+                    <div class="col-lg-8 mx-auto">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <p class="card-text">Warcraft 3 is a real-time strategy game that was released in 2002 by Blizzard Entertainment. Set in the fantasy world of Azeroth, it features four playable factions: humans, orcs, night elves, and the undead. The game revolutionized the RTS genre by introducing hero units and RPG elements.</p>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Add more footer columns as needed -->
                 </div>
             </div>
-        </footer>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5">Game Features</h2>
+                <div class="row g-4">
+                    <!-- Feature 1 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <img src="images/icons/4icon.png" alt="Factions Icon" class="mb-3" width="64">
+                                <h3 class="h5">Four Playable Factions</h3>
+                                <p class="card-text">Each faction has unique units, buildings, and gameplay mechanics, providing diverse strategic options.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <img src="images/icons/hero_icon.png" alt="Heroes Icon" class="mb-3" width="64">
+                                <h3 class="h5">Hero Units</h3>
+                                <p class="card-text">Powerful hero units level up and gain abilities, adding RPG elements to strategic gameplay.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <img src="images/icons/multiplayer.png" alt="Multiplayer Icon" class="mb-3" width="64">
+                                <h3 class="h5">Multiplayer Battles</h3>
+                                <p class="card-text">Engage in epic multiplayer battles with players from around the world.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="py-5 bg-primary text-white">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2 class="mb-4">Join the Battle Today!</h2>
+                        <p class="lead mb-4">Subscribe to our newsletter for the latest updates and strategies.</p>
+                        <form class="row g-3 justify-content-center" onsubmit="validateEmail(event)">
+                            <div class="col-md-8">
+                                <input type="email" class="form-control form-control-lg" placeholder="Enter your email address" required>
+                            </div>
+                            <div class="col-md-auto">
+                                <button type="submit" class="btn btn-light btn-lg px-4">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhanced Footer -->
+                <footer class="footer bg-dark text-light">
+                    <div class="container py-5">
+                        <div class="row g-4">
+                            <!-- About Section -->
+                            <div class="col-lg-4 col-md-6">
+                                <div class="pe-lg-5">
+                                    <h5 class="text-uppercase mb-4">About Warcraft III</h5>
+                                    <p class="text-muted">Experience the epic world of Azeroth through legendary heroes, mythical creatures, and unforgettable battles in this timeless strategy game.</p>
+                                </div>
+                            </div>
+                            <!-- Quick Links -->
+                            <div class="col-lg-2 col-md-6">
+                                <h5 class="text-uppercase mb-4">Navigation</h5>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><a href="index.html" class="text-muted">Home</a></li>
+                                    <li class="mb-2"><a href="story.html" class="text-muted">Story</a></li>
+                                    <li class="mb-2"><a href="factions.html" class="text-muted">Factions</a></li>
+                                    <li class="mb-2"><a href="characters.html" class="text-muted">Characters</a></li>
+                                </ul>
+                            </div>
+                            <!-- Services -->
+                            <div class="col-lg-2 col-md-6">
+                                <h5 class="text-uppercase mb-4">Services</h5>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><a href="#" class="text-muted">Game Analysis</a></li>
+                                    <li class="mb-2"><a href="#" class="text-muted">Game Reviews</a></li>
+                                    <li class="mb-2"><a href="#" class="text-muted">Tutorials</a></li>
+                                    <li class="mb-2"><a href="#" class="text-muted">Tournaments</a></li>
+                                </ul>
+                            </div>
+                            <!-- Contact -->
+                            <div class="col-lg-4 col-md-6">
+                                <h5 class="text-uppercase mb-4">Contact Us</h5>
+                                <p class="text-muted mb-2">
+                                    <i class="fas fa-envelope me-2"></i>
+                                    <a href="mailto:some-email@gmail.com" class="text-muted">some-email@gmail.com</a>
+                                </p>
+                                <p class="text-muted mb-4">
+                                    <i class="fas fa-phone me-2"></i>
+                                    <a href="tel:0777777123" class="text-muted">0-777-777-123</a>
+                                </p>
+                                <!-- Social Links Grid -->
+                                <div class="social-grid">
+                                    <a href="#" aria-label="Facebook">
+                                        <img src="images/icons/facebook.png" alt="Facebook">
+                                    </a>
+                                    <a href="#" aria-label="Twitter">
+                                        <img src="images/icons/twitter.png" alt="Twitter">
+                                    </a>
+                                    <a href="#" aria-label="Instagram">
+                                        <img src="images/icons/insta.png" alt="Instagram">
+                                    </a>
+                                    <a href="#" aria-label="Telegram">
+                                        <img src="images/icons/telegram.png" alt="Telegram">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-5">
+                        <div class="row align-items-center">
+                            <div class="col-md-6 text-center text-md-start">
+                                <p class="text-muted mb-0">&copy; 2024 Andrei Kornev. All rights reserved.</p>
+                            </div>
+                            <div class="col-md-6 text-center text-md-end">
+                                <small class="text-muted">Made with <i class="fas fa-heart text-danger"></i> for Warcraft III fans</small>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
 
         <!-- Bootstrap Bundle JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

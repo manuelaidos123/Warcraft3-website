@@ -1,291 +1,352 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>Warcraft 3</title>
+        <title>Warcraft 3 - Voice Recognition Test</title>
         <meta charset="UTF-8">
-        <link href='https://fonts.googleapis.com/css?family=Abyssinica SIL' rel='stylesheet'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Test your knowledge of Warcraft 3 character voices">
+        <link href='https://fonts.googleapis.com/css?family=Abyssinica+SIL' rel='stylesheet'>
         <link rel="stylesheet" type="text/css" href="style.css">
         <script src="scripts.js" defer></script>
+        <link rel="icon" type="image/png" href="images/icons/logo.png">
     </head>
     <body>
         <header>
             <div class="headerContainer">
-                <div class="item"><img src="images/icons/logo.png" height="40px"></div>
-                <div class="headerNav">
-                    <a href="index.html"><div class="navItem">Home</div></a>
-                    <a href = "story.html"><div class="navItem">Story</div></a>
-                    <a href = "fractions.html"><div class="navItem">Fractions</div></a>
-                    <a href = "characters.html"><div class="navItem">Characters</div></a>
-                    <a href="pedia.html"><div class="navItem">WarcraftPedia</div></a>
-                    <div class="navItem">Test</div>
+                <div class="item">
+                    <img src="images/icons/logo.png" alt="Warcraft 3 Logo" height="40">
                 </div>
+                <nav class="headerNav">
+                    <a href="index.html" class="navItem">Home</a>
+                    <a href="story.html" class="navItem">Story</a>
+                    <a href="factions.html" class="navItem">Factions</a>
+                    <a href="characters.html" class="navItem">Characters</a>
+                    <a href="pedia.html" class="navItem">WarcraftPedia</a>
+                    <a href="test.html" class="navItem" aria-current="page">Test</a>
+                </nav>
             </div>
         </header>
         <main>
-            <div class = "mainContainer">
-                <div class = "mainTest">
-                    <div class="question">
-                        <h3>1. Голос Тралла</h3>
-                        <div class="question">
-                            <div class="option">
-                                <div style="display: flex; flex-direction: row;">
-                                    <input type="radio" name="question1">
-                                    <audio controls>
-                                        <source src="sounds/trall.mp3", type="audio/mp3">
-                                    </audio>
+            <div class="mainContainer">
+                <section class="mainTest">
+                    <h1>Character Voice Recognition Test</h1>
+                    <p>Listen to the audio clips and select which character you think is speaking. Test your knowledge of Warcraft 3 voices!</p>
+                    
+                    <form id="voiceTest" onsubmit="SubmitTest(event)">
+                        <div class="question-group" role="group" aria-labelledby="q1">
+                            <h2 id="q1">1. Thrall's Voice</h2>
+                            <fieldset>
+                                <legend class="visually-hidden">Select Thrall's voice</legend>
+                                <div class="option">
+                                    <input type="radio" id="q1-1" name="question1" value="trall.mp3">
+                                    <label for="q1-1">
+                                        <audio controls>
+                                            <source src="sounds/trall.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
                                 </div>
-                            </div>
-                            <div class="option">
-                                <div style="display: flex; flex-direction: row;">
-                                    <input type="radio" name="question1">
-                                    <audio controls>
-                                        <source src="sounds/healer.mp3", type="audio/mp3">
-                                    </audio>
+                                <div class="option">
+                                    <input type="radio" id="q1-2" name="question1" value="healer.mp3">
+                                    <label for="q1-2">
+                                        <audio controls>
+                                            <source src="sounds/healer.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
                                 </div>
-                            </div>
-                            <div class="option">
-                                <div style="display: flex; flex-direction: row;">
-                                    <input type="radio" name="question1">
-                                    <audio controls>
-                                        <source src="sounds/farseer.mp3", type="audio/mp3">
-                                    </audio>
+                                <div class="option">
+                                    <input type="radio" id="q1-3" name="question1" value="farseer.mp3">
+                                    <label for="q1-3">
+                                        <audio controls>
+                                            <source src="sounds/farseer.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
                                 </div>
-                            </div>
-                            <div class="option">
-                                <div style="display: flex; flex-direction: row;">
-                                    <input type="radio" name="question1">
-                                    <audio controls>
-                                        <source src="sounds/shaman.mp3", type="audio/mp3">
-                                    </audio>
+                                <div class="option">
+                                    <input type="radio" id="q1-4" name="question1" value="shaman.mp3">
+                                    <label for="q1-4">
+                                        <audio controls>
+                                            <source src="sounds/shaman.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
                                 </div>
-                            </div>
+                            </fieldset>
                         </div>
-                        <div class="question">
-                            <h3>2. Голос Артаса</h3>
-                            <div class="question">
+
+                        <div class="question-group" role="group" aria-labelledby="q2">
+                            <h2 id="q2">2. Arthas's Voice</h2>
+                            <fieldset>
+                                <legend class="visually-hidden">Select Arthas's voice</legend>
                                 <div class="option">
-                                    <div style="display: flex; flex-direction: row;">
-                                        <input type="radio" name="question2">
+                                    <input type="radio" id="q2-1" name="question2" value="anus.mp3">
+                                    <label for="q2-1">
                                         <audio controls>
-                                            <source src="sounds/anus.mp3", type="audio/mp3">
+                                            <source src="sounds/anus.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
                                         </audio>
-                                    </div>
-                                </div>
-                                <div class="option">
-                                    <div style="display: flex; flex-direction: row;">
-                                        <input type="radio" name="question2">
-                                        <audio controls>
-                                            <source src="sounds/titindrus.mp3", type="audio/mp3">
-                                        </audio>
-                                    </div>
+                                    </label>
                                 </div>
                                 <div class="option">
-                                    <div style="display: flex; flex-direction: row;">
-                                        <input type="radio" name="question2">
+                                    <input type="radio" id="q2-2" name="question2" value="titindrus.mp3">
+                                    <label for="q2-2">
                                         <audio controls>
-                                            <source src="sounds/arthas_angry.mp3", type="audio/mp3">
+                                            <source src="sounds/titindrus.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
                                         </audio>
-                                    </div>
+                                    </label>
                                 </div>
                                 <div class="option">
-                                    <div style="display: flex; flex-direction: row;">
-                                        <input type="radio" name="question2">
+                                    <input type="radio" id="q2-3" name="question2" value="arthas_angry.mp3">
+                                    <label for="q2-3">
                                         <audio controls>
-                                            <source src="sounds/acolyte.mp3", type="audio/mp3">
+                                            <source src="sounds/arthas_angry.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
                                         </audio>
-                                    </div>
+                                    </label>
                                 </div>
-                            </div>
-                            <div class="question">
-                                <h3>3. Голос Кел-Тузада</h3>
-                                <div class="question">
-                                    <div class="option">
-                                        <div style="display: flex; flex-direction: row;">
-                                            <input type="radio" name="question3">
-                                            <audio controls>
-                                                <source src="sounds/anubarak.mp3", type="audio/mp3">
-                                            </audio>
-                                        </div>
-                                    </div>
-                                    <div class="option">
-                                        <div style="display: flex; flex-direction: row;">
-                                            <input type="radio" name="question3">
-                                            <audio controls>
-                                                <source src="sounds/tuzad.mp3", type="audio/mp3">
-                                            </audio>
-                                        </div>
-                                    </div >
-                                    <div class="option">
-                                        <div style="display: flex; flex-direction: row;">
-                                            <input type="radio" name="question3">
-                                            <audio controls>
-                                                <source src="sounds/juk.mp3", type="audio/mp3">
-                                            </audio>
-                                        </div>
-                                    </div>
-                                    <div class="option">
-                                        <div style="display: flex; flex-direction: row;">
-                                            <input type="radio" name="question3">
-                                            <audio controls>
-                                                <source src="sounds/necros.mp3", type="audio/mp3">
-                                            </audio>
-                                        </div>
-                                    </div>
+                                <div class="option">
+                                    <input type="radio" id="q2-4" name="question2" value="acolyte.mp3">
+                                    <label for="q2-4">
+                                        <audio controls>
+                                            <source src="sounds/acolyte.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
                                 </div>
-                                <div class="question">
-                                    <h3>4. Голос Тиренд</h3>
-                                    <div class="question">
-                                        <div class="option">
-                                            <div style="display: flex; flex-direction: row;">
-                                                <input type="radio" name="question4">
-                                                <audio controls>
-                                                    <source src="sounds/patma.mp3", type="audio/mp3">
-                                                </audio>
-                                            </div>
-                                        </div>
-                                        <div class="option">
-                                            <div style="display: flex; flex-direction: row;">
-                                                <input type="radio" name="question4">
-                                                <audio controls>
-                                                    <source src="sounds/huntress.mp3", type="audio/mp3">
-                                                </audio>
-                                            </div>
-                                        </div>
-                                        <div class="option">
-                                            <div style="display: flex; flex-direction: row;">
-                                                <input type="radio" name="question4">
-                                                <audio controls>
-                                                    <source src="sounds/driada.mp3", type="audio/mp3">
-                                                </audio>
-                                            </div>
-                                        </div>
-                                        <div class="option">
-                                            <div style="display: flex; flex-direction: row;">
-                                                <input type="radio" name="question4">
-                                                <audio controls>
-                                                    <source src="sounds/tirend.mp3", type="audio/mp3">
-                                                </audio>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="question">
-                                        <h3>5. Голос Медива</h3>
-                                        <div class="question">
-                                            <div class="option">
-                                                <div style="display: flex; flex-direction: row;">
-                                                    <input type="radio" name="question5">
-                                                    <audio controls>
-                                                        <source src="sounds/archimage.mp3", type="audio/mp3">
-                                                    </audio>
-                                                </div>
-                                            </div>
-                                            <div class="option">
-                                                <div style="display: flex; flex-direction: row;">
-                                                    <input type="radio" name="question5">
-                                                    <audio controls>
-                                                        <source src="sounds/mk.mp3", type="audio/mp3">
-                                                    </audio>
-                                                </div>
-                                            </div>
-                                            <div class="option">
-                                                <div style="display: flex; flex-direction: row;">
-                                                    <input type="radio" name="question5">
-                                                    <audio controls>
-                                                        <source src="sounds/mediv.mp3", type="audio/mp3">
-                                                    </audio>
-                                                </div>
-                                            </div>
-                                            <div class="option">
-                                                <div style="display: flex; flex-direction: row;">
-                                                    <input type="radio" name="question5">
-                                                    <audio controls>
-                                                        <source src="sounds/rifle.mp3", type="audio/mp3">
-                                                    </audio>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="question" name="lastQuestion">
-                                            <h3>6. Голос Джайны</h3>
-                                            <div class="question">
-                                                <div class="option">
-                                                    <div style="display: flex; flex-direction: row;">
-                                                        <input type="radio" name="question6">
-                                                        <audio controls>
-                                                            <source src="sounds/archer.mp3", type="audio/mp3">
-                                                        </audio>
-                                                    </div>
-                                                </div>
-                                                <div class="option">
-                                                    <div style="display: flex; flex-direction: row;">
-                                                        <input type="radio" name="question6">
-                                                        <audio controls>
-                                                            <source src="sounds/sora.mp3", type="audio/mp3">
-                                                        </audio>
-                                                    </div>
-                                                </div>
-                                                <div class="option">
-                                                    <div style="display: flex; flex-direction: row;">
-                                                        <input type="radio" name="question6">
-                                                        <audio controls>
-                                                            <source src="sounds/jaina.mp3", type="audio/mp3">
-                                                        </audio>
-                                                    </div>
-                                                </div>
-                                                <div class="option">
-                                                    <div style="display: flex; flex-direction: row;">
-                                                        <input type="radio" name="question6">
-                                                        <audio controls>
-                                                            <source src="sounds/mev.mp3", type="audio/mp3">
-                                                        </audio>
-                                                    </div>
-                                                </div>
-                                                <input type = "submit" value = "Submit" class = "submitTest" onclick="SubmitTest()">
-                                            </div>
-        </div>
-    </main>
+                            </fieldset>
+                        </div>
+
+                        <div class="question-group" role="group" aria-labelledby="q3">
+                            <h2 id="q3">3. Kel'Thuzad's Voice</h2>
+                            <fieldset>
+                                <legend class="visually-hidden">Select Kel'Thuzad's voice</legend>
+                                <div class="option">
+                                    <input type="radio" id="q3-1" name="question3" value="anubarak.mp3">
+                                    <label for="q3-1">
+                                        <audio controls>
+                                            <source src="sounds/anubarak.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="q3-2" name="question3" value="tuzad.mp3">
+                                    <label for="q3-2">
+                                        <audio controls>
+                                            <source src="sounds/tuzad.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="q3-3" name="question3" value="juk.mp3">
+                                    <label for="q3-3">
+                                        <audio controls>
+                                            <source src="sounds/juk.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="q3-4" name="question3" value="necros.mp3">
+                                    <label for="q3-4">
+                                        <audio controls>
+                                            <source src="sounds/necros.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="question-group" role="group" aria-labelledby="q4">
+                            <h2 id="q4">4. Tyrande's Voice</h2>
+                            <fieldset>
+                                <legend class="visually-hidden">Select Tyrande's voice</legend>
+                                <div class="option">
+                                    <input type="radio" id="q4-1" name="question4" value="patma.mp3">
+                                    <label for="q4-1">
+                                        <audio controls>
+                                            <source src="sounds/patma.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="q4-2" name="question4" value="huntress.mp3">
+                                    <label for="q4-2">
+                                        <audio controls>
+                                            <source src="sounds/huntress.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="q4-3" name="question4" value="driada.mp3">
+                                    <label for="q4-3">
+                                        <audio controls>
+                                            <source src="sounds/driada.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="q4-4" name="question4" value="tirend.mp3">
+                                    <label for="q4-4">
+                                        <audio controls>
+                                            <source src="sounds/tirend.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="question-group" role="group" aria-labelledby="q5">
+                            <h2 id="q5">5. Medivh's Voice</h2>
+                            <fieldset>
+                                <legend class="visually-hidden">Select Medivh's voice</legend>
+                                <div class="option">
+                                    <input type="radio" id="q5-1" name="question5" value="archimage.mp3">
+                                    <label for="q5-1">
+                                        <audio controls>
+                                            <source src="sounds/archimage.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="q5-2" name="question5" value="mk.mp3">
+                                    <label for="q5-2">
+                                        <audio controls>
+                                            <source src="sounds/mk.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="q5-3" name="question5" value="mediv.mp3">
+                                    <label for="q5-3">
+                                        <audio controls>
+                                            <source src="sounds/mediv.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="q5-4" name="question5" value="rifle.mp3">
+                                    <label for="q5-4">
+                                        <audio controls>
+                                            <source src="sounds/rifle.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="question-group" role="group" aria-labelledby="q6">
+                            <h2 id="q6">6. Jaina's Voice</h2>
+                            <fieldset>
+                                <legend class="visually-hidden">Select Jaina's voice</legend>
+                                <div class="option">
+                                    <input type="radio" id="q6-1" name="question6" value="archer.mp3">
+                                    <label for="q6-1">
+                                        <audio controls>
+                                            <source src="sounds/archer.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="q6-2" name="question6" value="sora.mp3">
+                                    <label for="q6-2">
+                                        <audio controls>
+                                            <source src="sounds/sora.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="q6-3" name="question6" value="jaina.mp3">
+                                    <label for="q6-3">
+                                        <audio controls>
+                                            <source src="sounds/jaina.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                                <div class="option">
+                                    <input type="radio" id="q6-4" name="question6" value="mev.mp3">
+                                    <label for="q6-4">
+                                        <audio controls>
+                                            <source src="sounds/mev.mp3" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <button type="submit" class="submitTest">Submit Test</button>
+                    </form>
+                    <div id="testResults" role="alert" aria-live="polite"></div>
+                </section>
+            </div>
+        </main>
         <footer>
-            <div class = "footer">
-                <div class = "footerContainer">
-                    <div class = "listContainer">
+            <div class="footer">
+                <div class="footerContainer">
+                    <div class="listContainer">
                         <div class="listLeft">
-                            <h3>Services</h3>
+                            <h2>Services</h2>
                             <ul>
-                                <li>Game Analysis</li>
-                                <li>Game Reviews</li>
-                                <li>Tutorials</li>
-                                <li>Tournaments</li>
+                                <li><a href="#game-analysis">Game Analysis</a></li>
+                                <li><a href="#game-reviews">Game Reviews</a></li>
+                                <li><a href="#tutorials">Tutorials</a></li>
+                                <li><a href="#tournaments">Tournaments</a></li>
                             </ul>
                         </div>
-                        <img src = "images/icons/footer-logo.png" width = 300px>
+                        <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="300">
                         <div class="listRight">
-                            <h3>About</h3>
+                            <h2>About</h2>
                             <ul>
-                                <a href="index.html"><li>Home</li></a>
-                                <a href="story.html"><li>Story</li></a>
-                                <a href="fractions.html"><li>Fractions</li></a>
-                                <a href="characters.html"><li>Characters</li></a>
-                                <a href="pedia.html"><li>WarcraftPedia</li></a>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="story.html">Story</a></li>
+                                <li><a href="factions.html">Factions</a></li>
+                                <li><a href="characters.html">Characters</a></li>
+                                <li><a href="pedia.html">WarcraftPedia</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class = "companyInfo">
-                        <h3>Company Information</h3>
+                    <div class="companyInfo">
+                        <h2>Company Information</h2>
                         <p>We specialize in providing comprehensive services for all your Warcraft 3 needs. Whether you're organizing a tournament, seeking expert coaching, or looking to host a memorable Warcraft 3 event, we've got you covered.
                         Our team of seasoned professionals is dedicated to delivering top-notch experiences tailored to your specific requirements. Trust us to elevate your Warcraft 3 journey to new heights with our unparalleled services and passion for the game.
                         </p>
                     </div>
-                    <div class = "socialLinks">
-                            <img class = "socialIcon" src = "images/icons/insta.png">
-                            <img class = "socialIcon" src = "images/icons/telegram.png">
-                            <img class = "socialIcon" src = "images/icons/twitter.png">
-                            <img class = "socialIcon" src = "images/icons/facebook.png">
+                    <div class="socialLinks">
+                        <a href="#instagram" aria-label="Follow us on Instagram">
+                            <img class="socialIcon" src="images/icons/insta.png" alt="Instagram Icon">
+                        </a>
+                        <a href="#telegram" aria-label="Join us on Telegram">
+                            <img class="socialIcon" src="images/icons/telegram.png" alt="Telegram Icon">
+                        </a>
+                        <a href="#twitter" aria-label="Follow us on Twitter">
+                            <img class="socialIcon" src="images/icons/twitter.png" alt="Twitter Icon">
+                        </a>
+                        <a href="#facebook" aria-label="Like us on Facebook">
+                            <img class="socialIcon" src="images/icons/facebook.png" alt="Facebook Icon">
+                        </a>
                     </div>
-                    <div class = "contactText">
-                        <p>Email: some-email@gmail.com</p>
-                        <p>Telephone: 0-777-777-123</p>
+                    <div class="contactText">
+                        <p>Email: <a href="mailto:some-email@gmail.com">some-email@gmail.com</a></p>
+                        <p>Telephone: <a href="tel:0777777123">0-777-777-123</a></p>
                     </div>
-                    <p class="copyrightText">Andrei Kornev 2024.</p>
-
+                    <p class="copyrightText">&copy; Andrei Kornev 2024</p>
                 </div>
             </div>
         </footer>

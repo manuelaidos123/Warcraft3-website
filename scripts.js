@@ -1,148 +1,136 @@
-let slideIndex = 1;
-let emailEntered = false;
-let resultsShown = false;
+// Initialize Bootstrap components
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all tooltips
+    const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltips.forEach(tooltip => new bootstrap.Tooltip(tooltip));
 
-showSlides();
+    // Initialize all popovers
+    const popovers = document.querySelectorAll('[data-bs-toggle="popover"]');
+    popovers.forEach(popover => new bootstrap.Popover(popover));
 
+    // Add fade-in animation to cards
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => card.classList.add('fade-in'));
+});
 
-function showSlides() {
+// Email validation
+function validateEmail(event) {
+    if (event) {
+        event.preventDefault();
+    }
+
+    const emailInput = document.querySelector('input[type="email"]');
+    if (!emailInput) return;
+
+    const email = emailInput.value.trim();
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+    if (emailRegex.test(email)) {
+        showAlert('success', 'Thank you for subscribing! You will receive a confirmation email shortly.');
+        emailInput.value = '';
+    } else {
+        showAlert('danger', 'Please enter a valid email address.');
+    }
+}
+
+// Alert handling
+function showAlert(type, message) {
+    // Remove any existing alerts
+    const existingAlert = document.querySelector('.alert');
+    if (existingAlert) {
+        existingAlert.remove();
+    }
+
+    // Create new alert
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type} alert-dismissible fade show`;
+    alert.role = 'alert';
+    alert.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+
+    // Insert alert after the form
+    const form = document.querySelector('form');
+    if (form) {
+        form.insertAdjacentElement('afterend', alert);
+
+        // Auto-dismiss alert after 5 seconds
+        setTimeout(() => {
+            const bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+        }, 5000);
+    }
+}
+
+// Test submission handling
+function submitTest(event) {
+    event.preventDefault();
     
-    let slides = document.getElementsByClassName("Slide");
-    let dots = document.getElementsByClassName("dot");
-
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-
-    for( let i = 0; i < dots.length; ++i) {
-        dots[i].className = dots[i].className.replace("active", "");
-    }
-
-    
-    if (slideIndex > slides.length) {
-        slideIndex = 1;
-    }
-
-    slides[slideIndex-1].style.display = "block";
-    dots[slideIndex - 1].className += " active";
-    slideIndex++;
-    setTimeout(showSlides, 7000);
-}
-
-function changeSlides(position) {
-    let slides = document.getElementsByClassName("Slide");
-    let dots = document.getElementsByClassName("dot");
-    slideIndex += position;
-    if (slideIndex > slides.length) {slideIndex = 1}
-    else if(slideIndex < 1){slideIndex = slides.length}
-    for (i = 0; i < slides.length; i++) {
-       slides[i].style.display = "none";  
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-
-      }
-        slides[slideIndex-1].style.display = "block";  
-        dots[slideIndex-1].className += " active";
-    }
-
-function currentSlide(position) {
-    let slides = document.getElementsByClassName("Slide");
-    let dots = document.getElementsByClassName("dot");
-    if (position > slides.length) {position = 1}
-    else if(position < 1){position = slides.length}
-    for (i = 0; i < slides.length; i++) {
-       slides[i].style.display = "none";  
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
-        slides[position-1].style.display = "block";  
-        dots[position-1].className += " active";
-    }
-
-
-function validateEmail() {
-    let email = document.getElementsByClassName("textBox")[0].value;
-    let re = /^[a-zA-Z0-9. _-]+@[a-zA-Z0-9. -]+\. [a-zA-Z]{2,4}$/;
-    displayResponse(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email));
-}
-
-function displayResponse(isEmail) {
-    if (emailEntered){
-        let elem = document.getElementsByClassName("email")[0];
-        elem.remove();
-    }
-
-    let html = document.createElement("h4");
-    html.className = "email";
-    if (isEmail) {
-        var inner = document.createTextNode("You will recieve answer on your E-mail soon..");    
-    }
-    else {
-        var inner = document.createTextNode("Invalid E-mail adress..");
-    }
-
-    html.appendChild(inner);
-    const appendAfter = document.getElementsByClassName("submitButton")[0]
-
-    appendAfter.parentNode.insertBefore(html, appendAfter.nextSibling);
-    emailEntered = true;
-}
-
-function SubmitTest() {
     let score = 0;
-    let percentage = 0;
-    let questions = 6;
+    const questions = 6;
+    const answers = [
+        "trall.mp3",
+        "arthas_angry.mp3",
+        "tuzad.mp3",
+        "tirend.mp3",
+        "mediv.mp3",
+        "jaina.mp3"
+    ];
 
-    let answers = ["trall.mp3", "arthas_angry.mp3", "tuzad.mp3", "tirend.mp3", "mediv.mp3", "jaina.mp3"];
-    
     try {
-        for( let i = 0; i < questions; ++i){
-            let answerRadio = document.querySelector(`input[name="question${i + 1}"]:checked`);
-            let answered = answerRadio.nextElementSibling.childNodes[1].getAttribute("src"); // Returns sounds/*.mp3 of chosen answer
-            let answer = answered.split("/")[1]; // Returns second elemend of array (*.mp3) selected by user
-            if(answer == answers[i]) 
-                score ++;
+        for (let i = 0; i < questions; i++) {
+            const selectedAnswer = document.querySelector(`input[name="question${i + 1}"]:checked`);
+            if (!selectedAnswer) {
+                throw new Error('Please answer all questions before submitting.');
+            }
+            if (selectedAnswer.value === answers[i]) {
+                score++;
+            }
         }
-        
-        percentage = score / questions * 100;
-    }
-    catch(TypeError) {
-        alert("You have not chosen all of the options!");
-        return;
-    }
 
-    ShowResults(score, percentage, questions );
+        const percentage = (score / questions) * 100;
+        showTestResults(score, percentage);
+    } catch (error) {
+        showAlert('warning', error.message);
+    }
 }
 
-function ShowResults(score, percentage, questions) {
-    if (resultsShown){
-        let elem = document.getElementsByClassName("results")[0];
-        elem.remove();
+function showTestResults(score, percentage) {
+    let message = `Your score: ${score}/6 (${percentage}%)\n`;
+    
+    if (percentage >= 90) {
+        message += 'Excellent! You are a true Warcraft III expert!';
+        type = 'success';
+    } else if (percentage >= 70) {
+        message += 'Great job! You know your Warcraft III well!';
+        type = 'success';
+    } else if (percentage >= 50) {
+        message += 'Good effort! Keep playing to learn more!';
+        type = 'warning';
+    } else {
+        message += 'Keep practicing! Try playing more Warcraft III to improve your knowledge.';
+        type = 'danger';
     }
 
-    let message = "";
-    let str = `Your score is - ${score}/${questions}. Your percentage of correct answers is - ${percentage}% out of 100%. `
+    showAlert(type, message);
 
-    if (percentage >= 90){
-        message = "Wow. You know Warcraft 3 very well!"
-    }
-    else if (percentage >= 50) {
-        message = "You have certainly played Warcraft 3 a little bit."
-    }
-    else {
-        message = "Haven't you played Warcraft 3 yet?"
-    }
-
-    str += message;
-    str = document.createTextNode(str);
-
-    let html = document.createElement("h4");
-    html.appendChild(str);
-    html.className = "results";
-
-    const appendAfter = document.getElementsByName("lastQuestion")[0];
-    appendAfter.parentNode.insertBefore(html, appendAfter.nextSibling);
-    resultsShown = true;
+    // Scroll to results
+    window.scrollTo({
+        top: document.querySelector('.alert').offsetTop - 100,
+        behavior: 'smooth'
+    });
 }
+
+// Add smooth scrolling for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    });
+});
