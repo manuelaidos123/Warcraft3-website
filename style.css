@@ -127,8 +127,8 @@ body {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Social Media Grid */
-.social-grid {
+/* Social Media Icons Standardization */
+.socialLinks {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(40px, 40px));
     gap: 1rem;
@@ -136,7 +136,7 @@ body {
     margin: 1rem auto;
 }
 
-.social-grid a {
+.socialLinks a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -147,15 +147,20 @@ body {
     transition: all 0.3s ease;
 }
 
-.social-grid a:hover {
+.socialLinks a:hover {
     background-color: var(--wc-primary);
     transform: translateY(-3px);
 }
 
-.social-grid img {
+.socialIcon {
     width: 20px;
     height: 20px;
     filter: brightness(1);
+}
+
+/* Ensure Bootstrap social icons follow the same sizing */
+.socialLinks .fab {
+    font-size: 20px;
 }
 
 /* Footer */
