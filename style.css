@@ -2,11 +2,11 @@
     /* Color variables */
     --primary-color: #2f89fc;
     --primary-hover: #1a7af0;
-    --background-light: #f8f9fa;
-    --background-semi: #e9eef5;
+    --background-light: #ffffff;
+    --background-semi: #f8f9fa;
     --background-dark: #282d32;
     --text-dark: #292e34;
-    --text-light: #f0f9ff;
+    --text-light: #ffffff;
     
     /* Spacing variables */
     --spacing-xs: 0.5rem;
@@ -41,6 +41,7 @@ body {
     font-family: 'Abyssinica SIL', serif;
     line-height: 1.6;
     color: var(--text-dark);
+    background-color: var(--background-light);
 }
 
 a {
@@ -279,6 +280,37 @@ p {
     background-color: var(--primary-hover);
 }
 
+/* Main Content */
+.mainContainer {
+    padding: var(--spacing-md);
+    background-color: var(--background-light);
+}
+
+.mainInfo {
+    background-color: var(--background-semi);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.mainList {
+    background-color: var(--background-semi);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.mainInfo h1, .mainInfo h2, .mainList h2 {
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+}
+
+.mainInfo p {
+    color: var(--text-dark);
+    line-height: 1.8;
+}
+
 /* Footer */
 .footer {
     background-color: var(--background-dark);
@@ -415,9 +447,73 @@ p {
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --background-light: #1a1a1a;
-        --background-semi: #2a2a2a;
-        --text-dark: #f0f9ff;
-        --text-light: #f0f9ff;
+        --background-light: #121212;
+        --background-semi: #1e1e1e;
+        --background-dark: #000000;
+        --text-dark: #ffffff;
+        --text-light: #ffffff;
+        --primary-color: #4c9fff;
+        --primary-hover: #3d8ce0;
+    }
+
+    body {
+        background-color: var(--background-light);
+        color: var(--text-light);
+    }
+
+    h1, h2, h3, h4, h5, h6, p {
+        color: var(--text-light);
+    }
+
+    .headerContainer {
+        background-color: var(--background-dark);
+        border-bottom: 1px solid var(--background-semi);
+    }
+
+    .navItem {
+        background-color: var(--background-semi);
+        color: var(--text-light);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .navItem:hover, .navItem:focus {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .mainInfo, .mainList {
+        background-color: var(--background-semi);
+        color: var(--text-light);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .prosItem {
+        background-color: var(--background-dark);
+        color: var(--text-light);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .prosItem:hover {
+        border-color: var(--primary-color);
+    }
+
+    .footer {
+        background-color: var(--background-dark);
+        color: var(--text-light);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .textBox {
+        background-color: var(--background-dark);
+        color: var(--text-light);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .textBox:focus {
+        border-color: var(--primary-color);
+    }
+
+    a:hover {
+        color: var(--primary-color);
     }
 }
