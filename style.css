@@ -296,7 +296,33 @@ body {
     outline: none;
 }
 
-/* Responsive Image Handling */
+/* Responsive Image Containers */
+.imageContainer {
+    padding: 2rem 0;
+}
+
+.figure {
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.figure:hover {
+    transform: translateY(-5px);
+}
+
+.figure-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+}
+
+.figure-caption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Ensure all images are responsive */
 .img-fluid {
     max-width: 100%;
     height: auto;
@@ -304,20 +330,12 @@ body {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .nav-pills .nav-link {
-        margin: 5px 0;
+    .imageContainer {
+        padding: 1rem 0;
     }
     
-    .card {
-        margin-bottom: 2rem;
-    }
-
-    .image-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-    
-    .hero {
-        min-height: 40vh; /* Shorter hero section on mobile */
+    .figure {
+        margin-bottom: 1rem;
     }
 }
 
