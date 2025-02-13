@@ -1,192 +1,136 @@
-// IIFE to avoid global scope pollution
-(() => {
-    'use strict';
+// Initialize Bootstrap components
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all tooltips
+    const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltips.forEach(tooltip => new bootstrap.Tooltip(tooltip));
 
-    // State management
-    const state = {
-        slideIndex: 1,
-        slideInterval: null,
-        isAnimating: false
-    };
+    // Initialize all popovers
+    const popovers = document.querySelectorAll('[data-bs-toggle="popover"]');
+    popovers.forEach(popover => new bootstrap.Popover(popover));
 
-    // Constants
-    const SLIDE_INTERVAL = 7000;
-    const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    
-    // DOM Elements
-    const elements = {
-        slides: null,
-        dots: null,
-        enrollForm: null
-    };
+    // Add fade-in animation to cards
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => card.classList.add('fade-in'));
+});
 
-    // Initialize the application
-    document.addEventListener('DOMContentLoaded', () => {
-        initializeElements();
-        setupEventListeners();
-        startSlideshow();
-        setupAccessibility();
-    });
-
-    function initializeElements() {
-        elements.slides = document.getElementsByClassName('Slide');
-        elements.dots = document.getElementsByClassName('dot');
-        elements.enrollForm = document.getElementById('enrollForm');
-    }
-
-    function setupEventListeners() {
-        // Keyboard navigation for slideshow
-        document.addEventListener('keydown', handleKeyboardNavigation);
-
-        // Pause slideshow on hover/focus
-        const slideshow = document.querySelector('.imageSlider');
-        if (slideshow) {
-            slideshow.addEventListener('mouseenter', pauseSlideshow);
-            slideshow.addEventListener('mouseleave', startSlideshow);
-            slideshow.addEventListener('focusin', pauseSlideshow);
-            slideshow.addEventListener('focusout', startSlideshow);
-        }
-
-        // Form submission
-        if (elements.enrollForm) {
-            elements.enrollForm.addEventListener('submit', handleFormSubmit);
-        }
-    }
-
-    function setupAccessibility() {
-        // Add aria-live region for slide announcements
-        const liveRegion = document.createElement('div');
-        liveRegion.setAttribute('aria-live', 'polite');
-        liveRegion.classList.add('visually-hidden');
-        document.body.appendChild(liveRegion);
-    }
-
-    // Slideshow functions
-    function showSlides() {
-        if (!elements.slides || !elements.dots) return;
-
-        for (let i = 0; i < elements.slides.length; i++) {
-            elements.slides[i].style.display = 'none';
-            elements.dots[i].classList.remove('active');
-            elements.dots[i].setAttribute('aria-selected', 'false');
-        }
-
-        state.slideIndex = state.slideIndex > elements.slides.length ? 1 
-            : state.slideIndex < 1 ? elements.slides.length 
-            : state.slideIndex;
-
-        elements.slides[state.slideIndex - 1].style.display = 'block';
-        elements.dots[state.slideIndex - 1].classList.add('active');
-        elements.dots[state.slideIndex - 1].setAttribute('aria-selected', 'true');
-
-        // Announce slide change for screen readers
-        announceSlideChange(state.slideIndex);
-    }
-
-    function announceSlideChange(index) {
-        const liveRegion = document.querySelector('[aria-live="polite"]');
-        if (liveRegion) {
-            liveRegion.textContent = `Showing slide ${index} of ${elements.slides.length}`;
-        }
-    }
-
-    function changeSlides(position) {
-        if (state.isAnimating) return;
-        state.isAnimating = true;
-
-        pauseSlideshow();
-        state.slideIndex += position;
-        showSlides();
-
-        // Debounce animation flag
-        setTimeout(() => {
-            state.isAnimating = false;
-            startSlideshow();
-        }, 500);
-    }
-
-    function currentSlide(position) {
-        pauseSlideshow();
-        state.slideIndex = position;
-        showSlides();
-        startSlideshow();
-    }
-
-    function startSlideshow() {
-        if (state.slideInterval) return;
-        state.slideInterval = setInterval(() => {
-            state.slideIndex++;
-            showSlides();
-        }, SLIDE_INTERVAL);
-    }
-
-    function pauseSlideshow() {
-        if (state.slideInterval) {
-            clearInterval(state.slideInterval);
-            state.slideInterval = null;
-        }
-    }
-
-    function handleKeyboardNavigation(event) {
-        switch (event.key) {
-            case 'ArrowLeft':
-                event.preventDefault();
-                changeSlides(-1);
-                break;
-            case 'ArrowRight':
-                event.preventDefault();
-                changeSlides(1);
-                break;
-        }
-    }
-
-    // Form handling
-    function handleFormSubmit(event) {
+// Email validation
+function validateEmail(event) {
+    if (event) {
         event.preventDefault();
-        const emailInput = event.target.querySelector('.textBox');
-        
-        if (!emailInput) {
-            showFormMessage('System error. Please try again later.', false);
-            return;
-        }
-
-        const email = emailInput.value.trim();
-        if (validateEmail(email)) {
-            // Here you would typically send the email to your server
-            showFormMessage('Thank you! You will receive a confirmation email shortly.', true);
-            emailInput.value = '';
-        } else {
-            showFormMessage('Please enter a valid email address.', false);
-        }
     }
 
-    function validateEmail(email) {
-        return EMAIL_REGEX.test(email);
+    const emailInput = document.querySelector('input[type="email"]');
+    if (!emailInput) return;
+
+    const email = emailInput.value.trim();
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+    if (emailRegex.test(email)) {
+        showAlert('success', 'Thank you for subscribing! You will receive a confirmation email shortly.');
+        emailInput.value = '';
+    } else {
+        showAlert('danger', 'Please enter a valid email address.');
+    }
+}
+
+// Alert handling
+function showAlert(type, message) {
+    // Remove any existing alerts
+    const existingAlert = document.querySelector('.alert');
+    if (existingAlert) {
+        existingAlert.remove();
     }
 
-    function showFormMessage(message, isSuccess) {
-        const existingMessage = document.querySelector('.form-message');
-        if (existingMessage) {
-            existingMessage.remove();
+    // Create new alert
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type} alert-dismissible fade show`;
+    alert.role = 'alert';
+    alert.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+
+    // Insert alert after the form
+    const form = document.querySelector('form');
+    if (form) {
+        form.insertAdjacentElement('afterend', alert);
+
+        // Auto-dismiss alert after 5 seconds
+        setTimeout(() => {
+            const bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+        }, 5000);
+    }
+}
+
+// Test submission handling
+function submitTest(event) {
+    event.preventDefault();
+    
+    let score = 0;
+    const questions = 6;
+    const answers = [
+        "trall.mp3",
+        "arthas_angry.mp3",
+        "tuzad.mp3",
+        "tirend.mp3",
+        "mediv.mp3",
+        "jaina.mp3"
+    ];
+
+    try {
+        for (let i = 0; i < questions; i++) {
+            const selectedAnswer = document.querySelector(`input[name="question${i + 1}"]:checked`);
+            if (!selectedAnswer) {
+                throw new Error('Please answer all questions before submitting.');
+            }
+            if (selectedAnswer.value === answers[i]) {
+                score++;
+            }
         }
 
-        const messageElement = document.createElement('p');
-        messageElement.className = `form-message ${isSuccess ? 'success' : 'error'}`;
-        messageElement.textContent = message;
-        messageElement.setAttribute('role', 'alert');
+        const percentage = (score / questions) * 100;
+        showTestResults(score, percentage);
+    } catch (error) {
+        showAlert('warning', error.message);
+    }
+}
 
-        const form = document.getElementById('enrollForm');
-        if (form) {
-            form.appendChild(messageElement);
-            
-            // Auto-remove message after 5 seconds
-            setTimeout(() => {
-                messageElement.remove();
-            }, 5000);
-        }
+function showTestResults(score, percentage) {
+    let message = `Your score: ${score}/6 (${percentage}%)\n`;
+    
+    if (percentage >= 90) {
+        message += 'Excellent! You are a true Warcraft III expert!';
+        type = 'success';
+    } else if (percentage >= 70) {
+        message += 'Great job! You know your Warcraft III well!';
+        type = 'success';
+    } else if (percentage >= 50) {
+        message += 'Good effort! Keep playing to learn more!';
+        type = 'warning';
+    } else {
+        message += 'Keep practicing! Try playing more Warcraft III to improve your knowledge.';
+        type = 'danger';
     }
 
-    // Export functions needed by HTML
-    window.changeSlides = changeSlides;
-    window.currentSlide = currentSlide;
-})();
+    showAlert(type, message);
+
+    // Scroll to results
+    window.scrollTo({
+        top: document.querySelector('.alert').offsetTop - 100,
+        behavior: 'smooth'
+    });
+}
+
+// Add smooth scrolling for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    });
+});

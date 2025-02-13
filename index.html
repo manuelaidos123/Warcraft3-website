@@ -5,184 +5,218 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Warcraft 3 fan website with information about factions, characters, and lore">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Google Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Abyssinica+SIL' rel='stylesheet'>
+        <!-- Custom CSS -->
         <link rel="stylesheet" type="text/css" href="style.css">
-        <script src="scripts.js" defer></script>
+        <!-- Favicon -->
         <link rel="icon" type="image/png" href="images/icons/logo.png">
     </head>
-    <body>
-        <header>
-            <div class="headerContainer">
-                <div class="item">
-                    <img src="images/icons/logo.png" alt="Warcraft 3 Logo" height="40">
+    <body class="bg-light">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/icons/logo.png" alt="Warcraft 3 Logo" height="40" class="d-inline-block align-text-top">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="story.html">Story</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="factions.html">Factions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="characters.html">Characters</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pedia.html">WarcraftPedia</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="test.html">Test</a>
+                        </li>
+                    </ul>
                 </div>
-                <nav class="headerNav">
-                    <a href="index.html" class="navItem" aria-current="page">Home</a>
-                    <a href="story.html" class="navItem">Story</a>
-                    <a href="fractions.html" class="navItem">Factions</a>
-                    <a href="characters.html" class="navItem">Characters</a>
-                    <a href="pedia.html" class="navItem">WarcraftPedia</a>
-                    <a href="test.html" class="navItem">Test</a>
-                </nav>
             </div>
-        </header>
-        <main>
-            <section class="homeWelcome">
-                <h1 class="homeText">Welcome!</h1>
-                <h2 class="homeText">To the Best Warcraft 3 website.</h2>
-            </section>
-            <section class="WarcraftReforgedHeader">
-                <h2 class="infoWarcraftHeader">Warcraft Reforged</h2>
-                <hr aria-hidden="true">
-            </section>
-            <section class="imageSlider" aria-label="Game Screenshots">
-                <div class="Slide fade-in">
-                    <button class="prevButton" onclick="changeSlides(-1)" aria-label="Previous slide">&#10094;</button>
-                    <button class="nextButton" onclick="changeSlides(1)" aria-label="Next slide">&#10095;</button>
-                    <img src="images/reforged1.jpg" alt="Warcraft 3 Reforged Screenshot 1">
-                </div>
-                <div class="Slide fade-in">
-                    <button class="prevButton" onclick="changeSlides(-1)" aria-label="Previous slide">&#10094;</button>
-                    <button class="nextButton" onclick="changeSlides(1)" aria-label="Next slide">&#10095;</button>
-                    <img src="images/reforged2.jpg" alt="Warcraft 3 Reforged Screenshot 2">
-                </div>
-                <div class="Slide fade-in">    
-                    <button class="prevButton" onclick="changeSlides(-1)" aria-label="Previous slide">&#10094;</button>
-                    <button class="nextButton" onclick="changeSlides(1)" aria-label="Next slide">&#10095;</button>
-                    <img src="images/reforged3.jpg" alt="Warcraft 3 Reforged Screenshot 3">
-                </div>
-                <div class="Slide fade-in">    
-                    <button class="prevButton" onclick="changeSlides(-1)" aria-label="Previous slide">&#10094;</button>
-                    <button class="nextButton" onclick="changeSlides(1)" aria-label="Next slide">&#10095;</button>
-                    <img src="images/reforged4.jpg" alt="Warcraft 3 Reforged Screenshot 4">
-                </div>
-               
-                <div class="dots" role="tablist">
-                    <button class="dot" onclick="currentSlide(1)" role="tab" aria-label="Slide 1"></button>
-                    <button class="dot" onclick="currentSlide(2)" role="tab" aria-label="Slide 2"></button>
-                    <button class="dot" onclick="currentSlide(3)" role="tab" aria-label="Slide 3"></button>
-                    <button class="dot" onclick="currentSlide(4)" role="tab" aria-label="Slide 4"></button>
-                </div>
-            </section>
-            <section class="infoWarcraft">
-                <h2 class="infoWarcraftHeader">What is Warcraft 3?</h2>
-                <hr aria-hidden="true">
-                <p class="infoWarcraftParagraph">
-                    Warcraft 3 is a real-time strategy game that was released in 2002 by Blizzard Entertainment. 
-                    It is the third installment in the Warcraft series, which is set in a fantasy world of Azeroth, where humans, orcs, elves, undead, and other races fight for survival and domination.
-                    The game consists of two main modes: campaign and multiplayer. The campaign mode follows the story of four different factions: the human alliance, the orcish horde, the night elf sentinels, and the undead scourge.
-                    Each faction has its own unique units, buildings, heroes, and abilities. The campaign mode also introduces the concept of RPG elements, such as quests, inventory, and leveling up.
-                    The multiplayer mode allows players to compete against each other or cooperate in teams, using one of the four factions or custom ones created by the game's editor. 
-                    The multiplayer mode also features a variety of maps, game modes, and settings, such as resource gathering, base building, unit training, and combat. The game also supports online play through Blizzard's Battle.net service, where players can join or host games, chat with other players, and access ladder rankings.
-                    Warcraft 3 is widely regarded as one of the best and most influential strategy games of all time, as it spawned many popular genres and titles, such as Defense of the Ancients (DotA), World of Warcraft, and StarCraft II. 
-                    The game also received critical acclaim and numerous awards, such as Game of the Year, Best Strategy Game, and Best Multiplayer Game. 
-                    In 2020, Blizzard released a remastered version of the game, called Warcraft III: Reforged, which features improved graphics, sound, and gameplay.
-                </p>
-            </section>
-            <section class="warcraftPros">
-                <div class="prosItem">
-                    <img class="proImage" src="images/icons/4icon.png" alt="Four Factions Icon">
-                    <h3>Four Playable Factions</h3>
-                    <p>Warcraft III offers four distinct playable factions: Humans, Orcs, Undead, and Night Elves. Each faction has unique units, buildings, and gameplay mechanics, providing diverse strategic options for players.</p>
-                </div>
-                <div class="prosItem">
-                    <img class="proImage" src="images/icons/hero_icon.png" alt="Hero Icon">
-                    <h3>Heroes</h3>
-                    <p>One of Warcraft III's most significant innovations is the introduction of hero units. Heroes play a crucial role in battles and can turn the tide of a match with their abilities.</p>
-                </div>
-                <div class="prosItem">
-                    <img class="proImage" src="images/icons/peon.png" alt="Resource Icon">
-                    <h3>Resource Management</h3>
-                    <p>Warcraft III features resource management mechanics where players must gather gold and lumber to construct buildings, train units, and research upgrades. Managing resources efficiently is essential for building a strong army and economy.</p>
-                </div>
-                <div class="prosItem">
-                    <img class="proImage" src="images/icons/defend.png" alt="Defense Icon">
-                    <h3>Base Building and Defense</h3>
-                    <p>Players must construct and expand their bases strategically to defend against enemy attacks while also launching offensives against their opponents. Base layout and defense play a crucial role in determining the outcome of battles.</p>
-                </div>
-                <div class="prosItem">
-                    <img class="proImage" src="images/icons/editor.png" alt="Editor Icon">
-                    <h3>Custom Maps and Modding</h3>
-                    <p>
-                        Warcraft III's World Editor allows players to create custom maps, scenarios, and even entirely new games using the game's assets and scripting tools. 
-                        This feature has led to the creation of numerous popular custom game modes, such as Defense of the Ancients (DotA), which eventually spawned its own genre.
-                    </p>
-                </div>
-                <div class="prosItem">
-                    <img class="proImage" src="images/icons/multiplayer.png" alt="Multiplayer Icon">
-                    <h3>Multiplayer Modes</h3>
-                    <p>
-                        Warcraft III offers various multiplayer modes, including one-on-one battles, team-based matches, and custom games. 
-                        The multiplayer mode also features a robust online multiplayer infrastructure and matchmaking system that provides endless opportunities for competitive play.
-                    </p>
-                </div>
-            </section>
-            <section class="enrollPart">
-                <div class="enroll">
-                    <h3>Don't waste your Time. Enroll now.</h3>
-                    <p>Embark on epic adventures, command powerful armies, and master strategic warfare in Warcraft 3. 
-                       Join me in this immersive world where heroes rise, alliances form, and battles shape destinies. 
-                       Let's unlock our tactical prowess, forge unforgettable memories, and conquer realms together!
-                    </p>
-                    <form id="enrollForm" onsubmit="validateEmail(event)">
-                        <input type="email" placeholder="Enter your email address.." class="textBox" required aria-label="Email address">
-                        <button type="submit" class="submitButton">Enroll</button>
-                    </form>
-                </div>
-            </section>
-        </main>
-        <footer>
-            <div class="footer">
-                <div class="footerContainer">
-                    <div class="listContainer">
-                        <div class="listLeft">
-                            <h3>Services</h3>
-                            <ul>
-                                <li><a href="#game-analysis">Game Analysis</a></li>
-                                <li><a href="#game-reviews">Game Reviews</a></li>
-                                <li><a href="#tutorials">Tutorials</a></li>
-                                <li><a href="#tournaments">Tournaments</a></li>
-                            </ul>
-                        </div>
-                        <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="300">
-                        <div class="listRight">
-                            <h3>About</h3>
-                            <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="story.html">Story</a></li>
-                                <li><a href="fractions.html">Factions</a></li>
-                                <li><a href="characters.html">Characters</a></li>
-                                <li><a href="pedia.html">WarcraftPedia</a></li>
-                            </ul>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero bg-dark text-white py-5 mb-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="display-4 fw-bold">Welcome to Warcraft 3</h1>
+                        <p class="lead">Explore the epic world of strategy, heroes, and legendary battles.</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Image Carousel -->
+                        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
+                            </div>
+                            <div class="carousel-inner rounded shadow">
+                                <div class="carousel-item active">
+                                    <img src="images/reforged1.jpg" class="d-block w-100" alt="Warcraft 3 Reforged Screenshot 1">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/reforged2.jpg" class="d-block w-100" alt="Warcraft 3 Reforged Screenshot 2">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/reforged3.jpg" class="d-block w-100" alt="Warcraft 3 Reforged Screenshot 3">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/reforged4.jpg" class="d-block w-100" alt="Warcraft 3 Reforged Screenshot 4">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
                     </div>
-                    <div class="companyInfo">
-                        <h3>Company Information</h3>
-                        <p>We specialize in providing comprehensive services for all your Warcraft 3 needs. Whether you're organizing a tournament, seeking expert coaching, or looking to host a memorable Warcraft 3 event, we've got you covered.
-                        Our team of seasoned professionals is dedicated to delivering top-notch experiences tailored to your specific requirements. Trust us to elevate your Warcraft 3 journey to new heights with our unparalleled services and passion for the game.
-                        </p>
-                    </div>
-                    <div class="socialLinks">
-                        <a href="#instagram" aria-label="Follow us on Instagram">
-                            <img class="socialIcon" src="images/icons/insta.png" alt="Instagram Icon">
-                        </a>
-                        <a href="#telegram" aria-label="Join us on Telegram">
-                            <img class="socialIcon" src="images/icons/telegram.png" alt="Telegram Icon">
-                        </a>
-                        <a href="#twitter" aria-label="Follow us on Twitter">
-                            <img class="socialIcon" src="images/icons/twitter.png" alt="Twitter Icon">
-                        </a>
-                        <a href="#facebook" aria-label="Like us on Facebook">
-                            <img class="socialIcon" src="images/icons/facebook.png" alt="Facebook Icon">
-                        </a>
-                    </div>
-                    <div class="contactText">
-                        <p>Email: <a href="mailto:some-email@gmail.com">some-email@gmail.com</a></p>
-                        <p>Telephone: <a href="tel:0777777123">0-777-777-123</a></p>
-                    </div>
-                    <p class="copyrightText">&copy; Andrei Kornev 2024</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- Info Section -->
+        <section class="py-5 bg-white">
+            <div class="container">
+                <h2 class="text-center mb-5">What is Warcraft 3?</h2>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <p class="card-text">Warcraft 3 is a real-time strategy game that was released in 2002 by Blizzard Entertainment. Set in the fantasy world of Azeroth, it features four playable factions: humans, orcs, night elves, and the undead. The game revolutionized the RTS genre by introducing hero units and RPG elements.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5">Game Features</h2>
+                <div class="row g-4">
+                    <!-- Feature 1 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <img src="images/icons/4icon.png" alt="Factions Icon" class="mb-3" width="64">
+                                <h3 class="h5">Four Playable Factions</h3>
+                                <p class="card-text">Each faction has unique units, buildings, and gameplay mechanics, providing diverse strategic options.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <img src="images/icons/hero_icon.png" alt="Heroes Icon" class="mb-3" width="64">
+                                <h3 class="h5">Hero Units</h3>
+                                <p class="card-text">Powerful hero units level up and gain abilities, adding RPG elements to strategic gameplay.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <img src="images/icons/multiplayer.png" alt="Multiplayer Icon" class="mb-3" width="64">
+                                <h3 class="h5">Multiplayer Battles</h3>
+                                <p class="card-text">Engage in epic multiplayer battles with players from around the world.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="py-5 bg-primary text-white">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2 class="mb-4">Join the Battle Today!</h2>
+                        <p class="lead mb-4">Subscribe to our newsletter for the latest updates and strategies.</p>
+                        <form class="row g-3 justify-content-center" onsubmit="validateEmail(event)">
+                            <div class="col-md-8">
+                                <input type="email" class="form-control form-control-lg" placeholder="Enter your email address" required>
+                            </div>
+                            <div class="col-md-auto">
+                                <button type="submit" class="btn btn-light btn-lg px-4">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-light py-5">
+            <div class="container">
+                <div class="row">
+                    <!-- Services -->
+                    <div class="col-md-4 mb-4">
+                        <h4>Services</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light text-decoration-none">Game Analysis</a></li>
+                            <li><a href="#" class="text-light text-decoration-none">Game Reviews</a></li>
+                            <li><a href="#" class="text-light text-decoration-none">Tutorials</a></li>
+                            <li><a href="#" class="text-light text-decoration-none">Tournaments</a></li>
+                        </ul>
+                    </div>
+                    <!-- Quick Links -->
+                    <div class="col-md-4 mb-4">
+                        <h4>Quick Links</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="index.html" class="text-light text-decoration-none">Home</a></li>
+                            <li><a href="story.html" class="text-light text-decoration-none">Story</a></li>
+                            <li><a href="factions.html" class="text-light text-decoration-none">Factions</a></li>
+                            <li><a href="characters.html" class="text-light text-decoration-none">Characters</a></li>
+                        </ul>
+                    </div>
+                    <!-- Contact -->
+                    <div class="col-md-4 mb-4">
+                        <h4>Contact Us</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="mailto:some-email@gmail.com" class="text-light text-decoration-none">some-email@gmail.com</a></li>
+                            <li><a href="tel:0777777123" class="text-light text-decoration-none">0-777-777-123</a></li>
+                        </ul>
+                        <!-- Social Links -->
+                        <div class="mt-3">
+                            <a href="#" class="text-light me-3"><img src="images/icons/facebook.png" alt="Facebook" width="32"></a>
+                            <a href="#" class="text-light me-3"><img src="images/icons/twitter.png" alt="Twitter" width="32"></a>
+                            <a href="#" class="text-light me-3"><img src="images/icons/insta.png" alt="Instagram" width="32"></a>
+                            <a href="#" class="text-light"><img src="images/icons/telegram.png" alt="Telegram" width="32"></a>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4">
+                <p class="text-center mb-0">&copy; 2024 Andrei Kornev. All rights reserved.</p>
             </div>
         </footer>
+
+        <!-- Bootstrap Bundle JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Custom JS -->
+        <script src="scripts.js" defer></script>
     </body>
 </html>
