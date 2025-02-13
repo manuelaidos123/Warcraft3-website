@@ -133,7 +133,7 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(40px, 40px));
     gap: 1rem;
     max-width: 200px;
-    margin: 1rem auto;
+    margin: 2.5rem 0 1.5rem; /* Increased top margin to create more space */
 }
 
 .socialLinks a {
@@ -297,4 +297,21 @@ body {
     .card {
         margin-bottom: 2rem;
     }
+}
+
+.footerContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem;
+}
+
+.contactText {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Optional: adds a subtle divider */
+    padding-bottom: 1.5rem;
+}
+
+.copyrightText {
+    margin-top: 1rem;
+    opacity: 0.7;
 }
