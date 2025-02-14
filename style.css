@@ -1,9 +1,7 @@
 :root {
     /* Color variables */
-    /* Color variables */
     --wc-primary: #2f89fc;
     --wc-primary-hover: #1a7af0;
-    --wc-dark: #121212;
     --wc-dark: #121212;
     --wc-light: #ffffff;
     --wc-gray: #f8f9fa;
@@ -420,15 +418,10 @@ body::before {
 
 .footer a {
     color: rgba(255, 255, 255, 0.7);
-.footer a {
-    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    transition: color 0.3s ease;
     transition: color 0.3s ease;
 }
 
-.footer a:hover {
-    color: var(--wc-light);
 .footer a:hover {
     color: var(--wc-light);
 }
@@ -1070,6 +1063,18 @@ figcaption,
     transition: all 0.3s ease;
 }
 
-.strength-weak { background-color: #ff4444; width: 30%; }
-.strength-medium { background-color: #ffbb33; width: 60%; }
-.strength-strong { background-color: #00C851; width: 100%; }
+.strength-weak {
+    background-color: #ff4444;
+    width: 30%;
+}
+
+.strength-medium {
+    background-color: #ffbb33;
+    width: 60%;
+}
+
+.strength-strong {
+    background-color: #00C851;
+    width: 100%;
+}
+}
