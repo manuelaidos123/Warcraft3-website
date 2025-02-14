@@ -5,27 +5,52 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Learn about the epic story of Warcraft 3, including all campaigns and major plot points">
-        <link href='https://fonts.googleapis.com/css?family=Abyssinica+SIL' rel='stylesheet'>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <link rel="icon" type="image/png" href="images/icons/logo.png">
+        <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <!-- Google Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap' rel='stylesheet'>
+        <!-- Custom CSS -->
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="images/icons/logo.png">
     </head>
-    <body>
-        <header>
-            <div class="headerContainer">
-                <div class="item">
-                    <img src="images/icons/logo.png" alt="Warcraft 3 Logo" class="img-fluid" style="height: 40px; width: auto;">
+    <body class="bg-light">
+        <!-- Updated Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/icons/logo.png" alt="Warcraft III Logo" height="40">
+                    Warcraft III
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="story.html" aria-current="page">Story</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="factions.html">Factions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="characters.html">Characters</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pedia.html">WarcraftPedia</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="test.html">Test</a>
+                        </li>
+                    </ul>
                 </div>
-                <nav class="headerNav">
-                    <a href="index.html" class="navItem">Home</a>
-                    <a href="story.html" class="navItem" aria-current="page">Story</a>
-                    <a href="factions.html" class="navItem">Factions</a>
-                    <a href="characters.html" class="navItem">Characters</a>
-                    <a href="pedia.html" class="navItem">WarcraftPedia</a>
-                    <a href="test.html" class="navItem">Test</a>
-                </nav>
             </div>
-        </header>
+        </nav>
         <main>
             <div class="mainContainer">
                 <article class="mainInfo">
@@ -162,5 +187,9 @@
                 </div>
             </div>
         </footer>
+        <!-- Bootstrap Bundle JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Custom JS -->
+        <script src="js/main.js"></script>
     </body>
 </html>

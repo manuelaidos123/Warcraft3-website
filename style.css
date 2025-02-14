@@ -6,61 +6,253 @@
     --wc-light: #ffffff;
     --wc-gray: #f8f9fa;
     --wc-border: rgba(255, 255, 255, 0.1);
+    --wc-bg-gradient: linear-gradient(135deg, #1a1e2c 0%, #2b344d 100%);
+    --wc-overlay: rgba(26, 30, 44, 0.95);
 }
 
 /* Base styles */
 body {
     font-family: 'Abyssinica SIL', serif;
     padding-top: 76px; /* Height of fixed navbar */
+    background: var(--wc-bg-gradient);
+    background-attachment: fixed;
+    position: relative;
+    color: var(--wc-light);
+}
+
+/* Text color adjustments */
+body {
+    color: var(--wc-light); /* Sets default text color to white */
+}
+
+p, span, li, td, th, label, input, textarea {
+    color: rgba(255, 255, 255, 0.9); /* Slightly softer white for better readability */
+}
+
+/* Link colors */
+a {
+    color: var(--wc-primary);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--wc-primary-hover);
+}
+
+/* Form elements */
+input, textarea, select {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: var(--wc-light) !important;
+}
+
+input::placeholder, textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* List items */
+.list-group-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--wc-light);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Card text */
+.card-text {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Navigation text */
+.nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--wc-light) !important;
+}
+
+/* Table text */
+table {
+    color: var(--wc-light) !important;
+}
+
+/* Decorative background pattern */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/pattern.png'), 
+                      radial-gradient(circle at 50% 50%, rgba(47, 137, 252, 0.1) 0%, transparent 60%);
+    background-size: 200px 200px, cover;
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
 }
 
 /* Enhanced Navigation */
 #mainNav {
-    background-color: rgba(0, 0, 0, 0.9);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    background: rgba(13, 17, 23, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease-in-out;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(47, 137, 252, 0.2);
+    padding: 1rem 0;
 }
 
+/* Brand/Logo section */
 #mainNav .navbar-brand {
     font-family: 'Raleway', sans-serif;
     font-weight: 700;
     color: var(--wc-light);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
+#mainNav .navbar-brand img {
+    transition: transform 0.3s ease;
+}
+
+#mainNav .navbar-brand:hover img {
+    transform: scale(1.1);
+}
+
+/* Navigation Links */
 #mainNav .navbar-nav .nav-item .nav-link {
     font-size: 0.9rem;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
-    padding: 1.5rem 1rem;
-    color: rgba(255, 255, 255, 0.7);
+    padding: 1rem 1.25rem;
+    color: rgba(255, 255, 255, 0.8) !important;
     position: relative;
     transition: all 0.3s ease;
 }
 
-#mainNav .navbar-nav .nav-item .nav-link:hover,
-#mainNav .navbar-nav .nav-item .nav-link:focus,
-#mainNav .navbar-nav .nav-item .nav-link.active {
-    color: var(--wc-light);
-}
-
-#mainNav .navbar-nav .nav-item .nav-link::after {
+/* Hover effect with glowing underline */
+#mainNav .navbar-nav .nav-item .nav-link::before {
     content: '';
     position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-    right: 1rem;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
     height: 2px;
-    background-color: var(--wc-primary);
+    background: var(--wc-primary);
     transform: scaleX(0);
+    transform-origin: right;
     transition: transform 0.3s ease;
+    box-shadow: 0 0 10px var(--wc-primary);
 }
 
-#mainNav .navbar-nav .nav-item .nav-link:hover::after,
-#mainNav .navbar-nav .nav-item .nav-link:focus::after,
-#mainNav .navbar-nav .nav-item .nav-link.active::after {
+#mainNav .navbar-nav .nav-item .nav-link:hover::before,
+#mainNav .navbar-nav .nav-item .nav-link.active::before {
     transform: scaleX(1);
+    transform-origin: left;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link:hover,
+#mainNav .navbar-nav .nav-item .nav-link.active {
+    color: var(--wc-light) !important;
+}
+
+/* Active state with glow */
+#mainNav .navbar-nav .nav-item .nav-link.active {
+    color: var(--wc-primary) !important;
+    text-shadow: 0 0 10px rgba(47, 137, 252, 0.5);
+}
+
+/* Hamburger Menu for Mobile */
+#mainNav .navbar-toggler {
+    border: 1px solid rgba(47, 137, 252, 0.3);
+    background: rgba(47, 137, 252, 0.1);
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+#mainNav .navbar-toggler:hover {
+    border-color: var(--wc-primary);
+    background: rgba(47, 137, 252, 0.2);
+}
+
+#mainNav .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Scroll Effect */
+#mainNav.navbar-scrolled {
+    background: rgba(13, 17, 23, 0.98);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+/* Dropdown Menus */
+#mainNav .dropdown-menu {
+    background: rgba(13, 17, 23, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(47, 137, 252, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+#mainNav .dropdown-item {
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    padding: 0.75rem 1.5rem;
+}
+
+#mainNav .dropdown-item:hover {
+    background: rgba(47, 137, 252, 0.1);
+    color: var(--wc-primary);
+    transform: translateX(5px);
+}
+
+/* Mobile Navigation */
+@media (max-width: 991.98px) {
+    #mainNav .navbar-nav {
+        padding: 1rem 0;
+    }
+
+    #mainNav .nav-item {
+        padding: 0.25rem 0;
+    }
+
+    #mainNav .navbar-nav .nav-item .nav-link::before {
+        left: 0;
+        width: 3px;
+        height: 100%;
+        transform: scaleY(0);
+    }
+
+    #mainNav .navbar-nav .nav-item .nav-link:hover::before,
+    #mainNav .navbar-nav .nav-item .nav-link.active::before {
+        transform: scaleY(1);
+    }
+
+    #mainNav .dropdown-menu {
+        background: rgba(13, 17, 23, 0.5);
+        border: none;
+        padding: 0.5rem;
+    }
+}
+
+/* Add scroll animation */
+@keyframes navFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#mainNav .nav-item {
+    animation: navFadeIn 0.5s ease forwards;
+    animation-delay: calc(var(--item-number) * 0.1s);
+    opacity: 0;
 }
 
 /* Hero Section */
@@ -360,4 +552,173 @@ body {
 .copyrightText {
     margin-top: 1rem;
     opacity: 0.7;
+}
+
+/* Content wrapper */
+.mainContainer {
+    position: relative;
+    z-index: 1;
+    background: var(--wc-overlay);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    margin: 2rem auto;
+    padding: 2rem;
+    max-width: 1200px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Section styling */
+section {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Typography enhancements */
+h1, h2, h3 {
+    color: var(--wc-primary);
+    font-family: 'Raleway', sans-serif;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+h1::after, h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--wc-primary);
+    border-radius: 3px;
+}
+
+/* Card adjustments for dark theme */
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.card-body {
+    color: var(--wc-light);
+}
+
+/* Image container enhancement */
+.figure {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.figure-caption {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--wc-primary);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--wc-primary-hover);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .mainContainer {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    section {
+        padding: 1.5rem;
+    }
+}
+
+/* Typography and Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--wc-primary);
+    font-family: 'Raleway', sans-serif;
+    position: relative;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.card-title, .modal-title {
+    color: var(--wc-primary);
+    border-bottom: 2px solid var(--wc-primary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Section titles */
+section h2, 
+section h3, 
+section h4 {
+    color: var(--wc-primary);
+}
+
+/* Sidebar titles */
+aside h2, 
+aside h3, 
+.sidebar-title {
+    color: var(--wc-light);
+}
+
+/* Footer titles */
+footer h3, 
+footer h4, 
+.footer-title {
+    color: var(--wc-light);
+}
+
+/* Bootstrap component titles */
+.accordion-button,
+.nav-tabs .nav-link,
+.dropdown-item {
+    color: var(--wc-light) !important;
+}
+
+/* List group titles */
+.list-group-item-heading {
+    color: var(--wc-light);
+}
+
+/* Figure captions */
+figcaption,
+.figure-caption {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Main article title */
+.mainInfo h1 {
+    color: var(--wc-light);
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 2rem;
+}
+
+.mainInfo h1::after {
+    background: var(--wc-light); /* Makes the underline white as well */
 }
