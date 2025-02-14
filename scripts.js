@@ -11,6 +11,86 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add fade-in animation to cards
     const cards = document.querySelectorAll('.card');
     cards.forEach(card => card.classList.add('fade-in'));
+
+    // Form toggle handlers
+    document.getElementById('showSignup').addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleForms('signup');
+    });
+
+    document.getElementById('showLogin').addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleForms('login');
+    });
+
+    // Login form handling
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const errorDiv = document.getElementById('loginError');
+        
+        fetch('auth/login.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                errorDiv.textContent = data.error;
+                errorDiv.classList.remove('d-none');
+            } else if (data.success) {
+                const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                modal.hide();
+                updateLoginStatus(true);
+                showAlert('success', 'Login successful!');
+            }
+        })
+        .catch(error => {
+            errorDiv.textContent = 'An error occurred. Please try again.';
+            errorDiv.classList.remove('d-none');
+        });
+    });
+
+    // Signup form handling
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const errorDiv = document.getElementById('signupError');
+        
+        // Password validation
+        if (formData.get('password') !== formData.get('confirmPassword')) {
+            errorDiv.textContent = 'Passwords do not match';
+            errorDiv.classList.remove('d-none');
+            return;
+        }
+
+        fetch('auth/signup.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                errorDiv.textContent = data.error;
+                errorDiv.classList.remove('d-none');
+            } else if (data.success) {
+                const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                modal.hide();
+                showAlert('success', 'Registration successful! Please login.');
+            }
+        })
+        .catch(error => {
+            errorDiv.textContent = 'An error occurred. Please try again.';
+            errorDiv.classList.remove('d-none');
+        });
+    });
+
+    // Password strength checker
+    document.getElementById('signupPassword').addEventListener('input', function() {
+        checkPasswordStrength(this.value);
+    });
 });
 
 // Email validation
@@ -134,3 +214,51 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Update UI based on login status
+function updateLoginStatus(isLoggedIn) {
+    const loginIcon = document.querySelector('.fa-user-circle');
+    if (isLoggedIn) {
+        loginIcon.classList.add('text-success');
+    } else {
+        loginIcon.classList.remove('text-success');
+    }
+}
+
+function toggleForms(showForm) {
+    const loginContainer = document.getElementById('loginForm-container');
+    const signupContainer = document.getElementById('signupForm-container');
+    
+    if (showForm === 'signup') {
+        loginContainer.style.display = 'none';
+        signupContainer.style.display = 'block';
+    } else {
+        signupContainer.style.display = 'none';
+        loginContainer.style.display = 'block';
+    }
+}
+
+function checkPasswordStrength(password) {
+    let strength = 0;
+    if (password.match(/[a-z]+/)) strength += 1;
+    if (password.match(/[A-Z]+/)) strength += 1;
+    if (password.match(/[0-9]+/)) strength += 1;
+    if (password.match(/[$@#&!]+/)) strength += 1;
+    if (password.length >= 8) strength += 1;
+
+    const strengthIndicator = document.createElement('div');
+    strengthIndicator.className = 'password-strength';
+    
+    if (strength <= 2) {
+        strengthIndicator.classList.add('strength-weak');
+    } else if (strength <= 4) {
+        strengthIndicator.classList.add('strength-medium');
+    } else {
+        strengthIndicator.classList.add('strength-strong');
+    }
+
+    const existingIndicator = document.querySelector('.password-strength');
+    if (existingIndicator) existingIndicator.remove();
+    
+    document.getElementById('signupPassword').parentNode.appendChild(strengthIndicator);
+}
