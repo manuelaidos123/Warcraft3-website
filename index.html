@@ -4,9 +4,10 @@
         <title>Warcraft 3</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Warcraft 3 fan website with information about factions, characters, and lore">
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
         <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
         <!-- Google Fonts -->
@@ -201,51 +202,49 @@
                                 <h3 class="h5">Four Playable Factions</h3>
                                 <p class="card-text">Each faction has unique units, buildings, and gameplay mechanics, providing diverse strategic options.</p>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Feature 2 -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 border-0 shadow-sm">
-                            <div class="card-body text-center">
-                                <img src="images/icons/hero_icon.png" alt="Heroes Icon" class="mb-3" width="64">
-                                <h3 class="h5">Hero Units</h3>
-                                <p class="card-text">Powerful hero units level up and gain abilities, adding RPG elements to strategic gameplay.</p>
+                            <div class="carousel-item">
+                                <img src="images/reforged2.jpg" class="d-block w-100" alt="Reforged 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/reforged3.jpg" class="d-block w-100" alt="Reforged 3">
                             </div>
                         </div>
-                    </div>
-                    <!-- Feature 3 -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 border-0 shadow-sm">
-                            <div class="card-body text-center">
-                                <img src="images/icons/multiplayer.png" alt="Multiplayer Icon" class="mb-3" width="64">
-                                <h3 class="h5">Multiplayer Battles</h3>
-                                <p class="card-text">Engage in epic multiplayer battles with players from around the world.</p>
-                            </div>
-                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#imageSlider" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#imageSlider" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Call to Action -->
-        <section class="py-5 bg-primary text-white">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8 text-center">
-                        <h2 class="mb-4">Join the Battle Today!</h2>
-                        <p class="lead mb-4">Subscribe to our newsletter for the latest updates and strategies.</p>
-                        <form class="row g-3 justify-content-center" onsubmit="validateEmail(event)">
-                            <div class="col-md-8">
-                                <input type="email" class="form-control form-control-lg" placeholder="Enter your email address" required>
-                            </div>
-                            <div class="col-md-auto">
-                                <button type="submit" class="btn btn-light btn-lg px-4">Subscribe</button>
-                            </div>
-                        </form>
+            <!-- Enroll Section -->
+            <section class="bg-light py-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 text-center">
+                            <h3 class="mb-4">Don't waste your Time. Enroll now.</h3>
+                            <p class="mb-4">
+                                Embark on epic adventures, command powerful armies, and master strategic warfare in Warcraft 3. 
+                                Join me in this immersive world where heroes rise, alliances form, and battles shape destinies. 
+                                Let's unlock our tactical prowess, forge unforgettable memories, and conquer realms together!
+                            </p>
+                            <form class="row g-3 justify-content-center">
+                                <div class="col-md-8">
+                                    <input type="email" class="form-control form-control-lg" placeholder="Enter your email address.." required>
+                                </div>
+                                <div class="col-md-auto">
+                                    <button type="submit" class="btn btn-primary btn-lg" onclick="validateEmail()">Enroll</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
 
         <!-- Enhanced Footer -->
                 <footer class="footer bg-dark text-light">
@@ -317,6 +316,20 @@
                         </div>
                     </div>
                 </footer>
+        <!-- Footer -->
+        <footer class="bg-dark text-light py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3>Services</h3>
+                        <ul class="list-unstyled">
+                            <!-- Add your footer links here -->
+                        </ul>
+                    </div>
+                    <!-- Add more footer columns as needed -->
+                </div>
+            </div>
+        </footer>
 
         <!-- Bootstrap Bundle JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
