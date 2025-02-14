@@ -69,7 +69,6 @@ body {
 /* Hero Section */
 .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
                 url('images/reforged1.jpg') center/cover;
     min-height: 60vh;
     display: flex;
@@ -257,9 +256,6 @@ body {
 .accordion-button:not(.collapsed) {
     background-color: var(--wc-primary);
     color: var(--wc-light);
-}
-
-.accordion-button:focus {
 }
 
 /* WarcraftPedia specific styles */
