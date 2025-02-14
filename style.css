@@ -1,13 +1,16 @@
 :root {
     /* Color variables */
+    /* Color variables */
     --wc-primary: #2f89fc;
     --wc-primary-hover: #1a7af0;
+    --wc-dark: #121212;
     --wc-dark: #121212;
     --wc-light: #ffffff;
     --wc-gray: #f8f9fa;
     --wc-border: rgba(255, 255, 255, 0.1);
 }
 
+/* Base styles */
 /* Base styles */
 body {
     font-family: 'Abyssinica SIL', serif;
@@ -66,6 +69,7 @@ body {
 /* Hero Section */
 .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
                 url('images/reforged1.jpg') center/cover;
     min-height: 60vh;
     display: flex;
@@ -112,10 +116,31 @@ body {
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
     color: var(--wc-light);
     text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.image-grid .grid-item:hover img {
+    transform: scale(1.05);
+}
+
+.image-grid .grid-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: var(--wc-light);
+    text-align: center;
 }
 
 /* Card Styles */
+/* Card Styles */
 .card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: none;
+    border-radius: 0.5rem;
+    overflow: hidden;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     border: none;
     border-radius: 0.5rem;
@@ -124,6 +149,7 @@ body {
 
 .card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
 }
 
@@ -167,10 +193,15 @@ body {
 
 .footer a {
     color: rgba(255, 255, 255, 0.7);
+.footer a {
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
+    transition: color 0.3s ease;
     transition: color 0.3s ease;
 }
 
+.footer a:hover {
+    color: var(--wc-light);
 .footer a:hover {
     color: var(--wc-light);
 }
@@ -185,8 +216,12 @@ body {
     .card {
         background-color: #1e1e1e;
         border-color: var(--wc-border);
+        background-color: #1e1e1e;
+        border-color: var(--wc-border);
     }
 
+    .card-body {
+        color: var(--wc-light);
     .card-body {
         color: var(--wc-light);
     }
@@ -225,9 +260,78 @@ body {
 }
 
 .accordion-button:focus {
+}
+
+/* WarcraftPedia specific styles */
+.card {
+    border: none;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.nav-pills .nav-link {
+    color: var(--wc-dark);
+    background-color: var(--wc-gray);
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+.nav-pills .nav-link:hover {
+    background-color: var(--wc-primary);
+    color: var(--wc-light);
+}
+
+.nav-pills .nav-link.active {
+    background-color: var(--wc-primary);
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--wc-primary);
+    color: var(--wc-light);
+}
+
+.accordion-button:focus {
     box-shadow: 0 0 0 0.25rem rgba(47, 137, 252, 0.25);
 }
 
+.list-group-item {
+    border: none;
+    padding: 0.75rem 1.25rem;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+    background-color: var(--wc-gray);
+}
+
+.card-title {
+    color: var(--wc-primary);
+    border-bottom: 2px solid var(--wc-primary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Animation for content loading */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Accessibility */
 .list-group-item {
     border: none;
     padding: 0.75rem 1.25rem;
