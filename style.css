@@ -1,9 +1,7 @@
 :root {
-    /* Color variables */
-    /* Color variables */
+    /* Color variables - removed duplicates */
     --wc-primary: #2f89fc;
     --wc-primary-hover: #1a7af0;
-    --wc-dark: #121212;
     --wc-dark: #121212;
     --wc-light: #ffffff;
     --wc-gray: #f8f9fa;
@@ -12,11 +10,10 @@
     --wc-overlay: rgba(26, 26, 46, 0.95);
 }
 
-/* Base styles */
-/* Base styles */
+/* Base styles - consolidated */
 body {
     font-family: 'Abyssinica SIL', serif;
-    padding-top: 76px; /* Height of fixed navbar */
+    padding-top: 76px;
     background: var(--wc-bg-gradient);
     background-attachment: fixed;
     position: relative;
@@ -374,10 +371,44 @@ body::before {
     overflow: hidden;
 }
 
-.card:hover {
+/* Card Styles */
+.card {
+    background-color: var(--wc-light);  /* White background */
+    border: none;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Card text colors */
+.card-title {
+    color: var(--wc-dark) !important;  /* Dark color for titles */
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.card-text {
+    color: var(--wc-dark) !important;  /* Dark color for text */
+}
+
+.card-body {
+    background-color: var(--wc-light);  /* White background */
+    color: var(--wc-dark);  /* Dark text */
+}
+
+/* Card hover effect */
+.card:not(.modal *):hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Ensure badges and buttons remain readable */
+.card .badge {
+    color: var(--wc-light) !important;  /* White text for badges */
+}
+
+.card .btn-primary {
+    color: var(--wc-light) !important;  /* White text for primary buttons */
 }
 
 /* Social Media Grid */
@@ -420,15 +451,10 @@ body::before {
 
 .footer a {
     color: rgba(255, 255, 255, 0.7);
-.footer a {
-    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    transition: color 0.3s ease;
     transition: color 0.3s ease;
 }
 
-.footer a:hover {
-    color: var(--wc-light);
 .footer a:hover {
     color: var(--wc-light);
 }
@@ -999,53 +1025,78 @@ figcaption,
 }
 
 /* Modal styles */
-.modal-content {
-    background: var(--wc-bg-gradient);
-    color: var(--wc-light);
+.modal {
+    transition: opacity 0.15s linear !important;
 }
 
-.modal-header {
-    border-bottom: 1px solid var(--wc-border);
+.modal.fade .modal-dialog {
+    transform: none !important;
+    transition: none !important;
 }
 
-.modal-header .btn-close {
-    color: var(--wc-light);
-    filter: invert(1) grayscale(100%) brightness(200%);
+.modal.show .modal-dialog {
+    transform: none !important;
 }
 
-.modal .form-control {
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--wc-border);
-    color: var(--wc-light);
+/* Remove any hover effects from modal */
+.modal:hover,
+.modal-dialog:hover,
+.modal-content:hover {
+    transform: none !important;
+    transition: none !important;
 }
 
-.modal .form-control:focus {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: var(--wc-primary);
-    color: var(--wc-light);
-    box-shadow: 0 0 0 0.25rem rgba(47, 137, 252, 0.25);
+/* Modal styles with stronger specificity */
+.modal,
+.modal * {
+    transform: none !important;
+    transition: opacity 0.15s linear !important;
 }
 
-.modal .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+.modal.fade .modal-dialog,
+.modal.fade .modal-content,
+.modal.fade .modal-body,
+.modal.fade .card {
+    transform: none !important;
+    transition: none !important;
 }
 
-.modal .form-check-input {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: var(--wc-border);
+.modal.show .modal-dialog,
+.modal.show .modal-content,
+.modal.show .modal-body,
+.modal.show .card {
+    transform: none !important;
 }
 
-.modal .form-check-input:checked {
-    background-color: var(--wc-primary);
-    border-color: var(--wc-primary);
+/* Character modal specific styles */
+#characterModal .modal-content,
+#characterModal .card,
+#characterModal .modal-body {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    transform: none !important;
 }
 
-.modal a {
-    color: var(--wc-primary);
+#characterModal .modal-content:hover,
+#characterModal .card:hover,
+#characterModal .modal-body:hover {
+    transform: none !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
-.modal a:hover {
-    color: var(--wc-primary-hover);
+/* Modal specific styles */
+.modal {
+    transition: opacity 0.15s linear;
+}
+
+.modal.fade .modal-dialog {
+    transition: transform 0.2s ease-out;
+    transform: translate(0, -50px);
+}
+
+.modal.show .modal-dialog {
+    transform: none;
 }
 
 /* Modal form transitions */
@@ -1070,6 +1121,156 @@ figcaption,
     transition: all 0.3s ease;
 }
 
-.strength-weak { background-color: #ff4444; width: 30%; }
-.strength-medium { background-color: #ffbb33; width: 60%; }
-.strength-strong { background-color: #00C851; width: 100%; }
+.strength-weak {
+    background-color: #ff4444;
+    width: 30%;
+}
+
+.strength-medium {
+    background-color: #ffbb33;
+    width: 60%;
+}
+
+.strength-strong {
+    background-color: #00C851;
+    width: 100%;
+}
+
+/* Campaign Content Styles */
+.campaign-content {
+    transition: opacity 0.3s ease;
+    min-height: 300px;
+}
+
+.campaign-selector .btn {
+    min-width: 200px;
+}
+
+.campaign-selector .btn.active {
+    background-color: #1a5fb4;
+    border-color: #1a5fb4;
+}
+
+.chapter-content {
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.chapter-content h2 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.chapter-content p {
+    line-height: 1.6;
+    color: #34495e;
+}
+
+/* Character detail styles */
+.character-detail .card {
+    background-color: var(--wc-light);
+    border-left: 4px solid var(--wc-primary);
+    margin: 1rem 0;
+}
+
+.character-detail .card-body {
+    background-color: var(--wc-light);
+    color: var(--wc-dark);
+}
+
+.character-detail h3 {
+    color: var(--wc-dark) !important;
+    margin-bottom: 1rem;
+}
+
+.character-detail p {
+    color: var(--wc-dark) !important;
+}
+
+/* Animation for detail section */
+.character-detail {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ensure cards don't animate on detail section */
+.character-detail .card:hover {
+    transform: none !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Badge colors in detail section */
+.character-detail .badge {
+    color: var(--wc-light) !important;
+}
+
+/* Form elements and dropdowns */
+select.form-select,
+select.form-select option,
+.dropdown-menu,
+.dropdown-item {
+    color: var(--wc-dark) !important;
+    background-color: var(--wc-light) !important;
+}
+
+select.form-select:focus {
+    border-color: var(--wc-primary);
+    box-shadow: 0 0 0 0.25rem rgba(47, 137, 252, 0.25);
+}
+
+.dropdown-item:hover {
+    background-color: var(--wc-gray) !important;
+    color: var(--wc-dark) !important;
+}
+
+/* Override any conflicting styles */
+.form-select option {
+    background-color: var(--wc-light);
+    color: var(--wc-dark);
+}
+
+/* Voice Test Styles */
+.voice-test-section {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.audio-controls {
+    padding: 2rem 0;
+}
+
+.answer-option {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.answer-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.score-container {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+}
+
+#feedback {
+    transition: all 0.3s ease;
+}
+}

@@ -1,127 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Warcraft 3 - Factions</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Learn about the four major factions of Warcraft 3: Alliance, Horde, Scourge, and Night Elves">
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Font Awesome -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <!-- Google Fonts -->
-        <link href='https://fonts.googleapis.com/css?family=Abyssinica+SIL' rel='stylesheet'>
-        <!-- Custom CSS -->
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <!-- Favicon -->
-        <link rel="icon" type="image/png" href="images/wc3_image.jpg">
-    </head>
-    <body>
-        <!-- Updated Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">
-                    <img src="images/wc3_image.jpg" alt="Warcraft III Logo" height="40" class="d-inline-block align-text-top">
-                    <span class="ms-2 fw-bold text-uppercase">Warcraft III</span>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+<head>
+    <title>Warcraft 3 - Factions</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about the four main factions of Warcraft III: Alliance, Horde, Undead Scourge, and Night Elves">
+    <meta name="theme-color" content="#2f89fc">
+    
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/icons/logo.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/icons/logo.png" alt="Warcraft III Logo" width="30" height="30">
+                Warcraft III
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="story.html">Story</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="factions.html" aria-current="page">Factions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="characters.html">Characters</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="pedia.html">WarcraftPedia</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="test.html">Test</a>
-                        </li>
-                    </ul>
-                </div>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="story.html">Story</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="factions.html">Factions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="characters.html">Characters</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
+                    <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <!-- Main Content with Responsive Images -->
-        <main class="pt-5 mt-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h1 class="text-center mb-5">The Four Factions of Warcraft III</h1>
-                        
-                        <!-- Alliance Section -->
-                        <section class="faction-section mb-5" id="alliance">
-                            <h2 class="mb-4">The Alliance</h2>
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    <img src="images/factions/alliance.jpg" alt="Alliance faction" class="img-fluid rounded shadow-lg mb-3">
-                                </div>
-                                <div class="col-md-6">
-                                    <p>The Alliance represents the forces of humanity and their closest allies. They are known for their strong military tradition and powerful magic.</p>
-                                    <ul class="list-unstyled">
-                                        <li><i class="fas fa-chevron-right me-2"></i>Humans</li>
-                                        <li><i class="fas fa-chevron-right me-2"></i>Dwarves</li>
-                                        <li><i class="fas fa-chevron-right me-2"></i>High Elves</li>
-                                        <li><i class="fas fa-chevron-right me-2"></i>Gnomes</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </section>
+    <!-- Main Content -->
+    <main class="container py-5 mt-5">
+        <section class="factions-section">
+            <h1 class="text-center mb-5">Factions of Warcraft III</h1>
+            
+            <!-- Faction Cards -->
+            <div class="row g-4">
+                <!-- Alliance -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 faction-card">
+                        <img src="images/factions/alliance.jpg" class="card-img-top" alt="Alliance Banner">
+                        <div class="card-body">
+                            <h2 class="card-title h5">The Alliance</h2>
+                            <p class="card-text">Noble humans, dwarves, and high elves united in honor.</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#allianceModal">
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-                        <!-- Horde Section -->
-                        <section class="faction-section mb-5" id="horde">
-                            <h2 class="mb-4">The Horde</h2>
-                            <div class="row align-items-center">
-                                <div class="col-md-6 order-md-2">
-                                    <img src="images/factions/horde.jpg" alt="Horde faction" class="img-fluid rounded shadow-lg mb-3">
-                                </div>
-                                <div class="col-md-6 order-md-1">
-                                    <p>The Horde combines the might of the Orcs and their allies. They excel in brute force and shamanic magic.</p>
-                                    <ul class="list-unstyled">
-                                        <li><i class="fas fa-chevron-right me-2"></i>Orcs</li>
-                                        <li><i class="fas fa-chevron-right me-2"></i>Trolls</li>
-                                        <li><i class="fas fa-chevron-right me-2"></i>Tauren</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </section>
+                <!-- Horde -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 faction-card">
+                        <img src="images/factions/horde.jpg" class="card-img-top" alt="Horde Banner">
+                        <div class="card-body">
+                            <h2 class="card-title h5">The Horde</h2>
+                            <p class="card-text">Fierce orcs and trolls fighting for freedom and honor.</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#hordeModal">
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-                        <!-- Scourge Section -->
-                        <section class="faction-section mb-5" id="scourge">
-                            <h2 class="mb-4">The Scourge</h2>
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    <img src="images/factions/scourge.jpg" alt="Scourge faction" class="img-fluid rounded shadow-lg mb-3">
-                                </div>
-                                <div class="col-md-6">
-                                    <p>The undead Scourge represents death and decay. Created by the Burning Legion, they have become a terrifying force under the Lich King.</p>
-                                    <ul class="list-unstyled">
-                                        <li><i class="fas fa-chevron-right me-2"></i>Undead</li>
-                                        <li><i class="fas fa-chevron-right me-2"></i>Death Knights</li>
-                                        <li><i class="fas fa-chevron-right me-2"></i>Necromancers</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </section>
+                <!-- Undead Scourge -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 faction-card">
+                        <img src="images/factions/undead.jpg" class="card-img-top" alt="Undead Scourge Banner">
+                        <div class="card-body">
+                            <h2 class="card-title h5">The Undead Scourge</h2>
+                            <p class="card-text">Terrifying undead armies serving the Lich King.</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#undeadModal">
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Night Elves -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 faction-card">
+                        <img src="images/factions/nightelf.jpg" class="card-img-top" alt="Night Elves Banner">
+                        <div class="card-body">
+                            <h2 class="card-title h5">The Night Elves</h2>
+                            <p class="card-text">Ancient guardians of nature and the forests.</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nightelfModal">
+                                Learn More
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </main>
+        </section>
+    </main>
 
-        <!-- Bootstrap JS and Popper.js -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-    </body>
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4">
+                    <h3>Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a class="text-light text-decoration-none" href="#human">Human Guide</a></li>
+                        <li><a class="text-light text-decoration-none" href="#orc">Orc Guide</a></li>
+                        <li><a class="text-light text-decoration-none" href="#nightelf">Night Elf Guide</a></li>
+                        <li><a class="text-light text-decoration-none" href="#undead">Undead Guide</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
+                </div>
+                <div class="col-lg-4">
+                    <h3>Social Links</h3>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-light"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-telegram fa-2x"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-twitter fa-2x"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-facebook fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col text-center">
+                    <p class="mb-0">Email: some-email@gmail.com | Telephone: 0-777-777-123</p>
+                    <p class="text-muted">Andrei Kornev 2024.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="scripts.js" defer></script>
+</body>
 </html>
 

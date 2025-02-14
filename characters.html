@@ -4,146 +4,81 @@
         <title>Warcraft 3 - Characters</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Learn about the legendary heroes and villains of Warcraft 3">
-        <!-- Bootstrap CSS -->
+        <meta name="description" content="Meet the legendary heroes and villains of Warcraft III, including Arthas, Thrall, and more">
+        <meta name="theme-color" content="#2f89fc">
+        
+        <!-- Preload critical assets -->
+        <link rel="preload" href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" as="style">
+        <link rel="preload" href="style.css" as="style">
+        <link rel="preload" href="scripts.js" as="script">
+        
+        <!-- Stylesheets -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <!-- Google Fonts -->
-        <link href='https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap' rel='stylesheet'>
-        <!-- Custom CSS -->
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <!-- Favicon -->
+        <link href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
         <link rel="icon" type="image/png" href="images/icons/logo.png">
     </head>
     <body class="bg-light">
-        <!-- Enhanced Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">
-                    <img src="images/icons/logo.png" alt="Warcraft 3 Logo" height="40" class="d-inline-block align-text-top">
-                    <span class="ms-2 fw-bold text-uppercase">Warcraft III</span>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="story.html">Story</a></li>
-                        <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="characters.html">Characters</a></li>
-                        <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
-                        <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
-                    </ul>
+        <header>
+            <!-- Navigation -->
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="images/icons/logo.png" alt="Warcraft III Logo" width="30" height="30">
+                        Warcraft III
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="story.html">Story</a></li>
+                            <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="characters.html">Characters</a></li>
+                            <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
+                            <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </header>
 
-        <!-- Main Content -->
         <main class="container py-5 mt-5">
-            <h1 class="text-center mb-5">Legendary Heroes & Villains</h1>
-
-            <!-- Human Characters -->
-            <section class="mb-5">
-                <h2 class="text-center mb-4">Human Campaign</h2>
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm">
-                            <img src="images/characters/arthas.jpg" class="card-img-top" alt="Prince Arthas Menethil">
-                            <div class="card-body">
-                                <h3 class="card-title">Arthas Menethil</h3>
-                                <p class="card-text">Crown Prince of Lordaeron who became the Lich King. Former paladin of the Silver Hand.</p>
-                            </div>
-                        </div>
+            <div class="alert-container" role="alert" aria-live="polite"></div>
+            
+            <section class="characters-section">
+                <h1 class="text-center mb-4">Characters</h1>
+                
+                <!-- Filters -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <select class="form-select" id="faction-filter">
+                            <option value="">All Factions</option>
+                            <option value="alliance">Alliance</option>
+                            <option value="horde">Horde</option>
+                            <option value="undead">Undead Scourge</option>
+                            <option value="nightelf">Night Elves</option>
+                        </select>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm">
-                            <img src="images/characters/jaina.jpg" class="card-img-top" alt="Jaina Proudmoore">
-                            <div class="card-body">
-                                <h3 class="card-title">Jaina Proudmoore</h3>
-                                <p class="card-text">Powerful mage and former love interest of Arthas. Leader of the Kirin Tor.</p>
-                            </div>
-                        </div>
+                    <div class="col-md-4">
+                        <select class="form-select" id="role-filter">
+                            <option value="">All Roles</option>
+                            <option value="hero">Hero</option>
+                            <option value="villain">Villain</option>
+                            <option value="support">Support</option>
+                        </select>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm">
-                            <img src="images/characters/uther.jpg" class="card-img-top" alt="Uther the Lightbringer">
-                            <div class="card-body">
-                                <h3 class="card-title">Uther the Lightbringer</h3>
-                                <p class="card-text">Leader of the Silver Hand and Arthas's mentor. A legendary paladin.</p>
-                            </div>
-                        </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="character-search" placeholder="Search characters...">
                     </div>
                 </div>
-            </section>
 
-            <!-- Orc Characters -->
-            <section class="mb-5">
-                <h2 class="text-center mb-4">Orc Campaign</h2>
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm">
-                            <img src="images/characters/thrall.jpg" class="card-img-top" alt="Thrall">
-                            <div class="card-body">
-                                <h3 class="card-title">Thrall</h3>
-                                <p class="card-text">Warchief of the Horde and powerful shaman. Led his people to freedom.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm">
-                            <img src="images/characters/grom.jpg" class="card-img-top" alt="Grommash Hellscream">
-                            <div class="card-body">
-                                <h3 class="card-title">Grommash Hellscream</h3>
-                                <p class="card-text">Legendary warrior and chieftain of the Warsong clan.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm">
-                            <img src="images/characters/cairne.jpg" class="card-img-top" alt="Cairne Bloodhoof">
-                            <div class="card-body">
-                                <h3 class="card-title">Cairne Bloodhoof</h3>
-                                <p class="card-text">Chief of the Bloodhoof Tauren and wise ally of Thrall.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Night Elf Characters -->
-            <section class="mb-5">
-                <h2 class="text-center mb-4">Night Elf Campaign</h2>
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm">
-                            <img src="images/characters/tyrande.jpg" class="card-img-top" alt="Tyrande Whisperwind">
-                            <div class="card-body">
-                                <h3 class="card-title">Tyrande Whisperwind</h3>
-                                <p class="card-text">High Priestess of Elune and leader of the Night Elves.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm">
-                            <img src="images/characters/malfurion.jpg" class="card-img-top" alt="Malfurion Stormrage">
-                            <div class="card-body">
-                                <h3 class="card-title">Malfurion Stormrage</h3>
-                                <p class="card-text">First of the druids and protector of nature.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm">
-                            <img src="images/characters/illidan.jpg" class="card-img-top" alt="Illidan Stormrage">
-                            <div class="card-body">
-                                <h3 class="card-title">Illidan Stormrage</h3>
-                                <p class="card-text">The Betrayer, twin brother of Malfurion and powerful demon hunter.</p>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Character Grid -->
+                <div class="row g-4" id="character-grid">
+                    <!-- Characters will be dynamically loaded here -->
                 </div>
             </section>
         </main>
@@ -153,12 +88,12 @@
             <div class="container">
                 <div class="row gy-4">
                     <div class="col-lg-4">
-                        <h3>Services</h3>
+                        <h3>Quick Links</h3>
                         <ul class="list-unstyled">
-                            <li>Game Analysis</li>
-                            <li>Game Reviews</li>
-                            <li>Tutorials</li>
-                            <li>Tournaments</li>
+                            <li><a class="text-light text-decoration-none" href="#human">Human Guide</a></li>
+                            <li><a class="text-light text-decoration-none" href="#orc">Orc Guide</a></li>
+                            <li><a class="text-light text-decoration-none" href="#nightelf">Night Elf Guide</a></li>
+                            <li><a class="text-light text-decoration-none" href="#undead">Undead Guide</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-4 text-center">
@@ -183,7 +118,8 @@
             </div>
         </footer>
 
-        <!-- Bootstrap Bundle JS -->
+        <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="scripts.js"></script>
     </body>
 </html>

@@ -1,64 +1,113 @@
 <?php
-session_start();
-require_once '../config/database.php';
+declare(strict_types=1);
 
-header('Content-Type: application/json');
+namespace App\Auth;
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['error' => 'Method not allowed']);
-    exit;
+// Use a more secure way to define paths
+use App\Config\PathConfig;
+use App\Bootstrap\AppBootstrap;
+
+// Initialize application with secure bootstrapping
+try {
+    $bootstrap = new AppBootstrap();
+    $bootstrap->initialize();
+} catch (\Exception $e) {
+    http_response_code(500);
+    error_log('Critical: Bootstrap initialization failed: ' . $e->getMessage());
+    throw new \RuntimeException('Application initialization failed');
 }
 
-$username = $_POST['username'] ?? '';
-$password = $_POST['password'] ?? '';
-$remember = isset($_POST['remember']) ? true : false;
+use App\Security\Session;
+use App\Security\CSRF;
+use App\Http\Response;
+use App\Http\Request;
+use App\Security\InputValidator;
+use App\Auth\AuthenticationService;
+use App\Security\Cookie;
 
+// Initialize secure session
+$session = new Session();
+$session->start();
+
+// Initialize response handler
+$response = new Response();
+$response->setJsonHeader();
+
+// Initialize request handler
+$request = new Request();
+
+// Validate request method
+if (!$request->isPost()) {
+    $response->sendError('Method not allowed', 405);
+    return;
+}
+
+// Validate CSRF token
+if (!CSRF::validateToken($request->getHeader('X-CSRF-Token'))) {
+    $response->sendError('Invalid CSRF token', 403);
+    return;
+}
+
+// Validate and sanitize input
+$validator = new InputValidator();
+
+try {
+    $username = $validator->sanitizeUsername($request->getPost('username'));
+    $password = $validator->sanitizePassword($request->getPost('password'));
+    $remember = $validator->validateBoolean($request->getPost('remember', false));
+} catch (ValidationException $e) {
+    $response->sendError($e->getMessage(), 400);
+    return;
+}
+
+// Validate required fields
 if (empty($username) || empty($password)) {
-    echo json_encode(['error' => 'Username and password are required']);
-    exit;
+    $response->sendError('Username and password are required', 400);
+    return;
 }
 
-$conn = getDBConnection();
-
-// Prepare statement to prevent SQL injection
-$stmt = $conn->prepare("SELECT id, username, password FROM users WHERE username = ?");
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows === 1) {
-    $user = $result->fetch_assoc();
+try {
+    // Initialize authentication service
+    $auth = new AuthenticationService();
     
-    if (password_verify($password, $user['password'])) {
-        // Login successful
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
+    // Attempt login
+    $user = $auth->authenticate($username, $password);
+    
+    if ($user) {
+        // Set session data securely
+        $session->set('user_id', $user['id']);
+        $session->set('username', $user['username']);
         
-        // Handle remember me
+        // Handle remember me functionality
         if ($remember) {
-            $token = bin2hex(random_bytes(32));
-            $stmt = $conn->prepare("UPDATE users SET remember_token = ? WHERE id = ?");
-            $stmt->bind_param("si", $token, $user['id']);
-            $stmt->execute();
+            $token = $auth->generateRememberToken();
+            $auth->storeRememberToken($user['id'], $token);
             
-            // Set cookie for 30 days
-            setcookie('remember_token', $token, time() + (86400 * 30), "/");
+            // Set secure cookie
+            Cookie::set([
+                'name' => 'remember_token',
+                'value' => $token,
+                'expire' => time() + (86400 * 30),
+                'path' => '/',
+                'secure' => true,
+                'httponly' => true,
+                'samesite' => 'Strict'
+            ]);
         }
         
-        // Update last login
-        $stmt = $conn->prepare("UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE id = ?");
-        $stmt->bind_param("i", $user['id']);
-        $stmt->execute();
+        // Update last login timestamp
+        $auth->updateLastLogin($user['id']);
         
-        echo json_encode(['success' => true, 'message' => 'Login successful']);
-    } else {
-        echo json_encode(['error' => 'Invalid credentials']);
+        $response->sendSuccess('Login successful');
+        return;
     }
-} else {
-    echo json_encode(['error' => 'Invalid credentials']);
+    
+    $response->sendError('Invalid credentials', 401);
+    return;
+    
+} catch (Exception $e) {
+    error_log("Login error: " . $e->getMessage());
+    $response->sendError('An error occurred during authentication', 500);
+    return;
 }
-
-$stmt->close();
-$conn->close();
 ?>
