@@ -11,12 +11,21 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
 class DocumentationGenerator:
-    def __init__(self, project_root):
+    """Generates comprehensive documentation for the Warcraft3 website project."""
+    
+    def __init__(self, project_root: str):
+        """
+        Initialize the documentation generator.
+        
+        Args:
+            project_root: Root directory path of the project
+        """
         self.project_root = project_root
         self.styles = getSampleStyleSheet()
         self.custom_style()
         self.version = "1.0.0"
         self.release_date = "2024-01-15"
+        self.setup_screenshots_folder()
         
     def custom_style(self):
         """Create custom styles for the document"""
@@ -44,6 +53,7 @@ class DocumentationGenerator:
             spaceAfter=30,
             textColor=colors.HexColor('#2F89FC')
         ))
+        
         self.styles.add(ParagraphStyle(
             name='CustomHeading2',
             parent=self.styles['Heading2'],
@@ -51,6 +61,25 @@ class DocumentationGenerator:
             spaceAfter=20,
             textColor=colors.HexColor('#1A1A1A')
         ))
+        
+        # Add CustomHeading3 style
+        self.styles.add(ParagraphStyle(
+            name='CustomHeading3',
+            parent=self.styles['Heading3'],
+            fontSize=14,
+            spaceAfter=15,
+            textColor=colors.HexColor('#1A1A1A')
+        ))
+        
+        # Add CustomHeading4 style
+        self.styles.add(ParagraphStyle(
+            name='CustomHeading4',
+            parent=self.styles['Heading3'],
+            fontSize=12,
+            spaceAfter=12,
+            textColor=colors.HexColor('#1A1A1A')
+        ))
+        
         self.styles.add(ParagraphStyle(
             name='FileContent',
             parent=self.styles['Normal'],
@@ -59,9 +88,29 @@ class DocumentationGenerator:
             spaceAfter=12,
             backColor=colors.HexColor('#F5F5F5')
         ))
+        
+        # Add CodeBlock style
+        self.styles.add(ParagraphStyle(
+            name='CodeBlock',
+            parent=self.styles['Normal'],
+            fontSize=9,
+            fontName='Courier',
+            spaceAfter=12,
+            backColor=colors.HexColor('#F5F5F5'),
+            leftIndent=20,
+            rightIndent=20
+        ))
 
-    def analyze_html_file(self, file_path):
-        """Analyze HTML file and extract key information"""
+    def analyze_html_file(self, file_path: str) -> dict:
+        """
+        Analyze HTML file and extract key information.
+        
+        Args:
+            file_path: Path to the HTML file
+            
+        Returns:
+            Dictionary containing extracted information
+        """
         with open(file_path, 'r', encoding='utf-8') as file:
             content = file.read()
             soup = BeautifulSoup(content, 'html.parser')
@@ -374,7 +423,7 @@ class DocumentationGenerator:
         return elements
 
     def create_ui_design(self):
-        """Create user interface design section"""
+        """Create user interface design section with visual examples"""
         elements = []
         
         # Design Philosophy
@@ -384,26 +433,34 @@ class DocumentationGenerator:
         • Dark theme with accent colors matching Warcraft III's aesthetic
         • Responsive grid layout using Bootstrap's container system
         • Interactive elements with hover effects and animations
-        • Consistent typography using Google Fonts (Abyssinica SIL and Raleway)
+        • Consistent typography using Google Fonts
         """
         elements.append(Paragraph(design_text, self.styles['Normal']))
         elements.append(Spacer(1, 0.2*inch))
 
-        # Navigation Structure
-        elements.append(Paragraph("Navigation Structure", self.styles['CustomHeading2']))
-        nav_text = """
-        The website features an intuitive navigation system:
-        • Main navigation bar with dropdown menus
-        • Sidebar navigation for story content
-        • Breadcrumb navigation for deep content
-        • Footer quick links for easy access
+        # Add Color Palette
+        elements.append(Paragraph("Color Palette", self.styles['CustomHeading3']))
+        color_vars = """
+        :root {
+            --wc-primary: #2f89fc;
+            --wc-dark: #121212;
+            --wc-light: #ffffff;
+            --wc-gray: #f8f9fa;
+            --wc-border: rgba(255, 255, 255, 0.1);
+        }
         """
-        elements.append(Paragraph(nav_text, self.styles['Normal']))
+        elements.append(Paragraph(color_vars, self.styles['CodeBlock']))
+        
+        # Add UI Components Screenshot
+        ui_components_path = os.path.join(self.project_root, 'documentation', 'screenshots', 'ui_components.png')
+        if os.path.exists(ui_components_path):
+            elements.append(Paragraph("UI Components Overview:", self.styles['CustomHeading3']))
+            elements.append(Image(ui_components_path, width=400, height=300))
         
         return elements
 
     def create_technical_implementation(self):
-        """Create technical implementation section"""
+        """Create technical implementation section with code examples and screenshots"""
         elements = []
         
         # Technologies Used
@@ -420,17 +477,51 @@ class DocumentationGenerator:
         elements.append(Paragraph(tech_stack, self.styles['Normal']))
         elements.append(Spacer(1, 0.2*inch))
 
-        # Code Organization
-        elements.append(Paragraph("Code Organization", self.styles['CustomHeading2']))
-        code_org = """
-        The codebase is organized following best practices:
-        • Separate concerns (HTML, CSS, JavaScript)
-        • Modular CSS with component-specific styles
-        • Responsive images with proper optimization
-        • Semantic HTML structure
-        • Progressive enhancement approach
+        # Add Navigation Code Example
+        elements.append(Paragraph("Navigation Implementation", self.styles['CustomHeading3']))
+        # Use escaped HTML or preformatted text
+        nav_code = """
+        &lt;!-- Navigation implementation --&gt;
+        &lt;nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav"&gt;
+            &lt;div class="container"&gt;
+                &lt;a class="navbar-brand" href="index.html"&gt;
+                    &lt;img src="images/logo.png" alt="Warcraft III Logo" height="40"&gt;
+                    Warcraft III
+                &lt;/a&gt;
+                &lt;!-- Navigation items --&gt;
+            &lt;/div&gt;
+        &lt;/nav&gt;
         """
-        elements.append(Paragraph(code_org, self.styles['Normal']))
+        elements.append(Paragraph(nav_code, self.styles['CodeBlock']))
+        
+        # Add screenshot of the navigation
+        nav_image_path = os.path.join(self.project_root, 'documentation', 'screenshots', 'navigation.png')
+        if os.path.exists(nav_image_path):
+            elements.append(Image(nav_image_path, width=400, height=100))
+        elements.append(Spacer(1, 0.2*inch))
+
+        # Add Responsive Design Example
+        elements.append(Paragraph("Responsive Design Implementation", self.styles['CustomHeading3']))
+        responsive_code = """
+        /* Responsive design CSS */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        """
+        elements.append(Paragraph(responsive_code, self.styles['CodeBlock']))
+        
+        # Add responsive design screenshots
+        responsive_desktop = os.path.join(self.project_root, 'documentation', 'screenshots', 'desktop_view.png')
+        responsive_mobile = os.path.join(self.project_root, 'documentation', 'screenshots', 'mobile_view.png')
+        if os.path.exists(responsive_desktop) and os.path.exists(responsive_mobile):
+            elements.append(Paragraph("Desktop vs Mobile View:", self.styles['CustomHeading4']))
+            elements.append(Image(responsive_desktop, width=300, height=200))
+            elements.append(Image(responsive_mobile, width=150, height=200))
         
         return elements
 
@@ -505,6 +596,12 @@ class DocumentationGenerator:
         elements.append(Paragraph(maintenance_text, self.styles['Normal']))
         
         return elements
+
+    def setup_screenshots_folder(self):
+        """Create screenshots folder and ensure it exists"""
+        screenshots_dir = os.path.join(self.project_root, 'documentation', 'screenshots')
+        os.makedirs(screenshots_dir, exist_ok=True)
+        return screenshots_dir
 
 if __name__ == '__main__':
     # Get the project root directory (assuming this script is in the documentation folder)

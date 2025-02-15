@@ -1,5 +1,5 @@
 :root {
-    /* Color variables */
+    /* Color variables - removed duplicates */
     --wc-primary: #2f89fc;
     --wc-primary-hover: #1a7af0;
     --wc-dark: #121212;
@@ -10,11 +10,10 @@
     --wc-overlay: rgba(26, 26, 46, 0.95);
 }
 
-/* Base styles */
-/* Base styles */
+/* Base styles - consolidated */
 body {
     font-family: 'Abyssinica SIL', serif;
-    padding-top: 76px; /* Height of fixed navbar */
+    padding-top: 76px;
     background: var(--wc-bg-gradient);
     background-attachment: fixed;
     position: relative;

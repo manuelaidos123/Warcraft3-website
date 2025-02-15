@@ -1,18 +1,29 @@
 <?php
-define('DB_HOST', 'localhost');
-define('DB_USER', 'your_username');
-define('DB_PASS', 'your_password');
-define('DB_NAME', 'warcraft3_db');
+// Load configuration from environment variables or secure configuration file
+function getDBConfig() {
+    return [
+        'host' => getenv('DB_HOST') ?: 'localhost',
+        'user' => getenv('DB_USER') ?: 'default_user',
+        'pass' => getenv('DB_PASS') ?: 'default_pass',
+        'name' => getenv('DB_NAME') ?: 'warcraft3_db'
+    ];
+}
 
-// Create connection
 function getDBConnection() {
-    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    $config = getDBConfig();
+    $conn = new mysqli(
+        $config['host'],
+        $config['user'],
+        $config['pass'],
+        $config['name']
+    );
     
-    // Check connection
     if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+        error_log("Database connection failed: " . $conn->connect_error);
+        throw new Exception("Database connection failed");
     }
     
+    $conn->set_charset("utf8mb4");
     return $conn;
 }
 ?>

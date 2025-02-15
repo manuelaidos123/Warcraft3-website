@@ -1,3 +1,26 @@
+// Consolidate all JavaScript into a single file
+const utils = {
+    validateEmail(email) {
+        return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email);
+    },
+    
+    showAlert(type, message) {
+        // Alert handling logic here
+    }
+};
+
+// Use the utilities
+function handleEmailSubmission(event) {
+    if (event) event.preventDefault();
+    const email = document.querySelector('input[type="email"]').value.trim();
+    
+    if (utils.validateEmail(email)) {
+        utils.showAlert('success', 'Thank you for subscribing!');
+    } else {
+        utils.showAlert('danger', 'Please enter a valid email address.');
+    }
+}
+
 // Initialize Bootstrap components
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all tooltips
@@ -94,22 +117,14 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Email validation
-function validateEmail(event) {
-    if (event) {
-        event.preventDefault();
-    }
-
-    const emailInput = document.querySelector('input[type="email"]');
-    if (!emailInput) return;
-
-    const email = emailInput.value.trim();
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-
-    if (emailRegex.test(email)) {
-        showAlert('success', 'Thank you for subscribing! You will receive a confirmation email shortly.');
-        emailInput.value = '';
+function handleEmailSubmission(event) {
+    if (event) event.preventDefault();
+    const email = document.querySelector('input[type="email"]').value.trim();
+    
+    if (utils.validateEmail(email)) {
+        utils.showAlert('success', 'Thank you for subscribing!');
     } else {
-        showAlert('danger', 'Please enter a valid email address.');
+        utils.showAlert('danger', 'Please enter a valid email address.');
     }
 }
 
