@@ -1,105 +1,160 @@
+# Standard library imports
 import os
 import datetime
+import logging
+from typing import Dict, List, Optional, Tuple
+from pathlib import Path
+from dataclasses import dataclass
+
+# Third-party imports
 from bs4 import BeautifulSoup
 from reportlab.lib import colors
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageTemplate, Frame, NextPageTemplate, PageBreak, Image
+from reportlab.lib.pagesizes import A4, letter
+from reportlab.lib.styles import (
+    getSampleStyleSheet,
+    ParagraphStyle
+)
 from reportlab.lib.units import inch
+from reportlab.lib.enums import (
+    TA_LEFT,
+    TA_CENTER,
+    TA_RIGHT
+)
+from reportlab.platypus import (
+    SimpleDocTemplate,
+    Paragraph,
+    Spacer,
+    Table,
+    TableStyle,
+    PageTemplate,
+    Frame,
+    NextPageTemplate,
+    PageBreak,
+    Image
+)
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
+
+# Type aliases
+StyleConfig = Tuple[str, ParagraphStyle, Dict[str, any]]
+
+@dataclass
+class DocumentConfig:
+    """Configuration for document generation"""
+    version: str
+    release_date: str
+    project_name: str
+    output_path: Path
+    
+    @classmethod
+    def default(cls, project_root: Path) -> 'DocumentConfig':
+        """Create default configuration"""
+        return cls(
+            version="1.0.0",
+            release_date="2024-01-15",
+            project_name="Warcraft III Website",
+            output_path=project_root / "documentation"
+        )
+
+class BaseGenerator:
+    """Base class for document generation components"""
+    
+    def __init__(self, config: DocumentConfig):
+        self.config = config
+        self.logger = logging.getLogger(self.__class__.__name__)
+
+class StyleGenerator(BaseGenerator):
+    """Handles document styling"""
+    
+    def __init__(self, config: DocumentConfig):
+        super().__init__(config)
+        self.styles = getSampleStyleSheet()
+        self._create_custom_styles()
+    
+    def _create_custom_styles(self) -> None:
+        """Create custom styles for the document"""
+        style_configs: List[StyleConfig] = [
+            ('CoverTitle', self.styles['Heading1'], {
+                'fontSize': 32,
+                'spaceAfter': 30,
+                'alignment': TA_CENTER,
+                'textColor': colors.HexColor('#2F89FC')
+            }),
+            ('CustomHeading1', self.styles['Heading1'], {
+                'fontSize': 24,
+                'spaceAfter': 20,
+                'textColor': colors.HexColor('#2F89FC')
+            }),
+            ('CustomHeading2', self.styles['Heading2'], {
+                'fontSize': 18,
+                'spaceAfter': 15,
+                'textColor': colors.HexColor('#2F89FC')
+            })
+        ]
+        
+        for name, parent, properties in style_configs:
+            self.styles.add(ParagraphStyle(name=name, parent=parent, **properties))
 
 class DocumentationGenerator:
     """Generates comprehensive documentation for the Warcraft3 website project."""
     
-    def __init__(self, project_root: str):
+    def __init__(self, project_root: str, config: Optional[DocumentConfig] = None):
         """
         Initialize the documentation generator.
         
         Args:
             project_root: Root directory path of the project
+            config: Optional configuration object
+        
+        Raises:
+            ValueError: If project_root doesn't exist
         """
-        self.project_root = project_root
+        self.project_root = Path(project_root)
+        if not self.project_root.exists():
+            raise ValueError(f"Project root {project_root} does not exist")
+            
+        self.config = config or DocumentConfig.default(self.project_root)
+        
+        self.logger = logging.getLogger(__name__)
         self.styles = getSampleStyleSheet()
-        self.custom_style()
-        self.version = "1.0.0"
-        self.release_date = "2024-01-15"
-        self.setup_screenshots_folder()
-        
-    def custom_style(self):
+        self.setup_styles()
+        self.setup_output_directory()
+
+    def setup_output_directory(self) -> None:
+        """Create output directory if it doesn't exist."""
+        self.config.output_path.mkdir(parents=True, exist_ok=True)
+
+    def setup_styles(self) -> None:
+        """Initialize document styles."""
+        try:
+            self._create_custom_styles()
+        except Exception as e:
+            self.logger.error(f"Failed to create custom styles: {e}")
+            raise
+
+    def _create_custom_styles(self) -> None:
         """Create custom styles for the document"""
-        self.styles.add(ParagraphStyle(
-            name='CoverTitle',
-            parent=self.styles['Heading1'],
-            fontSize=32,
-            spaceAfter=30,
-            alignment=TA_CENTER,
-            textColor=colors.HexColor('#2F89FC')
-        ))
+        style_configs: List[StyleConfig] = [
+            ('CoverTitle', self.styles['Heading1'], {
+                'fontSize': 32,
+                'spaceAfter': 30,
+                'alignment': TA_CENTER,
+                'textColor': colors.HexColor('#2F89FC')
+            }),
+            ('CustomHeading1', self.styles['Heading1'], {
+                'fontSize': 24,
+                'spaceAfter': 20,
+                'textColor': colors.HexColor('#2F89FC')
+            }),
+            ('CustomHeading2', self.styles['Heading2'], {
+                'fontSize': 18,
+                'spaceAfter': 15,
+                'textColor': colors.HexColor('#2F89FC')
+            })
+        ]
         
-        self.styles.add(ParagraphStyle(
-            name='CoverInfo',
-            parent=self.styles['Normal'],
-            fontSize=14,
-            spaceAfter=20,
-            alignment=TA_CENTER
-        ))
-        
-        self.styles.add(ParagraphStyle(
-            name='CustomHeading1',
-            parent=self.styles['Heading1'],
-            fontSize=24,
-            spaceAfter=30,
-            textColor=colors.HexColor('#2F89FC')
-        ))
-        
-        self.styles.add(ParagraphStyle(
-            name='CustomHeading2',
-            parent=self.styles['Heading2'],
-            fontSize=18,
-            spaceAfter=20,
-            textColor=colors.HexColor('#1A1A1A')
-        ))
-        
-        # Add CustomHeading3 style
-        self.styles.add(ParagraphStyle(
-            name='CustomHeading3',
-            parent=self.styles['Heading3'],
-            fontSize=14,
-            spaceAfter=15,
-            textColor=colors.HexColor('#1A1A1A')
-        ))
-        
-        # Add CustomHeading4 style
-        self.styles.add(ParagraphStyle(
-            name='CustomHeading4',
-            parent=self.styles['Heading3'],
-            fontSize=12,
-            spaceAfter=12,
-            textColor=colors.HexColor('#1A1A1A')
-        ))
-        
-        self.styles.add(ParagraphStyle(
-            name='FileContent',
-            parent=self.styles['Normal'],
-            fontSize=10,
-            fontName='Courier',
-            spaceAfter=12,
-            backColor=colors.HexColor('#F5F5F5')
-        ))
-        
-        # Add CodeBlock style
-        self.styles.add(ParagraphStyle(
-            name='CodeBlock',
-            parent=self.styles['Normal'],
-            fontSize=9,
-            fontName='Courier',
-            spaceAfter=12,
-            backColor=colors.HexColor('#F5F5F5'),
-            leftIndent=20,
-            rightIndent=20
-        ))
+        for name, parent, properties in style_configs:
+            self.styles.add(ParagraphStyle(name=name, parent=parent, **properties))
 
     def analyze_html_file(self, file_path: str) -> dict:
         """
@@ -216,7 +271,7 @@ class DocumentationGenerator:
         # Header
         canvas.setFont('Helvetica', 9)
         canvas.drawString(72, 800, "Warcraft III Website - Technical Documentation")
-        canvas.drawRightString(540, 800, f"Version {self.version}")
+        canvas.drawRightString(540, 800, f"Version {self.config.version}")
         canvas.line(72, 797, 540, 797)
         
         # Footer
@@ -251,8 +306,8 @@ class DocumentationGenerator:
         
         # Version information
         version_info = f"""
-        Version: {self.version}
-        Initial Release Date: {self.release_date}
+        Version: {self.config.version}
+        Initial Release Date: {self.config.release_date}
         Document Generated: {datetime.datetime.now().strftime('%Y-%m-%d')}
         """
         elements.append(Paragraph(version_info, self.styles['CoverInfo']))
