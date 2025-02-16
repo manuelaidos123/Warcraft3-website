@@ -5,6 +5,7 @@ import logging
 from typing import Dict, List, Optional, Tuple
 from pathlib import Path
 from dataclasses import dataclass
+import re  # For safe file name validation
 
 # Third-party imports
 from bs4 import BeautifulSoup
@@ -21,16 +22,13 @@ from reportlab.lib.enums import (
     TA_RIGHT
 )
 from reportlab.platypus import (
-    SimpleDocTemplate,
-    Paragraph,
-    Spacer,
-    Table,
-    TableStyle,
-    PageTemplate,
-    Frame,
-    NextPageTemplate,
-    PageBreak,
-    Image
+    SimpleDocTemplate, 
+    Paragraph,         
+    Spacer,           
+    PageTemplate,     
+    Frame,            
+    PageBreak,        
+    Image            
 )
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
@@ -80,14 +78,16 @@ class StyleGenerator(BaseGenerator):
                 'alignment': TA_CENTER,
                 'textColor': colors.HexColor('#2F89FC')
             }),
-            ('CustomHeading1', self.styles['Heading1'], {
+            ('LeftAlignedHeading', self.styles['Heading1'], {
                 'fontSize': 24,
                 'spaceAfter': 20,
+                'alignment': TA_LEFT,  # Using TA_LEFT
                 'textColor': colors.HexColor('#2F89FC')
             }),
-            ('CustomHeading2', self.styles['Heading2'], {
+            ('RightAlignedHeading', self.styles['Heading2'], {
                 'fontSize': 18,
                 'spaceAfter': 15,
+                'alignment': TA_RIGHT,  # Using TA_RIGHT
                 'textColor': colors.HexColor('#2F89FC')
             })
         ]
@@ -109,16 +109,21 @@ class DocumentationGenerator:
         Raises:
             ValueError: If project_root doesn't exist
         """
-        self.project_root = Path(project_root)
-        if not self.project_root.exists():
-            raise ValueError(f"Project root {project_root} does not exist")
+        # Sanitize project root path
+        self.project_root = Path(project_root).resolve()
+        if not self.project_root.exists() or not self.project_root.is_dir():
+            raise ValueError(f"Invalid project root: {project_root}")
             
+        # Validate config
         self.config = config or DocumentConfig.default(self.project_root)
         
+        # Configure logging properly
         self.logger = logging.getLogger(__name__)
-        self.styles = getSampleStyleSheet()
-        self.setup_styles()
-        self.setup_output_directory()
+        if not self.logger.handlers:
+            handler = logging.StreamHandler()
+            handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+            self.logger.addHandler(handler)
+            self.logger.setLevel(logging.INFO)
 
     def setup_output_directory(self) -> None:
         """Create output directory if it doesn't exist."""
@@ -165,19 +170,47 @@ class DocumentationGenerator:
             
         Returns:
             Dictionary containing extracted information
-        """
-        with open(file_path, 'r', encoding='utf-8') as file:
-            content = file.read()
-            soup = BeautifulSoup(content, 'html.parser')
             
-            info = {
+        Raises:
+            SecurityError: If path is outside project root
+            ValueError: If file is invalid
+        """
+        # Validate and sanitize file path
+        try:
+            safe_path = Path(file_path).resolve()
+            if not safe_path.is_relative_to(self.project_root):
+                raise SecurityError("Access denied: Path outside project root")
+            
+            if not safe_path.exists() or not safe_path.is_file():
+                raise ValueError(f"Invalid file path: {file_path}")
+                
+            # Validate file extension
+            if safe_path.suffix.lower() != '.html':
+                raise ValueError("File must be an HTML file")
+                
+            with safe_path.open('r', encoding='utf-8') as file:
+                content = file.read()
+                return self._parse_html_content(content)
+                
+        except Exception as e:
+            self.logger.error(f"Error analyzing file {file_path}: {str(e)}")
+            raise
+
+    @staticmethod
+    def _parse_html_content(content: str) -> dict:
+        """Parse HTML content safely"""
+        try:
+            soup = BeautifulSoup(content, 'html.parser')
+            return {
                 'title': soup.title.string if soup.title else 'No title',
-                'meta_description': soup.find('meta', {'name': 'description'})['content'] if soup.find('meta', {'name': 'description'}) else 'No description',
+                'meta_description': soup.find('meta', {'name': 'description'})['content'] 
+                    if soup.find('meta', {'name': 'description'}) else 'No description',
                 'scripts': [script.get('src', '') for script in soup.find_all('script', src=True)],
                 'stylesheets': [link.get('href', '') for link in soup.find_all('link', rel='stylesheet')],
                 'sections': [section.name for section in soup.find_all(['header', 'nav', 'main', 'section', 'footer'])]
             }
-            return info
+        except Exception as e:
+            raise ValueError(f"Failed to parse HTML content: {str(e)}")
 
     def generate_file_structure(self):
         """Generate a well-organized project file structure"""
@@ -238,7 +271,7 @@ class DocumentationGenerator:
         structure.append("\n📁 Styles:")
         css_files = [f for f in os.listdir(self.project_root) if f.endswith('.css')]
         for css in sorted(css_files):
-            structure.append(f"    📄 {css}")
+            structure.append(f"    ��� {css}")
 
         # Scripts
         structure.append("\n📁 JavaScript:")
@@ -252,7 +285,7 @@ class DocumentationGenerator:
             structure.append("\n📁 Sound Assets:")
             sound_files = os.listdir(os.path.join(self.project_root, 'sounds'))
             for sound in sorted(sound_files):
-                structure.append(f"    📄 {sound}")
+                structure.append(f"    ��� {sound}")
 
         # Documentation
         structure.append("\n📁 Documentation:")
@@ -260,7 +293,7 @@ class DocumentationGenerator:
             doc_files = [f for f in os.listdir(os.path.join(self.project_root, 'documentation')) 
                         if f != 'generate_docs.py']
             for doc in sorted(doc_files):
-                structure.append(f"    📄 {doc}")
+                structure.append(f"    ��� {doc}")
 
         return structure
 
@@ -349,78 +382,93 @@ class DocumentationGenerator:
 
     def create_pdf(self):
         """Generate the PDF documentation"""
-        doc_path = os.path.join(self.project_root, 'documentation', 'technical_documentation.pdf')
-        
-        # Create document with templates
-        doc = SimpleDocTemplate(
-            doc_path,
-            pagesize=A4,
-            rightMargin=72,
-            leftMargin=72,
-            topMargin=72,
-            bottomMargin=72
-        )
-        
-        # Create page templates
-        frame = Frame(
-            doc.leftMargin,
-            doc.bottomMargin,
-            doc.width,
-            doc.height,
-            id='normal'
-        )
-        
-        template = PageTemplate(
-            id='standard',
-            frames=frame,
-            onPage=self.header_footer
-        )
-        
-        doc.addPageTemplates([template])
-        
-        # Start building the document
-        story = []
-        
-        # Add cover page
-        story.extend(self.create_cover_page())
-        story.append(PageBreak())
-        
-        # Add table of contents
-        story.append(Paragraph('Table of Contents', self.styles['CustomHeading1']))
-        toc = [
-            '1. Project Overview',
-            '2. System Architecture',
-            '3. User Interface Design',
-            '4. Technical Implementation',
-            '5. Security Considerations',
-            '6. Testing and Quality Assurance',
-            '7. Deployment Guide',
-            '8. Maintenance Procedures'
-        ]
-        for item in toc:
-            story.append(Paragraph(item, self.styles['Normal']))
-        story.append(Spacer(1, 0.5*inch))
-
-        # Add main content sections with proper formatting
-        sections = {
-            '1. Project Overview': self.create_project_overview(),
-            '2. System Architecture': self.create_system_architecture(),
-            '3. User Interface Design': self.create_ui_design(),
-            '4. Technical Implementation': self.create_technical_implementation(),
-            '5. Security Considerations': self.create_security_section(),
-            '6. Testing and Quality Assurance': self.create_testing_section(),
-            '7. Deployment Guide': self.create_deployment_guide(),
-            '8. Maintenance Procedures': self.create_maintenance_procedures()
-        }
-        
-        for title, content in sections.items():
-            story.append(Paragraph(title, self.styles['CustomHeading1']))
-            story.extend(content)
+        try:
+            # Sanitize output filename
+            safe_filename = re.sub(r'[^a-zA-Z0-9_-]', '_', 'technical_documentation.pdf')
+            doc_path = self.config.output_path / safe_filename
+            
+            # Validate output directory
+            if not self.config.output_path.exists():
+                self.config.output_path.mkdir(parents=True, exist_ok=True)
+            
+            # Create document with templates
+            doc = SimpleDocTemplate(
+                str(doc_path),
+                pagesize=A4,
+                rightMargin=72,
+                leftMargin=72,
+                topMargin=72,
+                bottomMargin=72
+            )
+            
+            # Create page templates
+            frame = Frame(
+                doc.leftMargin,
+                doc.bottomMargin,
+                doc.width,
+                doc.height,
+                id='normal'
+            )
+            
+            template = PageTemplate(
+                id='standard',
+                frames=frame,
+                onPage=self.header_footer
+            )
+            
+            doc.addPageTemplates([template])
+            
+            # Start building the document
+            story = []
+            
+            # Add cover page
+            story.extend(self.create_cover_page())
             story.append(PageBreak())
-        
-        # Build the PDF
-        doc.build(story)
-        print(f"Documentation generated successfully at: {doc_path}")
+            
+            # Add table of contents
+            story.append(Paragraph('Table of Contents', self.styles['CustomHeading1']))
+            toc = [
+                '1. Project Overview',
+                '2. System Architecture',
+                '3. User Interface Design',
+                '4. Technical Implementation',
+                '5. Security Considerations',
+                '6. Testing and Quality Assurance',
+                '7. Deployment Guide',
+                '8. Maintenance Procedures'
+            ]
+            for item in toc:
+                story.append(Paragraph(item, self.styles['Normal']))
+            story.append(Spacer(1, 0.5*inch))
+
+            # Add main content sections with proper formatting
+            sections = {
+                '1. Project Overview': self.create_project_overview(),
+                '2. System Architecture': self.create_system_architecture(),
+                '3. User Interface Design': self.create_ui_design(),
+                '4. Technical Implementation': self.create_technical_implementation(),
+                '5. Security Considerations': self.create_security_section(),
+                '6. Testing and Quality Assurance': self.create_testing_section(),
+                '7. Deployment Guide': self.create_deployment_guide(),
+                '8. Maintenance Procedures': self.create_maintenance_procedures()
+            }
+            
+            for title, content in sections.items():
+                story.append(Paragraph(title, self.styles['CustomHeading1']))
+                story.extend(content)
+                story.append(PageBreak())
+            
+            # Build the PDF with error handling
+            try:
+                doc.build(story)
+                self.logger.info(f"Documentation generated successfully at: {doc_path}")
+            except Exception as e:
+                self.logger.error(f"Failed to build PDF: {str(e)}")
+                raise
+                
+        except Exception as e:
+            self.logger.error(f"Error creating PDF: {str(e)}")
+            raise
 
     def create_project_overview(self):
         """Create project overview section"""
@@ -657,6 +705,10 @@ class DocumentationGenerator:
         screenshots_dir = os.path.join(self.project_root, 'documentation', 'screenshots')
         os.makedirs(screenshots_dir, exist_ok=True)
         return screenshots_dir
+
+class SecurityError(Exception):
+    """Custom exception for security-related errors"""
+    pass
 
 if __name__ == '__main__':
     # Get the project root directory (assuming this script is in the documentation folder)

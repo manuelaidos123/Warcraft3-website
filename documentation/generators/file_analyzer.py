@@ -1,25 +1,48 @@
 from pathlib import Path
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, List, Set
 from bs4 import BeautifulSoup
 import logging
+from urllib.parse import urlparse
+import re
+from functools import lru_cache
+from ..generators.models import FileMetadata
 
-class FileAnalyzer(BaseGenerator):
-    """Handles file analysis and structure generation with improved error handling"""
+class FileAnalyzer:
+    """Handles file analysis and structure generation with improved security"""
+    
+    ALLOWED_EXTENSIONS = {'.html', '.css', '.js', '.py', '.md', '.txt'}
+    MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
+    BINARY_EXTENSIONS = {'.jpg', '.png', '.gif', '.ico', '.pdf', '.ttf', '.woff'}
     
     def __init__(self):
         self.logger = logging.getLogger(__name__)
         self._setup_logging()
+        self._analyzed_files: Set[Path] = set()
     
-    def _setup_logging(self) -> None:
-        """Configure logging for the analyzer"""
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    def _get_file_metadata(self, file_path: Path) -> FileMetadata:
+        """Create FileMetadata instance for the given file"""
+        return FileMetadata(
+            path=file_path,
+            size=file_path.stat().st_size,
+            extension=file_path.suffix.lower(),
+            is_binary=file_path.suffix.lower() in self.BINARY_EXTENSIONS
         )
     
+    def _setup_logging(self) -> None:
+        """Configure logging with proper format"""
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+            handlers=[
+                logging.StreamHandler(),
+                logging.FileHandler('file_analysis.log')
+            ]
+        )
+    
+    @lru_cache(maxsize=100)
     def analyze_html_file(self, file_path: Path) -> Dict[str, Any]:
         """
-        Analyze HTML file and extract key information
+        Analyze HTML file with security measures
         
         Args:
             file_path: Path to the HTML file
@@ -28,111 +51,90 @@ class FileAnalyzer(BaseGenerator):
             Dict containing analyzed file information
             
         Raises:
-            FileNotFoundError: If file doesn't exist
-            ValueError: If file is not valid HTML
+            SecurityError: If file violates security constraints
+            ValueError: If file is invalid
         """
-        if not file_path.exists():
-            raise FileNotFoundError(f"File not found: {file_path}")
-            
         try:
-            content = file_path.read_text(encoding='utf-8')
-            soup = BeautifulSoup(content, 'html.parser')
+            safe_path = self._validate_file_path(file_path)
+            self._check_file_size(safe_path)
+            
+            # Create and validate file metadata
+            metadata = self._get_file_metadata(safe_path)
+            if not metadata.is_valid:
+                raise ValueError(f"Invalid file: {safe_path}")
+            
+            content = self._read_file_safely(safe_path)
+            soup = BeautifulSoup(content, 'html.parser', parser='html5lib')
             
             return {
-                'title': self._get_title(soup),
-                'meta_description': self._get_meta_description(soup),
-                'scripts': self._get_scripts(soup),
-                'stylesheets': self._get_stylesheets(soup),
-                'sections': self._get_sections(soup),
-                'navigation': self._get_navigation(soup),
+                'metadata': metadata,
+                'title': self._get_safe_title(soup),
+                'meta_description': self._get_safe_meta_description(soup),
+                'scripts': self._get_safe_scripts(soup),
+                'stylesheets': self._get_safe_stylesheets(soup),
+                'sections': self._get_safe_sections(soup),
+                'navigation': self._get_safe_navigation(soup),
                 'accessibility_score': self._analyze_accessibility(soup)
             }
         except Exception as e:
             self.logger.error(f"Failed to analyze {file_path}: {str(e)}")
-            raise ValueError(f"Invalid HTML file: {str(e)}")
+            raise
     
-    def _get_title(self, soup: BeautifulSoup) -> str:
-        """Extract and validate page title"""
-        title_tag = soup.title
-        if not title_tag:
-            self.logger.warning("No title tag found")
-            return 'No title'
-        return title_tag.string.strip()
+    def _validate_file_path(self, file_path: Path) -> Path:
+        """Validate file path for security"""
+        safe_path = Path(file_path).resolve()
+        if not safe_path.exists():
+            raise FileNotFoundError(f"File not found: {file_path}")
+        
+        if safe_path.suffix.lower() not in self.ALLOWED_EXTENSIONS:
+            raise SecurityError(f"Unsupported file type: {safe_path.suffix}")
+        
+        return safe_path
     
-    def _get_meta_description(self, soup: BeautifulSoup) -> str:
-        """Extract meta description with fallback"""
-        meta = soup.find('meta', {'name': 'description'})
-        return meta.get('content', 'No description').strip() if meta else 'No description'
+    def _check_file_size(self, file_path: Path) -> None:
+        """Check file size against limits"""
+        if file_path.stat().st_size > self.MAX_FILE_SIZE:
+            raise SecurityError(f"File exceeds size limit: {file_path}")
     
-    def _get_scripts(self, soup: BeautifulSoup) -> List[Dict[str, str]]:
-        """Extract script information with additional metadata"""
+    def _read_file_safely(self, file_path: Path) -> str:
+        """Read file content with security checks"""
+        try:
+            with file_path.open('r', encoding='utf-8') as f:
+                content = f.read(self.MAX_FILE_SIZE + 1)
+                if len(content) > self.MAX_FILE_SIZE:
+                    raise SecurityError("File content exceeds size limit")
+                return content
+        except UnicodeDecodeError:
+            raise ValueError(f"File is not valid UTF-8: {file_path}")
+    
+    def _get_safe_title(self, soup: BeautifulSoup) -> str:
+        """Get sanitized page title"""
+        title = soup.title.string if soup.title else 'No title'
+        return self._sanitize_text(title)
+    
+    @staticmethod
+    def _sanitize_text(text: str) -> str:
+        """Sanitize text content"""
+        return re.sub(r'[<>&"\']', '', str(text))
+    
+    def _get_safe_scripts(self, soup: BeautifulSoup) -> List[str]:
+        """Get sanitized script sources"""
         scripts = []
         for script in soup.find_all('script', src=True):
-            scripts.append({
-                'src': script['src'],
-                'async': 'async' in script.attrs,
-                'defer': 'defer' in script.attrs,
-                'type': script.get('type', 'text/javascript')
-            })
+            src = script.get('src', '')
+            if self._is_safe_url(src):
+                scripts.append(src)
         return scripts
     
-    def _get_stylesheets(self, soup: BeautifulSoup) -> List[Dict[str, str]]:
-        """Extract stylesheet information with media queries"""
-        stylesheets = []
-        for link in soup.find_all('link', rel='stylesheet'):
-            stylesheets.append({
-                'href': link['href'],
-                'media': link.get('media', 'all'),
-                'type': link.get('type', 'text/css')
-            })
-        return stylesheets
-    
-    def _get_sections(self, soup: BeautifulSoup) -> List[Dict[str, Any]]:
-        """Analyze page structure and sections"""
-        sections = []
-        for section in soup.find_all(['header', 'nav', 'main', 'section', 'footer']):
-            sections.append({
-                'type': section.name,
-                'id': section.get('id', ''),
-                'classes': section.get('class', []),
-                'headings': len(section.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']))
-            })
-        return sections
-    
-    def _get_navigation(self, soup: BeautifulSoup) -> Dict[str, Any]:
-        """Analyze navigation structure"""
-        nav = soup.find('nav')
-        if not nav:
-            return {'present': False}
-            
-        return {
-            'present': True,
-            'items': len(nav.find_all('a')),
-            'aria_label': nav.get('aria-label', ''),
-            'structure': self._analyze_nav_structure(nav)
-        }
-    
-    def _analyze_nav_structure(self, nav: BeautifulSoup) -> Dict[str, Any]:
-        """Analyze navigation menu structure"""
-        return {
-            'has_list': bool(nav.find('ul')),
-            'nested_menus': len(nav.find_all('ul', recursive=True)) > 1,
-            'active_item': bool(nav.find(class_='active'))
-        }
-    
-    def _analyze_accessibility(self, soup: BeautifulSoup) -> Dict[str, Any]:
-        """Perform basic accessibility analysis"""
-        return {
-            'images_with_alt': len([img for img in soup.find_all('img') if img.get('alt')]),
-            'images_without_alt': len([img for img in soup.find_all('img') if not img.get('alt')]),
-            'form_labels': len(soup.find_all('label')),
-            'aria_landmarks': len([tag for tag in soup.find_all() if any(attr for attr in tag.attrs if attr.startswith('aria-'))]),
-            'heading_structure': self._analyze_heading_structure(soup)
-        }
-    
-    def _analyze_heading_structure(self, soup: BeautifulSoup) -> Dict[str, int]:
-        """Analyze heading hierarchy"""
-        return {
-            f'h{i}': len(soup.find_all(f'h{i}'))
-            for i in range(1, 7)
-        }
+    @staticmethod
+    def _is_safe_url(url: str) -> bool:
+        """Validate URL for security"""
+        try:
+            parsed = urlparse(url)
+            return bool(parsed.netloc) and parsed.scheme in {'http', 'https'}
+        except Exception:
+            return False
+
+class SecurityError(Exception):
+    """Custom exception for security-related errors"""
+    pass

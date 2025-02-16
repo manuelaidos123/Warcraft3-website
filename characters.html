@@ -21,9 +21,28 @@
     </head>
     <body class="bg-light">
         <header>
-            <!-- Same navbar as other templates -->
+            <!-- Navigation -->
             <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-                <!-- ... navbar content ... -->
+                <div class="container">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="images/icons/logo.png" alt="Warcraft III Logo" width="30" height="30">
+                        Warcraft III
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="story.html">Story</a></li>
+                            <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="characters.html">Characters</a></li>
+                            <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
+                            <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
+                        </ul>
+                    </div>
+                </div>
             </nav>
         </header>
 
@@ -31,68 +50,76 @@
             <div class="alert-container" role="alert" aria-live="polite"></div>
             
             <section class="characters-section">
-                <h1 class="text-center mb-4">Characters of Warcraft III</h1>
-
-                <!-- Character Filters -->
-                <div class="filters mb-4">
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <select class="form-select" id="faction-filter" aria-label="Filter by faction">
-                                <option value="">All Factions</option>
-                                <option value="alliance">Alliance</option>
-                                <option value="horde">Horde</option>
-                                <option value="undead">Undead Scourge</option>
-                                <option value="nightelf">Night Elves</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <select class="form-select" id="role-filter" aria-label="Filter by role">
-                                <option value="">All Roles</option>
-                                <option value="hero">Hero</option>
-                                <option value="villain">Villain</option>
-                                <option value="support">Support</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-search"></i></span>
-                                <input type="search" class="form-control" id="character-search" 
-                                       placeholder="Search characters..." aria-label="Search characters">
-                            </div>
-                        </div>
+                <h1 class="text-center mb-4">Characters</h1>
+                
+                <!-- Filters -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <select class="form-select" id="faction-filter">
+                            <option value="">All Factions</option>
+                            <option value="alliance">Alliance</option>
+                            <option value="horde">Horde</option>
+                            <option value="undead">Undead Scourge</option>
+                            <option value="nightelf">Night Elves</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-select" id="role-filter">
+                            <option value="">All Roles</option>
+                            <option value="hero">Hero</option>
+                            <option value="villain">Villain</option>
+                            <option value="support">Support</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="character-search" placeholder="Search characters...">
                     </div>
                 </div>
 
                 <!-- Character Grid -->
                 <div class="row g-4" id="character-grid">
-                    <!-- Character cards will be dynamically loaded here -->
-                </div>
-
-                <!-- Character Modal -->
-                <div class="modal fade" id="characterModal" tabindex="-1" aria-labelledby="characterModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="characterModalLabel">Character Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- Character details will be dynamically loaded here -->
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Characters will be dynamically loaded here -->
                 </div>
             </section>
         </main>
 
-        <!-- Same footer as other templates -->
+        <!-- Footer -->
         <footer class="bg-dark text-light py-5">
-            <!-- ... footer content ... -->
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="col-lg-4">
+                        <h3>Quick Links</h3>
+                        <ul class="list-unstyled">
+                            <li><a class="text-light text-decoration-none" href="#human">Human Guide</a></li>
+                            <li><a class="text-light text-decoration-none" href="#orc">Orc Guide</a></li>
+                            <li><a class="text-light text-decoration-none" href="#nightelf">Night Elf Guide</a></li>
+                            <li><a class="text-light text-decoration-none" href="#undead">Undead Guide</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
+                    </div>
+                    <div class="col-lg-4">
+                        <h3>Social Links</h3>
+                        <div class="d-flex gap-3">
+                            <a href="#" class="text-light"><i class="fab fa-instagram fa-2x"></i></a>
+                            <a href="#" class="text-light"><i class="fab fa-telegram fa-2x"></i></a>
+                            <a href="#" class="text-light"><i class="fab fa-twitter fa-2x"></i></a>
+                            <a href="#" class="text-light"><i class="fab fa-facebook fa-2x"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col text-center">
+                        <p class="mb-0">Email: some-email@gmail.com | Telephone: 0-777-777-123</p>
+                        <p class="text-muted">Andrei Kornev 2024.</p>
+                    </div>
+                </div>
+            </div>
         </footer>
 
         <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-        <script src="scripts.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="scripts.js"></script>
     </body>
 </html>

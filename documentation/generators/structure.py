@@ -1,15 +1,7 @@
 from pathlib import Path
 from typing import List, Dict, Set
 import logging
-from dataclasses import dataclass
-
-@dataclass
-class FileMetadata:
-    """Metadata for project files"""
-    path: Path
-    size: int
-    extension: str
-    is_binary: bool
+from ..generators.models import FileMetadata  # Import from models instead of defining here
 
 class ProjectStructureGenerator(BaseGenerator):
     """Generates comprehensive project structure documentation"""

@@ -20,35 +20,83 @@
         <link rel="icon" type="image/png" href="images/icons/logo.png">
     </head>
     <body class="bg-light">
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-                <div class="container">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="images/icons/logo.png" alt="Warcraft III Logo" width="40" height="40">
-                        Warcraft III
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a class="nav-link" href="story.html">Story</a></li>
-                            <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
-                            <li class="nav-item"><a class="nav-link" href="characters.html">Characters</a></li>
-                            <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
-                            <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
-                        </ul>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/icons/logo.png" alt="Warcraft III Logo" width="30" height="30">
+                    Warcraft III
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="story.html">Story</a></li>
+                        <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="characters.html">Characters</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
+                        <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Hero Section -->
+            <section class="hero bg-dark text-white py-5 mb-5">
+                <div class="container text-center">
+                    <h1 class="display-4">Welcome!</h1>
+                    <h3 class="lead">To the Best Warcraft 3 website.</h3>
+                </div>
+            </section>
+
+            <!-- Featured Content Section -->
+            <section class="container py-5">
+                <div class="row g-4">
+                    <!-- Featured Story -->
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="images/story-preview.jpg" class="card-img-top" alt="Story Preview">
+                            <div class="card-body">
+                                <h2 class="card-title h4">Epic Campaign</h2>
+                                <p class="card-text">Experience the legendary story of Warcraft III through its epic campaigns.</p>
+                                <a href="story.html" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Featured Factions -->
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="images/factions-preview.jpg" class="card-img-top" alt="Factions Preview">
+                            <div class="card-body">
+                                <h2 class="card-title h4">Mighty Factions</h2>
+                                <p class="card-text">Choose your allegiance among the powerful factions of Azeroth.</p>
+                                <a href="factions.html" class="btn btn-primary">Explore Factions</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Featured Characters -->
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="images/characters-preview.jpg" class="card-img-top" alt="Characters Preview">
+                            <div class="card-body">
+                                <h2 class="card-title h4">Legendary Heroes</h2>
+                                <p class="card-text">Meet the iconic characters that shaped the world of Warcraft.</p>
+                                <a href="characters.html" class="btn btn-primary">Meet Heroes</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </nav>
-        </header>
-
-        <main class="container py-5 mt-5">
-            <div class="alert-container" role="alert" aria-live="polite"></div>
-            <!-- Main content here -->
+            </section>
         </main>
 
+        <!-- Footer -->
         <footer class="bg-dark text-light py-5">
             <div class="container">
                 <div class="row gy-4">
@@ -65,6 +113,18 @@
                                 </a>
                             </p>
                         </address>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
+                    </div>
+                    <div class="col-lg-4">
+                        <h3>Quick Links</h3>
+                        <ul class="list-unstyled">
+                            <li><a href="story.html" class="text-light">Story</a></li>
+                            <li><a href="factions.html" class="text-light">Factions</a></li>
+                            <li><a href="characters.html" class="text-light">Characters</a></li>
+                            <li><a href="pedia.html" class="text-light">WarcraftPedia</a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="row mt-4">

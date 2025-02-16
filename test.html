@@ -53,26 +53,61 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <div id="voiceTest" class="text-center">
-                            <!-- Voice test content will be dynamically loaded -->
+                            <div class="mb-4">
+                                <h3>Test Your Knowledge</h3>
+                                <p>Listen to the voice clip and select the correct character!</p>
+                            </div>
+                            <div class="audio-controls mb-4">
+                                <button id="playSound" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-play me-2"></i>Play Voice
+                                </button>
+                                <audio id="voiceClip" src="" style="display: none;"></audio>
+                            </div>
+                            <div class="options-container mb-4">
+                                <div class="row g-3" id="answerOptions">
+                                    <!-- Options will be dynamically inserted here -->
+                                </div>
+                            </div>
+                            <div class="score-container">
+                                <p class="h4">Score: <span id="score">0</span></p>
+                                <p>Question: <span id="questionNumber">1</span>/10</p>
+                            </div>
+                            <div id="feedback" class="alert mt-3" style="display: none;"></div>
                         </div>
                     </div>
                 </div>
             </section>
         </main>
+        <!-- Footer -->
         <footer class="bg-dark text-light py-5">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3>Contact Information</h3>
-                        <address>
-                            <p>Email: <a class="text-light" href="mailto:some-email@gmail.com">some-email@gmail.com</a></p>
-                            <p>Phone: <a class="text-light" href="tel:0777777123">0-777-777-123</a></p>
-                        </address>
+                <div class="row gy-4">
+                    <div class="col-lg-4">
+                        <h3>Quick Links</h3>
+                        <ul class="list-unstyled">
+                            <li><a class="text-light text-decoration-none" href="#human">Human Guide</a></li>
+                            <li><a class="text-light text-decoration-none" href="#orc">Orc Guide</a></li>
+                            <li><a class="text-light text-decoration-none" href="#nightelf">Night Elf Guide</a></li>
+                            <li><a class="text-light text-decoration-none" href="#undead">Undead Guide</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
+                    </div>
+                    <div class="col-lg-4">
+                        <h3>Social Links</h3>
+                        <div class="d-flex gap-3">
+                            <a href="#" class="text-light"><i class="fab fa-instagram fa-2x"></i></a>
+                            <a href="#" class="text-light"><i class="fab fa-telegram fa-2x"></i></a>
+                            <a href="#" class="text-light"><i class="fab fa-twitter fa-2x"></i></a>
+                            <a href="#" class="text-light"><i class="fab fa-facebook fa-2x"></i></a>
+                        </div>
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-12">
-                        <p class="text-center mb-0">&copy; Andrei Kornev 2024</p>
+                    <div class="col text-center">
+                        <p class="mb-0">Email: some-email@gmail.com | Telephone: 0-777-777-123</p>
+                        <p class="text-muted">Andrei Kornev 2024.</p>
                     </div>
                 </div>
             </div>
