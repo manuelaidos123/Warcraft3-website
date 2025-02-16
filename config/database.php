@@ -2,20 +2,34 @@
 declare(strict_types=1);
 
 class DatabaseConfig {
-    private const DEFAULT_CONFIG = [
-        'host' => 'localhost',
-        'user' => 'default_user',
-        'pass' => 'default_pass',
-        'name' => 'warcraft3_db'
-    ];
+    private const CONFIG_FILE = __DIR__ . '/database.env';
+    private const REQUIRED_ENV_VARS = ['DB_HOST', 'DB_USER', 'DB_PASS', 'DB_NAME'];
     
     public static function getConfig(): array {
+        self::validateEnvironment();
+        
         return [
-            'host' => getenv('DB_HOST') ?: self::DEFAULT_CONFIG['host'],
-            'user' => getenv('DB_USER') ?: self::DEFAULT_CONFIG['user'],
-            'pass' => getenv('DB_PASS') ?: self::DEFAULT_CONFIG['pass'],
-            'name' => getenv('DB_NAME') ?: self::DEFAULT_CONFIG['name']
+            'host' => self::getRequiredEnv('DB_HOST'),
+            'user' => self::getRequiredEnv('DB_USER'),
+            'pass' => self::getRequiredEnv('DB_PASS'),
+            'name' => self::getRequiredEnv('DB_NAME')
         ];
+    }
+    
+    private static function validateEnvironment(): void {
+        foreach (self::REQUIRED_ENV_VARS as $var) {
+            if (empty(getenv($var))) {
+                throw new RuntimeException("Missing required environment variable: {$var}");
+            }
+        }
+    }
+    
+    private static function getRequiredEnv(string $name): string {
+        $value = getenv($name);
+        if ($value === false || $value === '') {
+            throw new RuntimeException("Required environment variable {$name} is not set");
+        }
+        return $value;
     }
     
     public static function getConnection(): mysqli {
@@ -30,14 +44,13 @@ class DatabaseConfig {
             );
             
             if ($conn->connect_error) {
-                throw new Exception("Database connection failed: " . $conn->connect_error);
+                throw new RuntimeException("Connection failed: " . $conn->connect_error);
             }
             
-            $conn->set_charset("utf8mb4");
+            $conn->set_charset('utf8mb4');
             return $conn;
         } catch (Exception $e) {
-            error_log($e->getMessage());
-            throw $e;
+            throw new RuntimeException("Database connection failed: " . $e->getMessage());
         }
     }
 }

@@ -16,17 +16,14 @@ class ProjectConfig:
     logging: Dict[str, Any]
 
     def __post_init__(self):
-        # Validate environment
         valid_environments = {'development', 'testing', 'production'}
         if self.environment not in valid_environments:
             raise ValueError(f"Invalid environment. Must be one of: {valid_environments}")
         
-        # Validate database config
         required_db_keys = {'host', 'port', 'name', 'user'}
         if not all(key in self.database for key in required_db_keys):
             raise ValueError(f"Missing required database configuration keys: {required_db_keys}")
         
-        # Validate logging config
         if 'level' not in self.logging:
             raise ValueError("Logging configuration must include 'level'")
 
@@ -77,30 +74,25 @@ class ConfigManager:
     
     def _load_yaml(self, filename: str) -> Dict[str, Any]:
         """Load YAML configuration file with security checks"""
-        config_path = self.config_dir / self._sanitize_filename(filename)
-        
-        # Prevent directory traversal
-        if not config_path.is_relative_to(self.config_dir):
-            raise SecurityError("Invalid config file path")
-            
-        if not config_path.exists():
-            self.logger.warning(f"Config file not found: {filename}")
-            return {}
-            
         try:
-            with config_path.open('r', encoding='utf-8') as f:
-                config = yaml.safe_load(f) or {}
-                self._validate_config_structure(config)
-                return config
+            file_path = self.config_dir / filename
+            if not file_path.is_file():
+                return {}
+                
+            # Prevent directory traversal
+            if not file_path.is_relative_to(self.config_dir):
+                raise SecurityError(f"Invalid config file path: {filename}")
+            
+            with file_path.open('r') as f:
+                # Use safe_load instead of load
+                return yaml.safe_load(f) or {}
+                
         except yaml.YAMLError as e:
-            raise ConfigurationError(f"Invalid YAML in {filename}: {str(e)}")
-        except Exception as e:
-            raise ConfigurationError(f"Error reading {filename}: {str(e)}")
-    
-    @staticmethod
-    def _sanitize_filename(filename: str) -> str:
-        """Sanitize filename to prevent path traversal"""
-        return Path(filename).name
+            self.logger.error(f"Failed to parse YAML file {filename}: {e}")
+            raise ConfigurationError(f"YAML parsing failed: {e}")
+        except OSError as e:
+            self.logger.error(f"Failed to read config file {filename}: {e}")
+            raise ConfigurationError(f"Config file access failed: {e}")
     
     def _validate_config_structure(self, config: Dict[str, Any]) -> None:
         """Validate configuration structure"""
@@ -110,17 +102,22 @@ class ConfigManager:
             raise ConfigurationError(f"Missing required configuration sections: {missing}")
     
     def _merge_configs(self, *configs: Dict[str, Any]) -> Dict[str, Any]:
-        """Merge configurations with deep merge support"""
+        """Merge configurations securely"""
         result = {}
         for config in configs:
             self._deep_merge(result, config)
         return result
     
     def _deep_merge(self, target: Dict[str, Any], source: Dict[str, Any]) -> None:
-        """Recursively merge dictionaries"""
+        """Perform deep merge of dictionaries with type checking"""
         for key, value in source.items():
+            if not isinstance(key, str):
+                raise ConfigurationError(f"Invalid configuration key type: {type(key)}")
+                
             if isinstance(value, dict):
                 target[key] = target.get(key, {})
+                if not isinstance(target[key], dict):
+                    raise ConfigurationError(f"Type mismatch in configuration for key {key}")
                 self._deep_merge(target[key], value)
             else:
                 target[key] = value
@@ -142,7 +139,7 @@ class ConfigManager:
         current[keys[-1]] = value
 
 class ConfigurationError(Exception):
-    """Custom exception for configuration errors"""
+    """Custom exception for configuration-related errors"""
     pass
 
 class SecurityError(Exception):

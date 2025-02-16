@@ -1,46 +1,95 @@
 // Constants and configurations
-const CONFIG = {
+const CONFIG = Object.freeze({
     EMAIL_REGEX: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-    ALERT_DURATION: 3000
-};
+    ALERT_DURATION: 3000,
+    ALLOWED_HTML_TAGS: ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'div', 'button']
+});
 
 // Utility functions
 const utils = {
     validateEmail(email) {
-        return CONFIG.EMAIL_REGEX.test(email);
+        return typeof email === 'string' && CONFIG.EMAIL_REGEX.test(email);
+    },
+    
+    sanitizeHTML(html) {
+        const div = document.createElement('div');
+        div.textContent = html;
+        return div.innerHTML;
     },
     
     showAlert(type, message) {
+        if (!['success', 'danger', 'warning', 'info'].includes(type)) {
+            type = 'info';
+        }
+        
+        const alertContainer = document.querySelector('.alert-container');
+        if (!alertContainer) {
+            console.error('Alert container not found');
+            return;
+        }
+        
         const alertDiv = document.createElement('div');
         alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
         alertDiv.role = 'alert';
+        
+        const sanitizedMessage = this.sanitizeHTML(message);
         alertDiv.innerHTML = `
-            ${message}
+            ${sanitizedMessage}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         `;
         
-        document.querySelector('.alert-container').appendChild(alertDiv);
-        setTimeout(() => alertDiv.remove(), CONFIG.ALERT_DURATION);
+        alertContainer.appendChild(alertDiv);
+        
+        setTimeout(() => {
+            if (alertDiv && alertDiv.parentNode) {
+                alertDiv.remove();
+            }
+        }, CONFIG.ALERT_DURATION);
     }
 };
 
-// Event handlers
+// Event handlers with proper error handling
 function handleEmailSubmission(event) {
-    event?.preventDefault();
-    const emailInput = document.querySelector('input[type="email"]');
-    const email = emailInput?.value.trim();
+    try {
+        event?.preventDefault();
+        
+        const emailInput = document.querySelector('input[type="email"]');
+        if (!emailInput) {
+            throw new Error('Email input not found');
+        }
+        
+        const email = emailInput.value.trim();
+        if (!utils.validateEmail(email)) {
+            utils.showAlert('danger', 'Please enter a valid email address');
+            return;
+        }
+        
+        // Process email submission
+        processEmailSubmission(email).catch(error => {
+            utils.showAlert('danger', 'Failed to process email submission');
+            console.error('Email submission error:', error);
+        });
+    } catch (error) {
+        console.error('Email submission handler error:', error);
+        utils.showAlert('danger', 'An unexpected error occurred');
+    }
+}
+
+async function processEmailSubmission(email) {
+    const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.content
+        },
+        body: JSON.stringify({ email })
+    });
     
-    if (!email) {
-        utils.showAlert('danger', 'Please enter an email address.');
-        return;
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
     }
     
-    if (utils.validateEmail(email)) {
-        utils.showAlert('success', 'Thank you for subscribing!');
-        emailInput.value = '';
-    } else {
-        utils.showAlert('danger', 'Please enter a valid email address.');
-    }
+    return await response.json();
 }
 
 // Initialize components

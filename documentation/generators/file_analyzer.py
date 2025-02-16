@@ -2,9 +2,10 @@ from pathlib import Path
 from typing import Dict, Any, List, Set
 from bs4 import BeautifulSoup
 import logging
-from urllib.parse import urlparse
+from urllib.parse import urlparse, ParseResult
 import re
 from functools import lru_cache
+import os
 from ..generators.models import FileMetadata
 
 class FileAnalyzer:
@@ -13,6 +14,7 @@ class FileAnalyzer:
     ALLOWED_EXTENSIONS = {'.html', '.css', '.js', '.py', '.md', '.txt'}
     MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
     BINARY_EXTENSIONS = {'.jpg', '.png', '.gif', '.ico', '.pdf', '.ttf', '.woff'}
+    LOG_FILE = 'file_analysis.log'
     
     def __init__(self):
         self.logger = logging.getLogger(__name__)
@@ -29,15 +31,28 @@ class FileAnalyzer:
         )
     
     def _setup_logging(self) -> None:
-        """Configure logging with proper format"""
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-            handlers=[
-                logging.StreamHandler(),
-                logging.FileHandler('file_analysis.log')
-            ]
-        )
+        """Configure logging with proper format and error handling"""
+        try:
+            log_dir = os.path.dirname(self.LOG_FILE)
+            if log_dir and not os.path.exists(log_dir):
+                os.makedirs(log_dir, exist_ok=True)
+                
+            logging.basicConfig(
+                level=logging.INFO,
+                format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                handlers=[
+                    logging.StreamHandler(),
+                    logging.FileHandler(self.LOG_FILE)
+                ]
+            )
+        except (OSError, IOError) as e:
+            # Fall back to console-only logging if file logging fails
+            logging.basicConfig(
+                level=logging.INFO,
+                format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                handlers=[logging.StreamHandler()]
+            )
+            self.logger.error(f"Failed to setup file logging: {str(e)}")
     
     @lru_cache(maxsize=100)
     def analyze_html_file(self, file_path: Path) -> Dict[str, Any]:
@@ -81,31 +96,74 @@ class FileAnalyzer:
             raise
     
     def _validate_file_path(self, file_path: Path) -> Path:
-        """Validate file path for security"""
-        safe_path = Path(file_path).resolve()
-        if not safe_path.exists():
-            raise FileNotFoundError(f"File not found: {file_path}")
+        """
+        Validate file path for security.
         
-        if safe_path.suffix.lower() not in self.ALLOWED_EXTENSIONS:
-            raise SecurityError(f"Unsupported file type: {safe_path.suffix}")
-        
-        return safe_path
+        Args:
+            file_path: Path to validate
+            
+        Returns:
+            Validated and resolved path
+            
+        Raises:
+            FileNotFoundError: If file doesn't exist
+            SecurityError: If file type is not allowed
+            OSError: If path resolution fails
+        """
+        try:
+            safe_path = Path(file_path).resolve(strict=True)
+            if not safe_path.exists():
+                raise FileNotFoundError(f"File not found: {file_path}")
+            
+            if safe_path.suffix.lower() not in self.ALLOWED_EXTENSIONS:
+                raise SecurityError(f"Unsupported file type: {safe_path.suffix}")
+            
+            return safe_path
+        except OSError as e:
+            raise OSError(f"Failed to resolve path {file_path}: {str(e)}") from e
     
     def _check_file_size(self, file_path: Path) -> None:
-        """Check file size against limits"""
-        if file_path.stat().st_size > self.MAX_FILE_SIZE:
-            raise SecurityError(f"File exceeds size limit: {file_path}")
+        """
+        Check file size against limits.
+        
+        Args:
+            file_path: Path to the file to check
+            
+        Raises:
+            SecurityError: If file size exceeds MAX_FILE_SIZE
+            OSError: If file stat fails
+        """
+        try:
+            if file_path.stat().st_size > self.MAX_FILE_SIZE:
+                raise SecurityError(f"File exceeds size limit: {file_path}")
+        except OSError as e:
+            raise OSError(f"Failed to check file size for {file_path}: {str(e)}") from e
     
     def _read_file_safely(self, file_path: Path) -> str:
-        """Read file content with security checks"""
+        """
+        Read file content with security checks.
+        
+        Args:
+            file_path: Path to the file to read
+            
+        Returns:
+            File content as string
+            
+        Raises:
+            SecurityError: If content exceeds size limit
+            ValueError: If file is not valid UTF-8
+            IOError: If file reading fails
+        """
         try:
             with file_path.open('r', encoding='utf-8') as f:
                 content = f.read(self.MAX_FILE_SIZE + 1)
                 if len(content) > self.MAX_FILE_SIZE:
                     raise SecurityError("File content exceeds size limit")
                 return content
-        except UnicodeDecodeError:
-            raise ValueError(f"File is not valid UTF-8: {file_path}")
+        except UnicodeDecodeError as e:
+            raise ValueError(f"File is not valid UTF-8: {file_path}") from e
+        except IOError as e:
+            raise IOError(f"Failed to read file {file_path}: {str(e)}") from e
     
     def _get_safe_title(self, soup: BeautifulSoup) -> str:
         """Get sanitized page title"""
@@ -128,11 +186,20 @@ class FileAnalyzer:
     
     @staticmethod
     def _is_safe_url(url: str) -> bool:
-        """Validate URL for security"""
+        """
+        Validate URL for security.
+        
+        Args:
+            url: URL to validate
+            
+        Returns:
+            True if URL is safe, False otherwise
+        """
         try:
-            parsed = urlparse(url)
+            parsed: ParseResult = urlparse(url)
             return bool(parsed.netloc) and parsed.scheme in {'http', 'https'}
-        except Exception:
+        except (ValueError, AttributeError, TypeError) as e:
+            logging.getLogger(__name__).warning(f"URL validation failed for {url}: {str(e)}")
             return False
 
 class SecurityError(Exception):
