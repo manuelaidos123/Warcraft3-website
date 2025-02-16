@@ -99,16 +99,7 @@ class DocumentationGenerator:
     """Generates comprehensive documentation for the Warcraft3 website project."""
     
     def __init__(self, project_root: str, config: Optional[DocumentConfig] = None):
-        """
-        Initialize the documentation generator.
-        
-        Args:
-            project_root: Root directory path of the project
-            config: Optional configuration object
-        
-        Raises:
-            ValueError: If project_root doesn't exist
-        """
+        """Initialize the documentation generator."""
         # Sanitize project root path
         self.project_root = Path(project_root).resolve()
         if not self.project_root.exists() or not self.project_root.is_dir():
@@ -117,13 +108,17 @@ class DocumentationGenerator:
         # Validate config
         self.config = config or DocumentConfig.default(self.project_root)
         
-        # Configure logging properly
+        # Configure logging
         self.logger = logging.getLogger(__name__)
         if not self.logger.handlers:
             handler = logging.StreamHandler()
             handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
             self.logger.addHandler(handler)
             self.logger.setLevel(logging.INFO)
+
+        # Initialize styles
+        self.styles = getSampleStyleSheet()
+        self._create_custom_styles()
 
     def setup_output_directory(self) -> None:
         """Create output directory if it doesn't exist."""
@@ -138,13 +133,31 @@ class DocumentationGenerator:
             raise
 
     def _create_custom_styles(self) -> None:
-        """Create custom styles for the document"""
-        style_configs: List[StyleConfig] = [
+        """Create all custom styles for the document"""
+        style_configs = [
             ('CoverTitle', self.styles['Heading1'], {
                 'fontSize': 32,
                 'spaceAfter': 30,
                 'alignment': TA_CENTER,
                 'textColor': colors.HexColor('#2F89FC')
+            }),
+            ('CoverInfo', self.styles['Normal'], {
+                'fontSize': 12,
+                'spaceAfter': 20,
+                'alignment': TA_CENTER
+            }),
+            ('FileContent', self.styles['Normal'], {
+                'fontSize': 10,
+                'leftIndent': 20
+            }),
+            ('CodeBlock', self.styles['Normal'], {
+                'fontSize': 9,
+                'fontName': 'Courier',
+                'leftIndent': 20,
+                'rightIndent': 20,
+                'spaceAfter': 15,
+                'spaceBefore': 15,
+                'backColor': colors.lightgrey
             }),
             ('CustomHeading1', self.styles['Heading1'], {
                 'fontSize': 24,
@@ -155,11 +168,28 @@ class DocumentationGenerator:
                 'fontSize': 18,
                 'spaceAfter': 15,
                 'textColor': colors.HexColor('#2F89FC')
+            }),
+            ('CustomHeading3', self.styles['Heading3'], {
+                'fontSize': 14,
+                'spaceAfter': 10,
+                'textColor': colors.HexColor('#2F89FC')
             })
         ]
         
         for name, parent, properties in style_configs:
-            self.styles.add(ParagraphStyle(name=name, parent=parent, **properties))
+            try:
+                self.styles.add(ParagraphStyle(name=name, parent=parent, **properties))
+            except KeyError:
+                # If style already exists, update it instead
+                self.styles[name].fontSize = properties.get('fontSize', self.styles[name].fontSize)
+                self.styles[name].spaceAfter = properties.get('spaceAfter', self.styles[name].spaceAfter)
+                self.styles[name].alignment = properties.get('alignment', self.styles[name].alignment)
+                self.styles[name].textColor = properties.get('textColor', self.styles[name].textColor)
+                self.styles[name].leftIndent = properties.get('leftIndent', self.styles[name].leftIndent)
+                self.styles[name].rightIndent = properties.get('rightIndent', self.styles[name].rightIndent)
+                self.styles[name].spaceBefore = properties.get('spaceBefore', self.styles[name].spaceBefore)
+                self.styles[name].backColor = properties.get('backColor', self.styles[name].backColor)
+                self.styles[name].fontName = properties.get('fontName', self.styles[name].fontName)
 
     def analyze_html_file(self, file_path: str) -> dict:
         """
@@ -278,7 +308,7 @@ class DocumentationGenerator:
         if os.path.exists(os.path.join(self.project_root, 'js')):
             js_files = os.listdir(os.path.join(self.project_root, 'js'))
             for js in sorted(js_files):
-                structure.append(f"    📄 {js}")
+                structure.append(f"    ��� {js}")
 
         # Sounds
         if os.path.exists(os.path.join(self.project_root, 'sounds')):
@@ -383,13 +413,21 @@ class DocumentationGenerator:
     def create_pdf(self):
         """Generate the PDF documentation"""
         try:
-            # Sanitize output filename
-            safe_filename = re.sub(r'[^a-zA-Z0-9_-]', '_', 'technical_documentation.pdf')
-            doc_path = self.config.output_path / safe_filename
+            # Ensure proper PDF filename with extension
+            filename = 'technical_documentation.pdf'
+            if not filename.endswith('.pdf'):
+                filename += '.pdf'
+            
+            # Create full path
+            doc_path = self.config.output_path / filename
             
             # Validate output directory
             if not self.config.output_path.exists():
                 self.config.output_path.mkdir(parents=True, exist_ok=True)
+            
+            # Remove existing file if it exists
+            if doc_path.exists():
+                doc_path.unlink()
             
             # Create document with templates
             doc = SimpleDocTemplate(
@@ -458,14 +496,10 @@ class DocumentationGenerator:
                 story.extend(content)
                 story.append(PageBreak())
             
-            # Build the PDF with error handling
-            try:
-                doc.build(story)
-                self.logger.info(f"Documentation generated successfully at: {doc_path}")
-            except Exception as e:
-                self.logger.error(f"Failed to build PDF: {str(e)}")
-                raise
-                
+            # Build the PDF
+            doc.build(story)
+            self.logger.info(f"Documentation generated successfully at: {doc_path}")
+            
         except Exception as e:
             self.logger.error(f"Error creating PDF: {str(e)}")
             raise
