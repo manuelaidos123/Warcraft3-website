@@ -3,17 +3,19 @@ declare(strict_types=1);
 
 namespace App\Auth;
 
-// Use constant for base path
-define('BASE_PATH', dirname(__DIR__));
+// Use a more secure way to define paths
+use App\Config\PathConfig;
+use App\Bootstrap\AppBootstrap;
 
-// Secure file inclusion using realpath
-$bootstrapPath = realpath(BASE_PATH . '/bootstrap.php');
-if ($bootstrapPath === false || !is_file($bootstrapPath)) {
+// Initialize application with secure bootstrapping
+try {
+    $bootstrap = new AppBootstrap();
+    $bootstrap->initialize();
+} catch (\Exception $e) {
     http_response_code(500);
-    error_log('Critical: Bootstrap file not found');
-    exit('System configuration error');
+    error_log('Critical: Bootstrap initialization failed: ' . $e->getMessage());
+    throw new \RuntimeException('Application initialization failed');
 }
-require_once $bootstrapPath;
 
 use App\Security\Session;
 use App\Security\Cookie;
@@ -43,8 +45,11 @@ try {
 
     // Redirect using response handler with absolute path
     $response->redirect('/index.html');
-} catch (Exception $e) {
+    return;
+    
+} catch (\Exception $e) {
     error_log("Logout error: " . $e->getMessage());
     $response->redirect('/error.html');
+    return;
 }
 ?>

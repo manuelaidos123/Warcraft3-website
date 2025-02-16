@@ -3,17 +3,19 @@ declare(strict_types=1);
 
 namespace App\Auth;
 
-// Use constant for base path
-define('BASE_PATH', dirname(__DIR__));
+// Use a more secure way to define paths
+use App\Config\PathConfig;
+use App\Bootstrap\AppBootstrap;
 
-// Secure file inclusion using realpath
-$bootstrapPath = realpath(BASE_PATH . '/bootstrap.php');
-if ($bootstrapPath === false || !is_file($bootstrapPath)) {
+// Initialize application with secure bootstrapping
+try {
+    $bootstrap = new AppBootstrap();
+    $bootstrap->initialize();
+} catch (\Exception $e) {
     http_response_code(500);
-    error_log('Critical: Bootstrap file not found');
-    exit('System configuration error');
+    error_log('Critical: Bootstrap initialization failed: ' . $e->getMessage());
+    throw new \RuntimeException('Application initialization failed');
 }
-require_once $bootstrapPath;
 
 use App\Security\Session;
 use App\Security\CSRF;
@@ -37,11 +39,13 @@ $request = new Request();
 // Validate request method
 if (!$request->isPost()) {
     $response->sendError('Method not allowed', 405);
+    return;
 }
 
 // Validate CSRF token
 if (!CSRF::validateToken($request->getHeader('X-CSRF-Token'))) {
     $response->sendError('Invalid CSRF token', 403);
+    return;
 }
 
 // Validate and sanitize input
@@ -53,11 +57,13 @@ try {
     $remember = $validator->validateBoolean($request->getPost('remember', false));
 } catch (ValidationException $e) {
     $response->sendError($e->getMessage(), 400);
+    return;
 }
 
 // Validate required fields
 if (empty($username) || empty($password)) {
     $response->sendError('Username and password are required', 400);
+    return;
 }
 
 try {
@@ -93,11 +99,15 @@ try {
         $auth->updateLastLogin($user['id']);
         
         $response->sendSuccess('Login successful');
-    } else {
-        $response->sendError('Invalid credentials', 401);
+        return;
     }
+    
+    $response->sendError('Invalid credentials', 401);
+    return;
+    
 } catch (Exception $e) {
     error_log("Login error: " . $e->getMessage());
     $response->sendError('An error occurred during authentication', 500);
+    return;
 }
 ?>
