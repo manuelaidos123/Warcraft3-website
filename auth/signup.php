@@ -1,58 +1,95 @@
 <?php
-require_once '../config/database.php';
+declare(strict_types=1);
 
-header('Content-Type: application/json');
+require_once __DIR__ . '/../bootstrap.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['error' => 'Method not allowed']);
-    exit;
+use App\Security\Session;
+use App\Security\CSRF;
+use App\Http\Response;
+use App\Http\Request;
+use App\Security\InputValidator;
+use App\Auth\RegistrationService;
+use App\Database\DatabaseConnection;
+
+// Initialize secure session
+$session = new Session();
+$session->start();
+
+// Initialize response handler
+$response = new Response();
+$response->setJsonHeader();
+
+// Initialize request handler
+$request = new Request();
+
+// Validate request method
+if (!$request->isPost()) {
+    $response->sendError('Method not allowed', 405);
 }
 
-$username = $_POST['username'] ?? '';
-$email = $_POST['email'] ?? '';
-$password = $_POST['password'] ?? '';
-
-// Validate input
-if (empty($username) || empty($email) || empty($password)) {
-    echo json_encode(['error' => 'All fields are required']);
-    exit;
+// Validate CSRF token
+if (!CSRF::validateToken($request->getHeader('X-CSRF-Token'))) {
+    $response->sendError('Invalid CSRF token', 403);
 }
 
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo json_encode(['error' => 'Invalid email format']);
-    exit;
+try {
+    // Initialize input validator
+    $validator = new InputValidator();
+
+    // Validate and sanitize input
+    $username = $validator->sanitizeUsername($request->getPost('username'));
+    $email = $validator->sanitizeEmail($request->getPost('email'));
+    $password = $validator->sanitizePassword($request->getPost('password'));
+
+    // Validate required fields
+    if (empty($username) || empty($email) || empty($password)) {
+        $response->sendError('All fields are required', 400);
+    }
+
+    // Validate email format
+    if (!$validator->isValidEmail($email)) {
+        $response->sendError('Invalid email format', 400);
+    }
+
+    // Validate password strength
+    if (!$validator->isValidPassword($password)) {
+        $response->sendError('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character', 400);
+    }
+
+    // Initialize registration service
+    $db = DatabaseConnection::getInstance();
+    $registrationService = new RegistrationService($db);
+
+    // Check if username or email already exists
+    if ($registrationService->isUserExists($username, $email)) {
+        $response->sendError('Username or email already exists', 409);
+    }
+
+    // Register new user
+    $result = $registrationService->registerUser([
+        'username' => $username,
+        'email' => $email,
+        'password' => $password
+    ]);
+
+    if ($result) {
+        // Log successful registration
+        error_log("New user registered: {$username}");
+        
+        // Send success response
+        $response->sendSuccess('Registration successful');
+    } else {
+        throw new RuntimeException('Registration failed');
+    }
+
+} catch (ValidationException $e) {
+    error_log("Validation error during registration: " . $e->getMessage());
+    $response->sendError($e->getMessage(), 400);
+} catch (DatabaseException $e) {
+    error_log("Database error during registration: " . $e->getMessage());
+    $response->sendError('An error occurred during registration', 500);
+} catch (Exception $e) {
+    error_log("Unexpected error during registration: " . $e->getMessage());
+    $response->sendError('An unexpected error occurred', 500);
 }
-
-if (strlen($password) < 8) {
-    echo json_encode(['error' => 'Password must be at least 8 characters long']);
-    exit;
-}
-
-$conn = getDBConnection();
-
-// Check if username or email already exists
-$stmt = $conn->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
-$stmt->bind_param("ss", $username, $email);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-    echo json_encode(['error' => 'Username or email already exists']);
-    exit;
-}
-
-// Hash password and insert new user
-$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-$stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-$stmt->bind_param("sss", $username, $email, $hashedPassword);
-
-if ($stmt->execute()) {
-    echo json_encode(['success' => true, 'message' => 'Registration successful']);
-} else {
-    echo json_encode(['error' => 'Registration failed']);
-}
-
-$stmt->close();
-$conn->close();
 ?>
