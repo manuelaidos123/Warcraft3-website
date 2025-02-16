@@ -1,7 +1,19 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/../bootstrap.php';
+namespace App\Auth;
+
+// Use constant for base path
+define('BASE_PATH', dirname(__DIR__));
+
+// Secure file inclusion using realpath
+$bootstrapPath = realpath(BASE_PATH . '/bootstrap.php');
+if ($bootstrapPath === false || !is_file($bootstrapPath)) {
+    http_response_code(500);
+    error_log('Critical: Bootstrap file not found');
+    exit('System configuration error');
+}
+require_once $bootstrapPath;
 
 use App\Security\Session;
 use App\Security\CSRF;

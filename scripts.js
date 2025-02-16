@@ -11,10 +11,19 @@ const utils = {
         return typeof email === 'string' && CONFIG.EMAIL_REGEX.test(email);
     },
     
-    sanitizeHTML(html) {
+    escapeHTML(text) {
         const div = document.createElement('div');
-        div.textContent = html;
-        return div.innerHTML;
+        div.textContent = text;
+        return div.textContent;
+    },
+    
+    createSafeElement(type, content, attributes = {}) {
+        const element = document.createElement(type);
+        element.textContent = content;
+        Object.entries(attributes).forEach(([key, value]) => {
+            element.setAttribute(key, value);
+        });
+        return element;
     },
     
     showAlert(type, message) {
@@ -30,13 +39,18 @@ const utils = {
         
         const alertDiv = document.createElement('div');
         alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
-        alertDiv.role = 'alert';
+        alertDiv.setAttribute('role', 'alert');
         
-        const sanitizedMessage = this.sanitizeHTML(message);
-        alertDiv.innerHTML = `
-            ${sanitizedMessage}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        `;
+        const messageSpan = document.createElement('span');
+        messageSpan.textContent = message;
+        alertDiv.appendChild(messageSpan);
+        
+        const closeButton = document.createElement('button');
+        closeButton.className = 'btn-close';
+        closeButton.setAttribute('type', 'button');
+        closeButton.setAttribute('data-bs-dismiss', 'alert');
+        closeButton.setAttribute('aria-label', 'Close');
+        alertDiv.appendChild(closeButton);
         
         alertContainer.appendChild(alertDiv);
         
@@ -64,7 +78,6 @@ function handleEmailSubmission(event) {
             return;
         }
         
-        // Process email submission
         processEmailSubmission(email).catch(error => {
             utils.showAlert('danger', 'Failed to process email submission');
             console.error('Email submission error:', error);
@@ -92,8 +105,50 @@ async function processEmailSubmission(email) {
     return await response.json();
 }
 
-// Initialize components
+// Character rendering functions
+function createCharacterCard(character) {
+    const cardDiv = document.createElement('div');
+    cardDiv.className = 'col-md-3';
+    
+    const card = document.createElement('div');
+    card.className = 'card h-100';
+    card.dataset.character = character.name;
+    
+    const img = document.createElement('img');
+    img.className = 'card-img-top';
+    img.src = character.image;
+    img.alt = character.name;
+    
+    const cardBody = document.createElement('div');
+    cardBody.className = 'card-body';
+    
+    const title = document.createElement('h5');
+    title.className = 'card-title';
+    title.textContent = character.name;
+    
+    const text = document.createElement('p');
+    text.className = 'card-text';
+    text.textContent = character.faction;
+    
+    const button = document.createElement('button');
+    button.className = 'btn btn-primary';
+    button.textContent = 'View Details';
+    button.onclick = () => showCharacterDetails(character.name);
+    
+    cardBody.append(title, text, button);
+    card.append(img, cardBody);
+    cardDiv.appendChild(card);
+    
+    return cardDiv;
+}
+
+// Initialize components with proper Bootstrap loading check
 function initializeComponents() {
+    if (typeof bootstrap === 'undefined') {
+        console.error('Bootstrap is not loaded');
+        return;
+    }
+
     // Initialize tooltips
     const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
     tooltips.forEach(tooltip => new bootstrap.Tooltip(tooltip));
@@ -102,7 +157,7 @@ function initializeComponents() {
     const emailForm = document.querySelector('#subscribeForm');
     emailForm?.addEventListener('submit', handleEmailSubmission);
 
-    // Initialize any existing modals
+    // Initialize modals safely
     const modals = document.querySelectorAll('.modal');
     modals.forEach(modal => {
         new bootstrap.Modal(modal, {
@@ -114,28 +169,6 @@ function initializeComponents() {
 
 // DOM ready handler
 document.addEventListener('DOMContentLoaded', initializeComponents);
-
-// Character data
-const characters = [
-    {
-        name: "Arthas Menethil",
-        faction: "alliance",
-        role: "hero",
-        laterRole: "villain",
-        image: "images/characters/arthas.jpg",
-        description: "Crown Prince of Lordaeron who later became the Lich King",
-        details: "Once a noble paladin of the Silver Hand, Arthas' desire to save his people led him down a dark path."
-    },
-    {
-        name: "Thrall",
-        faction: "horde",
-        role: "hero",
-        image: "images/characters/thrall.jpg",
-        description: "Warchief of the Horde",
-        details: "A wise and powerful shaman who led the Horde to their new homeland in Kalimdor."
-    }
-    // Add more characters...
-];
 
 // Character page functionality
 function initializeCharacterPage() {
@@ -893,13 +926,13 @@ const voiceTests = [
         soundFile: 'sounds/tuzad.mp3',
         character: 'Kel\'Thuzad',
         options: ['Kel\'Thuzad', 'Medivh', 'Anub\'arak', 'Necromancer'],
-        quote: "Voice of Kel\'Thuzad"
+        quote: 'Voice of Kel\'Thuzad'
     },
     {
         soundFile: 'sounds/anubarak.mp3',
         character: 'Anub\'arak',
         options: ['Anub\'arak', 'Kel\'Thuzad', 'Arthas', 'Necromancer'],
-        quote: "Voice of Anub\'arak"
+        quote: 'Voice of Anub\'arak'
     },
     {
         soundFile: 'sounds/tirend.mp3',
@@ -935,12 +968,20 @@ function initializeVoiceTest() {
     const voiceTestContainer = document.getElementById('voiceTest');
     if (!voiceTestContainer) return;
 
-    const playButton = document.getElementById('playSound');
-    const audioElement = document.getElementById('voiceClip');
-    const scoreElement = document.getElementById('score');
-    const questionElement = document.getElementById('questionNumber');
+    const elements = {
+        playButton: document.getElementById('playSound'),
+        audioElement: document.getElementById('voiceClip'),
+        scoreElement: document.getElementById('score'),
+        questionElement: document.getElementById('questionNumber')
+    };
 
-    // Preload all audio files
+    if (!elements.playButton || !elements.audioElement || 
+        !elements.scoreElement || !elements.questionElement) {
+        console.error('Required elements not found');
+        return;
+    }
+
+    // Preload audio files
     voiceTests.forEach(test => {
         const audio = new Audio(test.soundFile);
         audio.preload = 'auto';
@@ -948,8 +989,8 @@ function initializeVoiceTest() {
 
     loadQuestion(currentTest);
 
-    playButton.addEventListener('click', () => {
-        audioElement.play();
+    elements.playButton.addEventListener('click', () => {
+        elements.audioElement.play();
     });
 }
 
@@ -959,68 +1000,97 @@ function loadQuestion(index) {
         return;
     }
 
-    const test = voiceTests[index];
-    const audioElement = document.getElementById('voiceClip');
-    const playButton = document.getElementById('playSound');
-    const optionsContainer = document.getElementById('answerOptions');
-    const questionElement = document.getElementById('questionNumber');
-    const feedbackElement = document.getElementById('feedback');
+    const elements = {
+        audioElement: document.getElementById('voiceClip'),
+        playButton: document.getElementById('playSound'),
+        optionsContainer: document.getElementById('answerOptions'),
+        questionElement: document.getElementById('questionNumber'),
+        feedbackElement: document.getElementById('feedback')
+    };
 
+    if (!elements.audioElement || !elements.playButton || 
+        !elements.optionsContainer || !elements.questionElement || 
+        !elements.feedbackElement) {
+        console.error('Required elements not found');
+        return;
+    }
+
+    const test = voiceTests[index];
+    
     // Disable play button while loading
-    playButton.disabled = true;
-    playButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Loading...';
+    elements.playButton.disabled = true;
+    elements.playButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Loading...';
 
     // Update audio source
-    audioElement.src = test.soundFile;
+    elements.audioElement.src = test.soundFile;
     
     // Enable play button when audio is ready
-    audioElement.addEventListener('canplaythrough', () => {
-        playButton.disabled = false;
-        playButton.innerHTML = '<i class="fas fa-play me-2"></i>Play Voice';
+    elements.audioElement.addEventListener('canplaythrough', () => {
+        elements.playButton.disabled = false;
+        elements.playButton.innerHTML = '<i class="fas fa-play me-2"></i>Play Voice';
     }, { once: true });
 
     // Handle audio loading error
-    audioElement.addEventListener('error', () => {
-        playButton.disabled = true;
-        playButton.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>Error Loading Audio';
+    elements.audioElement.addEventListener('error', () => {
+        elements.playButton.disabled = true;
+        elements.playButton.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>Error Loading Audio';
     }, { once: true });
 
     // Clear previous feedback
-    feedbackElement.style.display = 'none';
+    elements.feedbackElement.style.display = 'none';
 
     // Update question number
-    questionElement.textContent = index + 1;
+    elements.questionElement.textContent = index + 1;
 
-    // Generate answer options
-    optionsContainer.innerHTML = test.options
+    // Generate answer options safely
+    const sanitizedOptions = test.options.map(option => ({
+        text: option.replace(/[<>]/g, ''),
+        value: option
+    }));
+
+    elements.optionsContainer.innerHTML = sanitizedOptions
         .map(option => `
             <div class="col-md-6">
                 <button class="btn btn-outline-primary w-100 answer-option" 
-                        onclick="checkAnswer('${option}')">
-                    ${option}
+                        data-answer="${option.value}">
+                    ${option.text}
                 </button>
             </div>
         `).join('');
+
+    // Add event listeners to buttons
+    elements.optionsContainer.querySelectorAll('.answer-option').forEach(button => {
+        button.addEventListener('click', () => checkAnswer(button.dataset.answer));
+    });
 }
 
 function checkAnswer(selectedAnswer) {
+    if (currentTest >= voiceTests.length) return;
+
+    const elements = {
+        feedbackElement: document.getElementById('feedback'),
+        scoreElement: document.getElementById('score')
+    };
+
+    if (!elements.feedbackElement || !elements.scoreElement) {
+        console.error('Required elements not found');
+        return;
+    }
+
     const test = voiceTests[currentTest];
-    const feedbackElement = document.getElementById('feedback');
-    const scoreElement = document.getElementById('score');
 
     if (selectedAnswer === test.character) {
         score++;
-        feedbackElement.className = 'alert alert-success mt-3';
-        feedbackElement.textContent = `Correct! This was ${test.character} saying "${test.quote}"`;
+        elements.feedbackElement.className = 'alert alert-success mt-3';
+        elements.feedbackElement.textContent = `Correct! This was ${test.character} saying "${test.quote}"`;
     } else {
-        feedbackElement.className = 'alert alert-danger mt-3';
-        feedbackElement.textContent = `Wrong! This was ${test.character} saying "${test.quote}"`;
+        elements.feedbackElement.className = 'alert alert-danger mt-3';
+        elements.feedbackElement.textContent = `Wrong! This was ${test.character} saying "${test.quote}"`;
     }
 
-    feedbackElement.style.display = 'block';
-    scoreElement.textContent = score;
+    elements.feedbackElement.style.display = 'block';
+    elements.scoreElement.textContent = score;
 
-    // Move to next question after delay
     setTimeout(() => {
         currentTest++;
         loadQuestion(currentTest);
@@ -1029,19 +1099,32 @@ function checkAnswer(selectedAnswer) {
 
 function showFinalScore() {
     const voiceTest = document.getElementById('voiceTest');
+    if (!voiceTest) return;
+
+    const sanitizedScore = score.toString().replace(/[<>]/g, '');
+    const sanitizedTotal = voiceTests.length.toString().replace(/[<>]/g, '');
+
     voiceTest.innerHTML = `
         <div class="text-center">
             <h2>Test Complete!</h2>
-            <p class="h3 mb-4">Final Score: ${score}/${voiceTests.length}</p>
-            <button class="btn btn-primary" onclick="restartTest()">Try Again</button>
+            <p class="h3 mb-4">Final Score: ${sanitizedScore}/${sanitizedTotal}</p>
+            <button class="btn btn-primary" id="restartButton">Try Again</button>
         </div>
     `;
+
+    document.getElementById('restartButton')?.addEventListener('click', restartTest);
 }
 
 function restartTest() {
+    const scoreElement = document.getElementById('score');
+    if (!scoreElement) {
+        console.error('Score element not found');
+        return;
+    }
+
     currentTest = 0;
     score = 0;
-    document.getElementById('score').textContent = '0';
+    scoreElement.textContent = '0';
     loadQuestion(0);
 }
 
