@@ -269,7 +269,7 @@ class DocumentationGenerator:
 
         # Main project structure
         structure.extend([
-            "Root Directory: Warcraft3-website\n",
+            "Root Directory\n",
             "Main Application Files",
             "-------------------"
         ])
