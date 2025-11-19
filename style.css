@@ -1149,6 +1149,7 @@ figcaption,
 .campaign-selector .btn.active {
     background-color: #1a5fb4;
     border-color: #1a5fb4;
+    box-shadow: 0 0 0 0.25rem rgba(26, 95, 180, 0.25);
 }
 
 .chapter-content {
@@ -1272,5 +1273,25 @@ select.form-select:focus {
 
 #feedback {
     transition: all 0.3s ease;
+}
+
+.alliance-theme { background-color: #2858a0; color: white; }
+.horde-theme { background-color: #8c1616; color: white; }
+.undead-theme { background-color: #2e2e2e; color: white; }
+.nightelf-theme { background-color: #4b2b82; color: white; }
+
+.faction-card {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.modal-header .btn-close {
+    background-color: white;
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
 }
 }

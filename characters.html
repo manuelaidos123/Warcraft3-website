@@ -1,125 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Warcraft 3 - Characters</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Meet the legendary heroes and villains of Warcraft III, including Arthas, Thrall, and more">
-        <meta name="theme-color" content="#2f89fc">
-        
-        <!-- Preload critical assets -->
-        <link rel="preload" href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" as="style">
-        <link rel="preload" href="style.css" as="style">
-        <link rel="preload" href="scripts.js" as="script">
-        
-        <!-- Stylesheets -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
-        <link rel="icon" type="image/png" href="images/icons/logo.png">
-    </head>
-    <body class="bg-light">
-        <header>
-            <!-- Navigation -->
-            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-                <div class="container">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="images/icons/logo.png" alt="Warcraft III Logo" width="30" height="30">
-                        Warcraft III
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="story.html">Story</a></li>
-                            <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
-                            <li class="nav-item"><a class="nav-link active" href="characters.html">Characters</a></li>
-                            <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
-                            <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
 
-        <main class="container py-5 mt-5">
-            <div class="alert-container" role="alert" aria-live="polite"></div>
-            
-            <section class="characters-section">
-                <h1 class="text-center mb-4">Characters</h1>
-                
-                <!-- Filters -->
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <select class="form-select" id="faction-filter">
-                            <option value="">All Factions</option>
-                            <option value="alliance">Alliance</option>
-                            <option value="horde">Horde</option>
-                            <option value="undead">Undead Scourge</option>
-                            <option value="nightelf">Night Elves</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <select class="form-select" id="role-filter">
-                            <option value="">All Roles</option>
-                            <option value="hero">Hero</option>
-                            <option value="villain">Villain</option>
-                            <option value="support">Support</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="character-search" placeholder="Search characters...">
-                    </div>
-                </div>
+<head>
+    <title>Warcraft 3 - Characters</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Meet the legendary heroes and villains of Warcraft III, including Arthas, Thrall, and more">
+    <meta name="theme-color" content="#2f89fc">
 
-                <!-- Character Grid -->
-                <div class="row g-4" id="character-grid">
-                    <!-- Characters will be dynamically loaded here -->
-                </div>
-            </section>
-        </main>
+    <!-- Preload critical assets -->
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap"
+        as="style">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="scripts.js" as="script">
 
-        <!-- Footer -->
-        <footer class="bg-dark text-light py-5">
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/icons/logo.png">
+    <style>
+        .filter-description {
+            background: rgba(47, 137, 252, 0.1);
+            border-left: 4px solid #2f89fc;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .filter-description.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <header>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <div class="row gy-4">
-                    <div class="col-lg-4">
-                        <h3>Quick Links</h3>
-                        <ul class="list-unstyled">
-                            <li><a class="text-light text-decoration-none" href="#human">Human Guide</a></li>
-                            <li><a class="text-light text-decoration-none" href="#orc">Orc Guide</a></li>
-                            <li><a class="text-light text-decoration-none" href="#nightelf">Night Elf Guide</a></li>
-                            <li><a class="text-light text-decoration-none" href="#undead">Undead Guide</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 text-center">
-                        <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
-                    </div>
-                    <div class="col-lg-4">
-                        <h3>Social Links</h3>
-                        <div class="d-flex gap-3">
-                            <a href="#" class="text-light"><i class="fab fa-instagram fa-2x"></i></a>
-                            <a href="#" class="text-light"><i class="fab fa-telegram fa-2x"></i></a>
-                            <a href="#" class="text-light"><i class="fab fa-twitter fa-2x"></i></a>
-                            <a href="#" class="text-light"><i class="fab fa-facebook fa-2x"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col text-center">
-                        <p class="mb-0">Email: some-email@gmail.com | Telephone: 0-777-777-123</p>
-                        <p class="text-muted">Andrei Kornev 2024.</p>
-                    </div>
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/icons/logo.png" alt="Warcraft III Logo" width="30" height="30">
+                    Warcraft III
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="story.html">Story</a></li>
+                        <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="characters.html">Characters</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
+                        <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
+                    </ul>
                 </div>
             </div>
-        </footer>
+        </nav>
+    </header>
 
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="scripts.js"></script>
-    </body>
+    <main class="container py-5 mt-5">
+        <div class="alert-container" role="alert" aria-live="polite"></div>
+
+        <section class="characters-section">
+            <h1 class="text-center mb-4">Characters of Warcraft III</h1>
+
+            <!-- Filters -->
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <label for="faction-filter" class="form-label">Filter by Faction</label>
+                    <select class="form-select" id="faction-filter">
+                        <option value="">All Factions</option>
+                        <option value="alliance">Alliance</option>
+                        <option value="horde">Horde</option>
+                        <option value="undead">Undead Scourge</option>
+                        <option value="nightelf">Night Elves</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="role-filter" class="form-label">Filter by Role</label>
+                    <select class="form-select" id="role-filter">
+                        <option value="">All Roles</option>
+                        <option value="hero">Hero</option>
+                        <option value="villain">Villain</option>
+                        <option value="support">Support</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="character-search" class="form-label">Search Characters</label>
+                    <input type="text" class="form-control" id="character-search" placeholder="Search characters...">
+                </div>
+            </div>
+
+            <!-- Filter Description Box -->
+            <div id="filter-description" class="filter-description">
+                <div id="filter-content"></div>
+            </div>
+
+            <!-- Character Grid -->
+            <div class="row g-4" id="character-grid">
+                <!-- Characters will be dynamically loaded here -->
+                <div class="col-12 text-center">
+                    <p class="text-muted">Select a faction or role to view characters, or search for a specific
+                        character.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4">
+                    <h3>Contact</h3>
+                    <address class="mb-3">
+                        <p>Email: <a class="text-light"
+                                href="mailto:contact@warcraft3website.com">contact@warcraft3website.com</a></p>
+                        <p>Follow us on:
+                            <a class="text-light me-2" href="https://twitter.com/warcraft3" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-twitter" aria-label="Twitter"></i>
+                            </a>
+                            <a class="text-light" href="https://discord.gg/warcraft3" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-discord" aria-label="Discord"></i>
+                            </a>
+                        </p>
+                    </address>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
+                </div>
+                <div class="col-lg-4">
+                    <h3>Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="story.html" class="text-light">Story</a></li>
+                        <li><a href="factions.html" class="text-light">Factions</a></li>
+                        <li><a href="characters.html" class="text-light">Characters</a></li>
+                        <li><a href="pedia.html" class="text-light">WarcraftPedia</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <p class="text-center mb-0">&copy; 2024 Warcraft III Website. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        // Faction and Role descriptions
+        const descriptions = {
+            factions: {
+                alliance: {
+                    title: "Alliance",
+                    text: "The noble Alliance consists of humans, dwarves, and high elves united in their defense of honor, justice, and the light. Led by brave paladins and powerful mages, they fight to protect their kingdoms from darkness."
+                },
+                horde: {
+                    title: "The Horde",
+                    text: "The mighty Horde is composed of orcs, trolls, and tauren bound by honor and strength. Under Thrall's leadership, they seek redemption and a new homeland, fighting to prove they are more than savage warriors."
+                },
+                undead: {
+                    title: "Undead Scourge",
+                    text: "The terrifying Undead Scourge serves the Lich King, wielding dark necromancy and plague. Death knights, liches, and endless undead legions spread corruption and death across the land, turning enemies into servants."
+                },
+                nightelf: {
+                    title: "Night Elves",
+                    text: "Ancient and immortal, the Night Elves are guardians of nature and the World Tree. Masters of stealth, archery, and druidic magic, they protect the forests with fierce determination and mystical power."
+                }
+            },
+            roles: {
+                hero: {
+                    title: "Heroes",
+                    text: "Noble champions who fight for their people and stand against evil. These legendary warriors, paladins, shamans, and druids lead armies into battle and shape the fate of Azeroth through courage and sacrifice."
+                },
+                villain: {
+                    title: "Villains",
+                    text: "Dark forces driven by ambition, corruption, or malice. From fallen paladins to demonic overlords, these antagonists seek power at any cost and threaten the very existence of the world."
+                },
+                support: {
+                    title: "Support Characters",
+                    text: "Allies, advisors, and companions who aid the heroes in their quests. While they may not lead armies, their wisdom, loyalty, and unique abilities prove invaluable in the battle against darkness."
+                }
+            }
+        };
+
+        // Update description when filters change
+        function updateDescription() {
+            const factionSelect = document.getElementById('faction-filter');
+            const roleSelect = document.getElementById('role-filter');
+            const descriptionBox = document.getElementById('filter-description');
+            const contentDiv = document.getElementById('filter-content');
+
+            const selectedFaction = factionSelect.value;
+            const selectedRole = roleSelect.value;
+
+            let content = '';
+
+            // Show both faction and role descriptions if both are selected
+            if (selectedFaction && descriptions.factions[selectedFaction]) {
+                const faction = descriptions.factions[selectedFaction];
+                content += `<div class="mb-3">
+                    <h5><i class="fas fa-shield-alt me-2"></i>${faction.title}</h5>
+                    <p class="mb-0">${faction.text}</p>
+                </div>`;
+            }
+
+            if (selectedRole && descriptions.roles[selectedRole]) {
+                const role = descriptions.roles[selectedRole];
+                content += `<div${selectedFaction ? ' class="border-top pt-3"' : ''}>
+                    <h5><i class="fas fa-users me-2"></i>${role.title}</h5>
+                    <p class="mb-0">${role.text}</p>
+                </div>`;
+            }
+
+            if (content) {
+                contentDiv.innerHTML = content;
+                descriptionBox.classList.add('show');
+            } else {
+                descriptionBox.classList.remove('show');
+            }
+        }
+
+        // Attach event listeners
+        document.getElementById('faction-filter').addEventListener('change', updateDescription);
+        document.getElementById('role-filter').addEventListener('change', updateDescription);
+
+        // Initial check
+        updateDescription();
+    </script>
+</body>
+
 </html>

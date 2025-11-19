@@ -16,46 +16,66 @@ class LogConfig:
     
     def configure(self, level: int = logging.INFO) -> None:
         """Configure logging with rotation and proper formatting"""
-        # Main log file with rotation
-        main_handler = logging.handlers.RotatingFileHandler(
-            self.log_dir / f"{self.app_name}.log",
-            maxBytes=10_000_000,  # 10MB
-            backupCount=5,
-            encoding='utf-8'
-        )
-        main_handler.setFormatter(logging.Formatter(self.DEFAULT_FORMAT))
-        
-        # Error log file
-        error_handler = logging.handlers.RotatingFileHandler(
-            self.log_dir / f"{self.app_name}_error.log",
-            maxBytes=10_000_000,
-            backupCount=5,
-            encoding='utf-8'
-        )
-        error_handler.setLevel(logging.ERROR)
-        error_handler.setFormatter(logging.Formatter(self.DEFAULT_FORMAT))
-        
-        # JSON handler for structured logging
-        json_handler = logging.handlers.RotatingFileHandler(
-            self.log_dir / f"{self.app_name}_structured.json",
-            maxBytes=10_000_000,
-            backupCount=5,
-            encoding='utf-8'
-        )
-        json_handler.setFormatter(JsonFormatter())
-        
-        # Configure root logger
-        root_logger = logging.getLogger()
-        root_logger.setLevel(level)
-        
-        # Remove existing handlers
-        for handler in root_logger.handlers[:]:
-            root_logger.removeHandler(handler)
-        
-        # Add our handlers
-        root_logger.addHandler(main_handler)
-        root_logger.addHandler(error_handler)
-        root_logger.addHandler(json_handler)
+        try:
+            # Main log file with rotation
+            main_handler = self._create_rotating_handler(
+                f"{self.app_name}.log",
+                self.DEFAULT_FORMAT
+            )
+            
+            # Error log file
+            error_handler = self._create_rotating_handler(
+                f"{self.app_name}_error.log",
+                self.DEFAULT_FORMAT,
+                logging.ERROR
+            )
+            
+            # JSON handler
+            json_handler = self._create_rotating_handler(
+                f"{self.app_name}_structured.json",
+                None,
+                formatter=JsonFormatter()
+            )
+            
+            # Configure root logger
+            root_logger = logging.getLogger()
+            root_logger.setLevel(level)
+            
+            # Remove existing handlers
+            for handler in root_logger.handlers[:]:
+                root_logger.removeHandler(handler)
+            
+            # Add handlers
+            root_logger.addHandler(main_handler)
+            root_logger.addHandler(error_handler)
+            root_logger.addHandler(json_handler)
+            
+        except Exception as e:
+            raise RuntimeError(f"Failed to configure logging: {e}")
+
+    def _create_rotating_handler(self, filename: str, format_str: str = None, 
+                               level: int = None, formatter: logging.Formatter = None) -> logging.Handler:
+        """Create a rotating file handler with error handling"""
+        try:
+            handler = logging.handlers.RotatingFileHandler(
+                self.log_dir / filename,
+                maxBytes=10_000_000,
+                backupCount=5,
+                encoding='utf-8'
+            )
+            
+            if level is not None:
+                handler.setLevel(level)
+                
+            if format_str:
+                handler.setFormatter(logging.Formatter(format_str))
+            elif formatter:
+                handler.setFormatter(formatter)
+                
+            return handler
+            
+        except Exception as e:
+            raise RuntimeError(f"Failed to create handler for {filename}: {e}")
 
 class JsonFormatter(logging.Formatter):
     """JSON formatter for structured logging"""

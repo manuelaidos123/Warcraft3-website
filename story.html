@@ -1,130 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Warcraft 3 - Story & Campaign</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Explore the epic story and campaigns of Warcraft III, including Reign of Chaos and The Frozen Throne">
-        <meta name="theme-color" content="#2f89fc">
-        
-        <!-- Preload critical assets -->
-        <link rel="preload" href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" as="style">
-        <link rel="preload" href="style.css" as="style">
-        <link rel="preload" href="scripts.js" as="script">
-        
-        <!-- Stylesheets -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
-        <link rel="icon" type="image/png" href="images/icons/logo.png">
-    </head>
-    <body class="bg-light">
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-                <div class="container">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="images/icons/logo.png" alt="Warcraft III Logo" width="30" height="30">
-                        Warcraft III
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link active" href="story.html">Story</a></li>
-                            <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
-                            <li class="nav-item"><a class="nav-link" href="characters.html">Characters</a></li>
-                            <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
-                            <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
 
-        <main class="container py-5 mt-5">
-            <div class="alert-container" role="alert" aria-live="polite"></div>
-            
-            <section class="story-timeline">
-                <h1 class="text-center mb-4">The Story of Warcraft III</h1>
-                
-                <!-- Campaign Selection -->
-                <div class="campaign-selector mb-5">
-                    <div class="btn-group d-flex flex-wrap justify-content-center" role="group" aria-label="Campaign selection">
-                        <button type="button" class="btn btn-primary m-2" data-campaign="reign">Reign of Chaos</button>
-                        <button type="button" class="btn btn-primary m-2" data-campaign="frozen">The Frozen Throne</button>
-                    </div>
-                </div>
+<head>
+    <title>Warcraft 3 - Story & Campaign</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Explore the epic story and campaigns of Warcraft III, including Reign of Chaos and The Frozen Throne">
+    <meta name="theme-color" content="#2f89fc">
 
-                <!-- Story Content -->
-                <div class="story-content">
-                    <div id="reign-content" class="campaign-content">
-                        <!-- Reign of Chaos content will be loaded here -->
-                    </div>
-                    <div id="frozen-content" class="campaign-content d-none">
-                        <!-- Frozen Throne content will be loaded here -->
-                    </div>
-                </div>
-            </section>
+    <!-- Preload critical assets -->
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap"
+        as="style">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="scripts.js" as="script">
 
-            <!-- Chapter Navigation -->
-            <nav class="chapter-navigation mt-4" aria-label="Chapter navigation">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <button class="page-link" id="prev-chapter" aria-label="Previous chapter">
-                            <i class="fas fa-chevron-left"></i> Previous
-                        </button>
-                    </li>
-                    <li class="page-item">
-                        <button class="page-link" id="next-chapter" aria-label="Next chapter">
-                            Next <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </li>
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/icons/logo.png">
+    <style>
+        /* Sidebar specific styles */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: calc(100vh - 120px);
+            overflow-y: auto;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding-right: 20px;
+        }
+
+        .nav-pills .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-pills .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: #2f89fc;
+            color: #fff;
+        }
+
+        .chapter-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: static;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/icons/logo.png" alt="Warcraft III Logo" width="30" height="30">
+                Warcraft III
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="story.html">Story</a></li>
+                    <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="characters.html">Characters</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
+                    <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
                 </ul>
-            </nav>
-        </main>
+            </div>
+        </div>
+    </nav>
 
-        <!-- Footer -->
-        <footer class="bg-dark text-light py-5">
-            <div class="container">
-                <div class="row gy-4">
-                    <div class="col-lg-4">
-                        <h3>Quick Links</h3>
-                        <ul class="list-unstyled">
-                            <li><a class="text-light text-decoration-none" href="#human">Human Guide</a></li>
-                            <li><a class="text-light text-decoration-none" href="#orc">Orc Guide</a></li>
-                            <li><a class="text-light text-decoration-none" href="#nightelf">Night Elf Guide</a></li>
-                            <li><a class="text-light text-decoration-none" href="#undead">Undead Guide</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 text-center">
-                        <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
-                    </div>
-                    <div class="col-lg-4">
-                        <h3>Social Links</h3>
-                        <div class="d-flex gap-3">
-                            <a href="#" class="text-light"><i class="fab fa-instagram fa-2x"></i></a>
-                            <a href="#" class="text-light"><i class="fab fa-telegram fa-2x"></i></a>
-                            <a href="#" class="text-light"><i class="fab fa-twitter fa-2x"></i></a>
-                            <a href="#" class="text-light"><i class="fab fa-facebook fa-2x"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col text-center">
-                        <p class="mb-0">Email: some-email@gmail.com | Telephone: 0-777-777-123</p>
-                        <p class="text-muted">Andrei Kornev 2024.</p>
+    <!-- Main Content -->
+    <main class="container py-5 mt-5">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-md-3">
+                <div class="sidebar">
+                    <h4 class="mb-4">Campaigns</h4>
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <button class="nav-link active text-start" id="v-pills-reign-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-reign" type="button" role="tab" aria-controls="v-pills-reign"
+                            aria-selected="true">
+                            <i class="fas fa-shield-alt me-2"></i>Reign of Chaos
+                        </button>
+                        <button class="nav-link text-start" id="v-pills-frozen-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-frozen" type="button" role="tab" aria-controls="v-pills-frozen"
+                            aria-selected="false">
+                            <i class="fas fa-snowflake me-2"></i>The Frozen Throne
+                        </button>
                     </div>
                 </div>
             </div>
-        </footer>
 
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-        <script src="scripts.js" defer></script>
-    </body>
+            <!-- Content Area -->
+            <div class="col-md-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <!-- Reign of Chaos Content -->
+                    <div class="tab-pane fade show active" id="v-pills-reign" role="tabpanel"
+                        aria-labelledby="v-pills-reign-tab">
+                        <h2 class="mb-4">Reign of Chaos</h2>
+                        <p class="lead mb-5">The burning shadow has fallen over the world. The drums of war thunder once
+                            again.</p>
+
+                        <div class="chapter-list">
+                            <!-- Human Campaign -->
+                            <div class="chapter-card">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h3 class="h5 text-primary">Human Campaign: The Scourge of Lordaeron</h3>
+                                        <p>Follow Prince Arthas as he defends his kingdom from a mysterious plague,
+                                            leading to choices that will change his destiny forever.</p>
+                                    </div>
+                                    <span class="badge bg-primary">9 Chapters</span>
+                                </div>
+                                <a href="guide.html?campaign=reign&chapter=human"
+                                    class="btn btn-outline-light btn-sm mt-3">Read Guide</a>
+                            </div>
+
+                            <!-- Undead Campaign -->
+                            <div class="chapter-card">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h3 class="h5 text-success">Undead Campaign: Path of the Damned</h3>
+                                        <p>Witness Arthas's transformation as he leads the undead Scourge against his
+                                            own kingdom and resurrects the lich Kel'Thuzad.</p>
+                                    </div>
+                                    <span class="badge bg-success">8 Chapters</span>
+                                </div>
+                                <a href="guide.html?campaign=reign&chapter=undead"
+                                    class="btn btn-outline-light btn-sm mt-3">Read Guide</a>
+                            </div>
+
+                            <!-- Orc Campaign -->
+                            <div class="chapter-card">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h3 class="h5 text-danger">Orc Campaign: The Invasion of Kalimdor</h3>
+                                        <p>Join Thrall and the Horde as they sail to the ancient lands of Kalimdor to
+                                            find their destiny and face the Burning Legion.</p>
+                                    </div>
+                                    <span class="badge bg-danger">8 Chapters</span>
+                                </div>
+                                <a href="guide.html?campaign=reign&chapter=orc"
+                                    class="btn btn-outline-light btn-sm mt-3">Read Guide</a>
+                            </div>
+
+                            <!-- Night Elf Campaign -->
+                            <div class="chapter-card">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h3 class="h5 text-info">Night Elf Campaign: Eternity's End</h3>
+                                        <p>Defend the ancient forests with the Night Elves and unite the races of
+                                            Azeroth for the final battle at Mount Hyjal.</p>
+                                    </div>
+                                    <span class="badge bg-info">7 Chapters</span>
+                                </div>
+                                <a href="guide.html?campaign=reign&chapter=nightelf"
+                                    class="btn btn-outline-light btn-sm mt-3">Read Guide</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frozen Throne Content -->
+                    <div class="tab-pane fade" id="v-pills-frozen" role="tabpanel" aria-labelledby="v-pills-frozen-tab">
+                        <h2 class="mb-4">The Frozen Throne</h2>
+                        <p class="lead mb-5">The aftermath of the Third War leaves the world forever changed. New powers
+                            rise from the ashes.</p>
+
+                        <div class="chapter-list">
+                            <!-- Sentinel Campaign -->
+                            <div class="chapter-card">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h3 class="h5 text-info">Sentinel Campaign: Terror of the Tides</h3>
+                                        <p>Join Maiev Shadowsong in her relentless pursuit of the betrayer, Illidan
+                                            Stormrage, across the broken isles.</p>
+                                    </div>
+                                    <span class="badge bg-info">8 Chapters</span>
+                                </div>
+                                <a href="guide.html?campaign=frozen&chapter=sentinel"
+                                    class="btn btn-outline-light btn-sm mt-3">Read Guide</a>
+                            </div>
+
+                            <!-- Alliance Campaign -->
+                            <div class="chapter-card">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h3 class="h5 text-primary">Alliance Campaign: Curse of the Blood Elves</h3>
+                                        <p>Follow Prince Kael'thas as he leads his people in their desperate search for
+                                            a cure to their magic addiction, finding unlikely allies.</p>
+                                    </div>
+                                    <span class="badge bg-primary">6 Chapters</span>
+                                </div>
+                                <a href="guide.html?campaign=frozen&chapter=alliance"
+                                    class="btn btn-outline-light btn-sm mt-3">Read Guide</a>
+                            </div>
+
+                            <!-- Scourge Campaign -->
+                            <div class="chapter-card">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h3 class="h5 text-success">Scourge Campaign: Legacy of the Damned</h3>
+                                        <p>Command Arthas as he races to the Frozen Throne to merge with the Lich King,
+                                            while Sylvanas seeks her revenge.</p>
+                                    </div>
+                                    <span class="badge bg-success">8 Chapters</span>
+                                </div>
+                                <a href="guide.html?campaign=frozen&chapter=scourge"
+                                    class="btn btn-outline-light btn-sm mt-3">Read Guide</a>
+                            </div>
+
+                            <!-- Bonus Campaign -->
+                            <div class="chapter-card">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h3 class="h5 text-warning">Bonus Campaign: The Founding of Durotar</h3>
+                                        <p>A unique RPG-style campaign following the Beastmaster Rexxar as he helps the
+                                            Horde establish their new home.</p>
+                                    </div>
+                                    <span class="badge bg-warning">3 Acts</span>
+                                </div>
+                                <a href="guide.html?campaign=frozen&chapter=bonus"
+                                    class="btn btn-outline-light btn-sm mt-3">Read Guide</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4">
+                    <h3>Contact</h3>
+                    <address class="mb-3">
+                        <p>Email: <a class="text-light"
+                                href="mailto:contact@warcraft3website.com">contact@warcraft3website.com</a></p>
+                        <p>Follow us on:
+                            <a class="text-light me-2" href="https://twitter.com/warcraft3" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-twitter" aria-label="Twitter"></i>
+                            </a>
+                            <a class="text-light" href="https://discord.gg/warcraft3" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-discord" aria-label="Discord"></i>
+                            </a>
+                        </p>
+                    </address>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
+                </div>
+                <div class="col-lg-4">
+                    <h3>Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="story.html" class="text-light">Story</a></li>
+                        <li><a href="factions.html" class="text-light">Factions</a></li>
+                        <li><a href="characters.html" class="text-light">Characters</a></li>
+                        <li><a href="pedia.html" class="text-light">WarcraftPedia</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <p class="text-center mb-0">&copy; 2024 Warcraft III Website. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="scripts.js" defer></script>
+</body>
+
 </html>

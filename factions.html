@@ -1,20 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Warcraft 3 - Factions</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn about the four main factions of Warcraft III: Alliance, Horde, Undead Scourge, and Night Elves">
+    <meta name="description"
+        content="Learn about the four main factions of Warcraft III: Alliance, Horde, Undead Scourge, and Night Elves">
     <meta name="theme-color" content="#2f89fc">
-    
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap"
+        as="style">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="scripts.js" as="script">
+
     <!-- Stylesheets -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="images/icons/logo.png">
+    <style>
+        /* Fix modal text visibility - override global white text */
+        .modal-body,
+        .modal-body p,
+        .modal-body li,
+        .modal-body h4 {
+            color: #212529 !important;
+        }
+    </style>
 </head>
-<body>
+
+<body class="bg-light">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
@@ -23,11 +41,12 @@
                 Warcraft III
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="story.html">Story</a></li>
                     <li class="nav-item"><a class="nav-link active" href="factions.html">Factions</a></li>
                     <li class="nav-item"><a class="nav-link" href="characters.html">Characters</a></li>
@@ -42,16 +61,16 @@
     <main class="container py-5 mt-5">
         <section class="factions-section">
             <h1 class="text-center mb-5">Factions of Warcraft III</h1>
-            
+
             <!-- Faction Cards -->
             <div class="row g-4">
                 <!-- Alliance -->
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-3" id="human">
                     <div class="card h-100 faction-card">
                         <img src="images/factions/alliance.jpg" class="card-img-top" alt="Alliance Banner">
                         <div class="card-body">
                             <h2 class="card-title h5">The Alliance</h2>
-                            <p class="card-text">Noble humans, dwarves, and high elves united in honor.</p>
+                            <p class="card-text">Noble humans, dwarves, and high elves united in honor and justice.</p>
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#allianceModal">
                                 Learn More
                             </button>
@@ -60,12 +79,12 @@
                 </div>
 
                 <!-- Horde -->
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-3" id="orc">
                     <div class="card h-100 faction-card">
                         <img src="images/factions/horde.jpg" class="card-img-top" alt="Horde Banner">
                         <div class="card-body">
                             <h2 class="card-title h5">The Horde</h2>
-                            <p class="card-text">Fierce orcs and trolls fighting for freedom and honor.</p>
+                            <p class="card-text">Fierce orcs, trolls, and tauren bound by honor and strength.</p>
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#hordeModal">
                                 Learn More
                             </button>
@@ -74,12 +93,12 @@
                 </div>
 
                 <!-- Undead Scourge -->
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-3" id="undead">
                     <div class="card h-100 faction-card">
-                        <img src="images/factions/undead.jpg" class="card-img-top" alt="Undead Scourge Banner">
+                        <img src="images/factions/scourge.jpg" class="card-img-top" alt="Undead Scourge Banner">
                         <div class="card-body">
                             <h2 class="card-title h5">The Undead Scourge</h2>
-                            <p class="card-text">Terrifying undead armies serving the Lich King.</p>
+                            <p class="card-text">Terrifying undead legions commanded by the Lich King.</p>
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#undeadModal">
                                 Learn More
                             </button>
@@ -88,12 +107,12 @@
                 </div>
 
                 <!-- Night Elves -->
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-3" id="nightelf">
                     <div class="card h-100 faction-card">
-                        <img src="images/factions/nightelf.jpg" class="card-img-top" alt="Night Elves Banner">
+                        <img src="images/factions/elves.jpg" class="card-img-top" alt="Night Elves Banner">
                         <div class="card-body">
                             <h2 class="card-title h5">The Night Elves</h2>
-                            <p class="card-text">Ancient guardians of nature and the forests.</p>
+                            <p class="card-text">Ancient immortal guardians of nature and the World Tree.</p>
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nightelfModal">
                                 Learn More
                             </button>
@@ -104,36 +123,185 @@
         </section>
     </main>
 
+    <!-- Faction Modals -->
+    <div class="modal fade" id="allianceModal" tabindex="-1" aria-labelledby="allianceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header alliance-theme">
+                    <h3 class="modal-title" id="allianceModalLabel">The Alliance</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close Alliance information"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="images/factions/alliance.jpg" class="img-fluid rounded mb-3"
+                                alt="Alliance Forces">
+                            <p class="lead">Noble humans, dwarves, and high elves united in honor and justice. Masters
+                                of defensive warfare with powerful fortifications and versatile spellcasters.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Notable Leaders</h4>
+                            <ul>
+                                <li>Jaina Proudmoore</li>
+                                <li>Uther the Lightbringer</li>
+                                <li>Arthas Menethil (former)</li>
+                            </ul>
+                            <h4>Key Strengths</h4>
+                            <ul>
+                                <li>Powerful defensive structures</li>
+                                <li>Strong aerial units</li>
+                                <li>Versatile spellcasters</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="hordeModal" tabindex="-1" aria-labelledby="hordeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header horde-theme">
+                    <h3 class="modal-title" id="hordeModalLabel">The Horde</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close Horde information"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="images/factions/horde.jpg" class="img-fluid rounded mb-3" alt="Horde Forces">
+                            <p class="lead">Fierce orcs, trolls, and tauren bound by honor and strength. Renowned for
+                                their powerful melee warriors and shamanistic magic.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Notable Leaders</h4>
+                            <ul>
+                                <li>Thrall</li>
+                                <li>Cairne Bloodhoof</li>
+                                <li>Vol'jin</li>
+                            </ul>
+                            <h4>Key Strengths</h4>
+                            <ul>
+                                <li>Powerful melee units</li>
+                                <li>Strong unit regeneration</li>
+                                <li>Effective raiding capabilities</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="undeadModal" tabindex="-1" aria-labelledby="undeadModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header undead-theme">
+                    <h3 class="modal-title" id="undeadModalLabel">The Undead Scourge</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close Undead information"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="images/factions/scourge.jpg" class="img-fluid rounded mb-3" alt="Undead Forces">
+                            <p class="lead">Terrifying undead legions commanded by the Lich King. Wielders of dark
+                                necromancy and plague, turning enemies into servants.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Notable Leaders</h4>
+                            <ul>
+                                <li>Arthas (as Death Knight)</li>
+                                <li>Kel'Thuzad</li>
+                                <li>The Lich King</li>
+                            </ul>
+                            <h4>Key Strengths</h4>
+                            <ul>
+                                <li>Necromantic powers</li>
+                                <li>Disease-based warfare</li>
+                                <li>Sacrificial strategies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="nightelfModal" tabindex="-1" aria-labelledby="nightelfModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header nightelf-theme">
+                    <h3 class="modal-title" id="nightelfModalLabel">The Night Elves</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close Night Elf information"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="images/factions/elves.jpg" class="img-fluid rounded mb-3" alt="Night Elf Forces">
+                            <p class="lead">Ancient immortal guardians of nature and the World Tree. Masters of stealth,
+                                archery, and druidic magic drawn from the forest itself.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Notable Leaders</h4>
+                            <ul>
+                                <li>Tyrande Whisperwind</li>
+                                <li>Malfurion Stormrage</li>
+                                <li>Illidan Stormrage (former)</li>
+                            </ul>
+                            <h4>Key Strengths</h4>
+                            <ul>
+                                <li>Stealth abilities</li>
+                                <li>Nature-based magic</li>
+                                <li>Powerful archer units</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-dark text-light py-5">
         <div class="container">
             <div class="row gy-4">
                 <div class="col-lg-4">
-                    <h3>Quick Links</h3>
-                    <ul class="list-unstyled">
-                        <li><a class="text-light text-decoration-none" href="#human">Human Guide</a></li>
-                        <li><a class="text-light text-decoration-none" href="#orc">Orc Guide</a></li>
-                        <li><a class="text-light text-decoration-none" href="#nightelf">Night Elf Guide</a></li>
-                        <li><a class="text-light text-decoration-none" href="#undead">Undead Guide</a></li>
-                    </ul>
+                    <h3>Contact</h3>
+                    <address class="mb-3">
+                        <p>Email: <a class="text-light"
+                                href="mailto:contact@warcraft3website.com">contact@warcraft3website.com</a></p>
+                        <p>Follow us on:
+                            <a class="text-light me-2" href="https://twitter.com/warcraft3" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-twitter" aria-label="Twitter"></i>
+                            </a>
+                            <a class="text-light" href="https://discord.gg/warcraft3" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-discord" aria-label="Discord"></i>
+                            </a>
+                        </p>
+                    </address>
                 </div>
                 <div class="col-lg-4 text-center">
                     <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
                 </div>
                 <div class="col-lg-4">
-                    <h3>Social Links</h3>
-                    <div class="d-flex gap-3">
-                        <a href="#" class="text-light"><i class="fab fa-instagram fa-2x"></i></a>
-                        <a href="#" class="text-light"><i class="fab fa-telegram fa-2x"></i></a>
-                        <a href="#" class="text-light"><i class="fab fa-twitter fa-2x"></i></a>
-                        <a href="#" class="text-light"><i class="fab fa-facebook fa-2x"></i></a>
-                    </div>
+                    <h3>Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="story.html" class="text-light">Story</a></li>
+                        <li><a href="factions.html" class="text-light">Factions</a></li>
+                        <li><a href="characters.html" class="text-light">Characters</a></li>
+                        <li><a href="pedia.html" class="text-light">WarcraftPedia</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="row mt-4">
-                <div class="col text-center">
-                    <p class="mb-0">Email: some-email@gmail.com | Telephone: 0-777-777-123</p>
-                    <p class="text-muted">Andrei Kornev 2024.</p>
+                <div class="col-12">
+                    <p class="text-center mb-0">&copy; 2024 Warcraft III Website. All rights reserved.</p>
                 </div>
             </div>
         </div>
@@ -143,6 +311,21 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     <script src="scripts.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add hover effect to faction cards
+            const factionCards = document.querySelectorAll('.faction-card');
+            factionCards.forEach(card => {
+                card.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                card.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
 </body>
-</html>
 
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Warcraft 3 - Campaign Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detailed guide for Warcraft III campaign chapters">
+    <meta name="theme-color" content="#2f89fc">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap"
+        as="style">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="scripts.js" as="script">
+
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/icons/logo.png">
+    <style>
+        .guide-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #2f89fc;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .objective-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 5px;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: #2f89fc;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/icons/logo.png" alt="Warcraft III Logo" width="30" height="30">
+                Warcraft III
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="story.html">Story</a></li>
+                    <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="characters.html">Characters</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
+                    <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container py-5 mt-5">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="story.html">Story</a></li>
+                        <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-campaign">Campaign Guide
+                        </li>
+                    </ol>
+                </nav>
+
+                <div id="guide-content">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Loading guide content...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4">
+                    <h3>Contact</h3>
+                    <address class="mb-3">
+                        <p>Email: <a class="text-light"
+                                href="mailto:contact@warcraft3website.com">contact@warcraft3website.com</a></p>
+                        <p>Follow us on:
+                            <a class="text-light me-2" href="https://twitter.com/warcraft3" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-twitter" aria-label="Twitter"></i>
+                            </a>
+                            <a class="text-light" href="https://discord.gg/warcraft3" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-discord" aria-label="Discord"></i>
+                            </a>
+                        </p>
+                    </address>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
+                </div>
+                <div class="col-lg-4">
+                    <h3>Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="story.html" class="text-light">Story</a></li>
+                        <li><a href="factions.html" class="text-light">Factions</a></li>
+                        <li><a href="characters.html" class="text-light">Characters</a></li>
+                        <li><a href="pedia.html" class="text-light">WarcraftPedia</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <p class="text-center mb-0">&copy; 2024 Warcraft III Website. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="scripts.js" defer></script>
+    <script>
+        // Campaign guide data
+        const guideData = {
+            reign: {
+                human: {
+                    title: "Human Campaign: The Scourge of Lordaeron",
+                    description: "Follow Prince Arthas Menethil as he defends the kingdom of Lordaeron from a mysterious plague.",
+                    objectives: [
+                        "Investigate the plague outbreak in the northern villages",
+                        "Defend Hearthglen from the undead assault",
+                        "Purge Stratholme before the plague spreads",
+                        "Hunt down the dreadlord Mal'Ganis"
+                    ],
+                    walkthrough: [
+                        {
+                            step: "Chapter 1: The Defense of Strahnbrad",
+                            content: "Begin by gathering your troops and rescuing villagers. Build a base and train footmen and riflemen. Use Arthas's Holy Light ability to heal your units during battles."
+                        },
+                        {
+                            step: "Chapter 2: Blackrock & Roll",
+                            content: "Establish your base quickly. Focus on lumber and gold collection. Train priests for healing and build workshops for siege weapons to destroy orc bases."
+                        },
+                        {
+                            step: "Chapter 3: Ravages of the Plague",
+                            content: "Investigate the plagued grain and defend your base from undead attacks. Use Arthas and the Paladin abilities effectively to cleanse the plagued villages."
+                        },
+                        {
+                            step: "Chapter 4: The Culling",
+                            content: "The infamous Stratholme mission. Race against Mal'Ganis to kill citizens before they turn. Focus on speed - use small groups to quickly eliminate pockets of resistance."
+                        }
+                    ],
+                    tips: [
+                        "Always keep Arthas's mana high for crucial Holy Light heals",
+                        "Footmen are your core unit - always have them in front",
+                        "Use priests to dispel enemy magic and provide healing support",
+                        "Save often before major battles"
+                    ],
+                    secrets: [
+                        "In Chapter 2, you can find a Ring of Protection +1 near the northeast corner",
+                        "The optional quest in Chapter 3 rewards you with a powerful item",
+                        "In Stratholme, destroying all ziggurats grants bonus experience"
+                    ]
+                },
+                undead: {
+                    title: "Undead Campaign: Path of the Damned",
+                    description: "Witness Arthas's fall as the Death Knight leading the Scourge.",
+                    objectives: [
+                        "Establish the Cult of the Damned in Lordaeron",
+                        "Resurrect the necromancer Kel'Thuzad",
+                        "Summon Archimonde to Azeroth"
+                    ],
+                    walkthrough: [
+                        {
+                            step: "Chapter 1: Misconceptions",
+                            content: "Learn the basics of Undead gameplay. Use Ghouls to gather lumber and build your necropolis. Focus on producing Crypt Fiends and Ghouls for your army."
+                        },
+                        {
+                            step: "Chapter 2: Digging Up the Dead",
+                            content: "Collect Kel'Thuzad's remains while defending against paladins. Use Death Coil and Death Pact effectively. Build a strong economy early."
+                        },
+                        {
+                            step: "Chapter 3: Into the Realm Eternal",
+                            content: "Journey to Quel'Thalas. Use the Meat Wagon to destroy towers from range. Arthas's abilities are crucial - manage his mana carefully."
+                        }
+                    ],
+                    tips: [
+                        "Undead can build on blight - spread it strategically",
+                        "Unholy Aura increases movement speed - great for map control",
+                        "Crypt Fiends counter air units effectively",
+                        "Use Sacrificial Skull to restore Arthas's mana"
+                    ],
+                    secrets: [
+                        "Hidden tomes can be found in various chapters",
+                        "The Graveyard in Chapter 2 has additional creeps for experience",
+                        "Optional side quests reward powerful artifacts"
+                    ]
+                },
+                orc: {
+                    title: "Orc Campaign: The Invasion of Kalimdor",
+                    description: "Lead Thrall and the Horde to a new destiny in Kalimdor.",
+                    objectives: [
+                        "Escape from Lordaeron and sail west",
+                        "Establish a new homeland in Kalimdor",
+                        "Ally with the Night Elves and defend the World Tree"
+                    ],
+                    walkthrough: [
+                        {
+                            step: "Chapter 1: Landfall",
+                            content: "Your first mission in Kalimdor. Establish a base and explore the jungle. Recruit Cairne Bloodhoof and the Tauren. Use Thrall's Far Sight to scout ahead."
+                        },
+                        {
+                            step: "Chapter 2: The Long March",
+                            content: "Journey through dangerous territory. Manage your caravan carefully and defend against centaur attacks. Use healing wards to keep your forces healthy."
+                        }
+                    ],
+                    tips: [
+                        "Burrows provide both supply and defense",
+                        "Spirit Wolves are free units - use them to scout and harass",
+                        "Healing Ward is incredibly powerful - protect your healers",
+                        "Kodo Beasts can devour enemy units for instant kills"
+                    ],
+                    secrets: [
+                        "Hidden paths lead to treasure and experience",
+                        "Free Goblin Merchants offer unique items",
+                        "Side quests reward powerful equipment"
+                    ]
+                },
+                nightelf: {
+                    title: "Night Elf Campaign: Eternity's End",
+                    description: "Defend the World Tree and unite the races against the Burning Legion.",
+                    objectives: [
+                        "Awaken the druids from their slumber",
+                        "Defend the World Tree from corruption",
+                        "Prepare for the final battle at Mount Hyjal"
+                    ],
+                    walkthrough: [
+                        {
+                            step: "Chapter 1: Enemies at the Gate",
+                            content: "Introduction to Night Elf mechanics. Use Archers and Huntresses. Wisps gather resources and can detonate for area damage. Build Ancient Protectors for defense."
+                        },
+                        {
+                            step: "Chapter 2: Daughters of the Moon",
+                            content: "Control Tyrande and the Sentinels. Use stealth effectively - Night Elves are invisible at night. Searing Arrows from Tyrande deal massive damage."
+                        }
+                    ],
+                    tips: [
+                        "Night Elves have permanent invisibility at night near trees",
+                        "Wisps can Detonate to deal area damage - use strategically",
+                        "Ancient of War can uproot and fight as a unit",
+                        "Druids of the Talon are excellent for scouting and harassment"
+                    ],
+                    secrets: [
+                        "Hidden fountains restore health and mana",
+                        "Ancient ruins contain powerful artifacts",
+                        "Optional objectives reward unique units"
+                    ]
+                }
+            },
+            frozen: {
+                sentinel: {
+                    title: "Sentinel Campaign: Terror of the Tides",
+                    description: "Maiev Shadowsong hunts the betrayer Illidan across the Broken Isles.",
+                    objectives: [
+                        "Track Illidan across the Broken Isles",
+                        "Prevent him from gaining demonic powers",
+                        "Capture or eliminate the betrayer"
+                    ],
+                    walkthrough: [
+                        {
+                            step: "Chapter 1: Rise of the Naga",
+                            content: "Chase Illidan through enemy territory. You control Maiev with limited forces. Use Blink and Fan of Knives effectively. Manage resources carefully."
+                        },
+                        {
+                            step: "Chapter 2: The Broken Isles",
+                            content: "Establish a Night Elf base while pursuing Illidan. Build up your economy and train an army. Unlock the Naga unit type as allies."
+                        }
+                    ],
+                    tips: [
+                        "Maiev's Blink allows her to escape or chase effectively",
+                        "Fan of Knives is devastating against grouped enemies",
+                        "Naga units are amphibious - use water for tactical advantages",
+                        "Avatar of Vengeance provides powerful summons"
+                    ],
+                    secrets: [
+                        "Hidden sea creatures guard treasures underwater",
+                        "Ancient shrines provide permanent stat bonuses",
+                        "Secret paths lead to powerful items"
+                    ]
+                },
+                alliance: {
+                    title: "Alliance Campaign: Curse of the Blood Elves",
+                    description: "Prince Kael'thas leads the Blood Elves in their desperate struggle.",
+                    objectives: [
+                        "Defend Quel'Thalas from the Scourge",
+                        "Find a cure for the Blood Elves' addiction",
+                        "Escape from Dalaran's dungeons"
+                    ],
+                    walkthrough: [
+                        {
+                            step: "Chapter 1: Misconceptions (Not the same as Undead)",
+                            content: "Control Kael'thas and defend against the Scourge. Blood Elf units are powerful but expensive. Use Flamestrike effectively to clear enemy groups."
+                        },
+                        {
+                            step: "Chapter 2: A Kingdom Divided",
+                            content: "Navigate political intrigue while defending your people. Balance military and diplomatic objectives. Spell Breakers are crucial against enemy casters."
+                        }
+                    ],
+                    tips: [
+                        "Blood Elf units have mana - use it strategically",
+                        "Spell Breakers can steal enemy buffs and immunity magic",
+                        "Phoenix can resurrect - use them as tanks",
+                        "Kael'thas's Gravity Lapse disables enemies completely"
+                    ],
+                    secrets: [
+                        "Hidden libraries contain spell tomes",
+                        "Ancient wells restore mana",
+                        "Side quests unlock powerful mercenaries"
+                    ]
+                },
+                scourge: {
+                    title: "Scourge Campaign: Legacy of the Damned",
+                    description: "Arthas races to the Frozen Throne to merge with the Lich King.",
+                    objectives: [
+                        "Journey to Northrend",
+                        "Defeat Illidan's forces",
+                        "Reach the Frozen Throne before it's destroyed"
+                    ],
+                    walkthrough: [
+                        {
+                            step: "Chapter 1: King Arthas",
+                            content: "Begin your journey to Northrend. Build a strong undead army. Use Death Knights and Liches effectively. Frostmourne makes Arthas incredibly powerful."
+                        },
+                        {
+                            step: "Chapter 2: The Flight from Lordaeron",
+                            content: "Escape pursuing forces while gathering allies. Manage your caravan and defend against ambushes. Resurrect fallen enemies as your own troops."
+                        }
+                    ],
+                    tips: [
+                        "Frost Armor provides significant protection",
+                        "Death and Decay devastates buildings and units",
+                        "Frost Wyrms are air superiority units",
+                        "Use Animate Dead to create temporary armies"
+                    ],
+                    secrets: [
+                        "Hidden crypts contain powerful undead champions",
+                        "Sacrificial altars grant temporary power boosts",
+                        "Optional objectives unlock unique abilities"
+                    ]
+                },
+                bonus: {
+                    title: "Bonus Campaign: The Founding of Durotar",
+                    description: "An RPG-style campaign following Rexxar as he helps establish the Horde's new home.",
+                    objectives: [
+                        "Help the Horde settle in Durotar",
+                        "Defend against human invasion",
+                        "Complete Thrall's missions across Kalimdor"
+                    ],
+                    walkthrough: [
+                        {
+                            step: "Act 1: To Tame a Land",
+                            content: "Control Rexxar and his animal companions. This is an RPG campaign - focus on hero levels and items. Complete side quests for rewards and experience."
+                        },
+                        {
+                            step: "Act 2: Old Hatreds",
+                            content: "Navigate tribal politics and external threats. Build alliances and gather a powerful team. Your hero choices matter for the final battles."
+                        },
+                        {
+                            step: "Act 3: A Blaze of Glory",
+                            content: "The climactic final act. Use your accumulated items and levels to overcome challenging encounters. Multiple paths to victory exist."
+                        }
+                    ],
+                    tips: [
+                        "This is an RPG - levels and items are crucial",
+                        "Complete all side quests for the best rewards",
+                        "Rexxar's animal companions scale with his level",
+                        "Save frequently - some missions have multiple outcomes"
+                    ],
+                    secrets: [
+                        "Hidden caves contain legendary items",
+                        "Special encounters unlock unique companions",
+                        "Secret boss fights reward the best gear"
+                    ]
+                }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const campaign = urlParams.get('campaign');
+            const chapter = urlParams.get('chapter');
+
+            const contentDiv = document.getElementById('guide-content');
+            const breadcrumb = document.getElementById('breadcrumb-campaign');
+
+            if (!campaign || !chapter || !guideData[campaign] || !guideData[campaign][chapter]) {
+                contentDiv.innerHTML = `
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Guide not found!</strong><br>
+                        Please select a chapter from the <a href="story.html">Story page</a>.
+                    </div>
+                `;
+                return;
+            }
+
+            const guide = guideData[campaign][chapter];
+            breadcrumb.textContent = guide.title;
+
+            let html = `
+                <h1 class="mb-3">${guide.title}</h1>
+                <p class="lead mb-4">${guide.description}</p>
+
+                <div class="guide-section">
+                    <h2 class="h4 mb-3"><i class="fas fa-bullseye me-2"></i>Main Objectives</h2>
+                    ${guide.objectives.map(obj => `
+                        <div class="objective-item">
+                            <i class="fas fa-check-circle text-success me-2"></i>${obj}
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="guide-section">
+                    <h2 class="h4 mb-3"><i class="fas fa-book me-2"></i>Walkthrough</h2>
+                    ${guide.walkthrough.map((step, index) => `
+                        <div class="mb-4">
+                            <h3 class="h5">
+                                <span class="step-number">${index + 1}</span>
+                                ${step.step}
+                            </h3>
+                            <p class="ms-5">${step.content}</p>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="guide-section">
+                            <h2 class="h4 mb-3"><i class="fas fa-lightbulb me-2"></i>Tips & Strategies</h2>
+                            <ul>
+                                ${guide.tips.map(tip => `<li>${tip}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="guide-section">
+                            <h2 class="h4 mb-3"><i class="fas fa-star me-2"></i>Secrets & Easter Eggs</h2>
+                            <ul>
+                                ${guide.secrets.map(secret => `<li>${secret}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 text-center">
+                    <a href="story.html" class="btn btn-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Story
+                    </a>
+                </div>
+            `;
+
+            contentDiv.innerHTML = html;
+        });
+    </script>
+</body>
+
+</html>

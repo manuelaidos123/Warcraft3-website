@@ -48,6 +48,10 @@ class VersionManager:
         try:
             with self.version_file.open('r') as f:
                 data = yaml.safe_load(f)
+                if data is None or not isinstance(data, dict):
+                    return
+                if 'versions' not in data:
+                    return
                 for version_data in data['versions']:
                     self._versions.append(VersionInfo(
                         version=version_data['version'],
@@ -67,6 +71,10 @@ class VersionManager:
     
     def add_version(self, version_info: VersionInfo) -> None:
         """Add new version with validation"""
+        # Check for duplicate version
+        if any(v.version == version_info.version for v in self._versions):
+            raise ValueError(f"Version {version_info.version} already exists")
+            
         # Validate version increment
         if self._versions:
             current = semver.VersionInfo.parse(self.current_version.version)
@@ -77,23 +85,33 @@ class VersionManager:
         self._versions.append(version_info)
         self._save_versions()
     
+    def get_version(self, version: str) -> VersionInfo:
+        """Get specific version information"""
+        for v in self._versions:
+            if v.version == version:
+                return v
+        raise ValueError(f"Version {version} not found")
+
     def _save_versions(self) -> None:
         """Save version history to YAML file"""
-        data = {
-            'versions': [
-                {
-                    'version': v.version,
-                    'date': v.release_date.isoformat(),
-                    'changes': v.changes,
-                    'author': v.author
-                }
-                for v in sorted(
-                    self._versions,
-                    key=lambda x: semver.VersionInfo.parse(x.version),
-                    reverse=True
-                )
-            ]
-        }
-        
-        with self.version_file.open('w') as f:
-            yaml.safe_dump(data, f, sort_keys=False)
+        try:
+            data = {
+                'versions': [
+                    {
+                        'version': v.version,
+                        'date': v.release_date.isoformat(),
+                        'changes': v.changes,
+                        'author': v.author
+                    }
+                    for v in sorted(
+                        self._versions,
+                        key=lambda x: semver.VersionInfo.parse(x.version),
+                        reverse=True
+                    )
+                ]
+            }
+            
+            with self.version_file.open('w') as f:
+                yaml.safe_dump(data, f, sort_keys=False)
+        except Exception as e:
+            raise RuntimeError(f"Failed to save version history: {e}")
