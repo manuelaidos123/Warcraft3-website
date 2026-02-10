@@ -1,0 +1,12 @@
+# Ignore backup files
+*.backup
+
+# Ignore auth agent generated content
+auth/agent/
+
+# Python
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
