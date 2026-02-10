@@ -201,16 +201,17 @@ function renderCharacters(charactersList) {
         return;
     }
 
-    container.innerHTML = ''; // Clear existing content
+    // Clear existing content safely
+    while (container.firstChild) container.removeChild(container.firstChild);
 
     if (charactersList.length === 0) {
         console.log("No characters to display");
-        container.innerHTML = `
-            <div class="col-12 text-center py-5">
-                <i class="fas fa-search fa-3x text-muted mb-3"></i>
-                <p class="lead text-muted">No characters found matching your criteria.</p>
-            </div>
-        `;
+        const col = createElement('div', { class: 'col-12 text-center py-5' });
+        const icon = createElement('i', { class: 'fas fa-search fa-3x text-muted mb-3' });
+        const p = createElement('p', { class: 'lead text-muted' }, 'No characters found matching your criteria.');
+        col.appendChild(icon);
+        col.appendChild(p);
+        container.appendChild(col);
         return;
     }
 
@@ -225,26 +226,43 @@ function renderCharacters(charactersList) {
         else if (character.faction === 'undead') badgeClass = 'bg-dark';
         else if (character.faction === 'nightelf') badgeClass = 'bg-success';
 
-        col.innerHTML = `
-            <div class="card h-100 shadow-sm hover-card">
-                <div class="position-relative">
-                    <img src="${character.image}" class="card-img-top" alt="${character.name}" 
-                         style="height: 250px; object-fit: cover;"
-                         onerror="this.src='images/characters/placeholder.jpg'">
-                    <span class="position-absolute top-0 end-0 badge ${badgeClass} m-2">
-                        ${character.faction.charAt(0).toUpperCase() + character.faction.slice(1)}
-                    </span>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">${character.name}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">${character.class}</h6>
-                    <p class="card-text">${character.description}</p>
-                </div>
-                <div class="card-footer bg-transparent border-top-0">
-                    <span class="badge bg-secondary">${character.role.toUpperCase()}</span>
-                </div>
-            </div>
-        `;
+        const card = createElement('div', { class: 'card h-100 shadow-sm hover-card' });
+
+        const pos = createElement('div', { class: 'position-relative' });
+        const img = createElement('img', {
+            src: character.image,
+            class: 'card-img-top',
+            alt: character.name,
+            style: 'height: 250px; object-fit: cover;'
+        });
+        // lazy-load images and handle missing image
+        img.setAttribute('loading', 'lazy');
+        img.addEventListener('error', () => { img.src = 'images/characters/placeholder.jpg'; });
+
+        const badge = createElement('span', { class: `position-absolute top-0 end-0 badge ${badgeClass} m-2` },
+            (character.faction.charAt(0).toUpperCase() + character.faction.slice(1))
+        );
+
+        pos.appendChild(img);
+        pos.appendChild(badge);
+
+        const body = createElement('div', { class: 'card-body' });
+        const h5 = createElement('h5', { class: 'card-title' }, character.name);
+        const h6 = createElement('h6', { class: 'card-subtitle mb-2 text-muted' }, character.class);
+        const p = createElement('p', { class: 'card-text' }, character.description);
+        body.appendChild(h5);
+        body.appendChild(h6);
+        body.appendChild(p);
+
+        const footer = createElement('div', { class: 'card-footer bg-transparent border-top-0' });
+        const roleBadge = createElement('span', { class: 'badge bg-secondary' }, character.role.toUpperCase());
+        footer.appendChild(roleBadge);
+
+        card.appendChild(pos);
+        card.appendChild(body);
+        card.appendChild(footer);
+
+        col.appendChild(card);
         container.appendChild(col);
     });
 }
@@ -433,10 +451,12 @@ function loadChapterContent() {
                 targetContent.appendChild(dynamicContent);
             }
         }
-        dynamicContent.innerHTML = `
-            <h2>${content.title}</h2>
-            <p>${content.text}</p>
-        `;
+        // Build safe content elements
+        while (dynamicContent.firstChild) dynamicContent.removeChild(dynamicContent.firstChild);
+        const h2 = createElement('h2', {}, content.title);
+        const p = createElement('p', {}, content.text);
+        dynamicContent.appendChild(h2);
+        dynamicContent.appendChild(p);
     }, 300);
 }
 
