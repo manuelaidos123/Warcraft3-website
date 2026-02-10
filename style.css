@@ -1,5 +1,5 @@
 :root {
-    /* Color variables - removed duplicates */
+    /* Color variables */
     --wc-primary: #2f89fc;
     --wc-primary-hover: #1a7af0;
     --wc-dark: #121212;
@@ -10,7 +10,11 @@
     --wc-overlay: rgba(26, 26, 46, 0.95);
 }
 
-/* Base styles - consolidated */
+/* Base styles */
+* {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Abyssinica SIL', serif;
     padding-top: 76px;
@@ -21,12 +25,8 @@ body {
 }
 
 /* Text color adjustments */
-body {
-    color: var(--wc-light); /* Sets default text color to white */
-}
-
 p, span, li, td, th, label, input, textarea {
-    color: rgba(255, 255, 255, 0.9); /* Slightly softer white for better readability */
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* Link colors */
@@ -52,55 +52,23 @@ input::placeholder, textarea::placeholder {
 
 /* List items */
 .list-group-item {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: var(--wc-light);
+    color: var(--wc-dark) !important;
+    background-color: rgba(255, 255, 255, 0.9) !important;
     border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* List items in Advantages/Disadvantages sections */
-.list-group-item {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
-}
-
-.list-group-item i.fa-check {
-    color: #28a745; /* Green color for advantages */
-}
-
-.list-group-item i.fa-times {
-    color: #dc3545; /* Red color for disadvantages */
-}
-
-/* Text color for list items */
-.list-group-item {
-    color: var(--wc-dark) !important; /* Dark color for better visibility */
-    background-color: rgba(255, 255, 255, 0.9) !important; /* Light background */
-}
-
-/* Hover effect for list items */
 .list-group-item:hover {
     background-color: rgba(255, 255, 255, 1) !important;
     transform: translateX(5px);
     transition: all 0.3s ease;
 }
 
-/* Card text */
-.card-text {
-    color: var(--wc-light) !important;
+.list-group-item i.fa-check {
+    color: #28a745;
 }
 
-/* Navigation text */
-.nav-link {
-    color: rgba(255, 255, 255, 0.8) !important;
-}
-
-.nav-link:hover, .nav-link.active {
-    color: var(--wc-light) !important;
-}
-
-/* Table text */
-table {
-    color: var(--wc-light) !important;
+.list-group-item i.fa-times {
+    color: #dc3545;
 }
 
 /* Decorative background pattern */
@@ -111,10 +79,9 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('images/pattern.png'), 
-                      radial-gradient(circle at 50% 50%, rgba(47, 137, 252, 0.1) 0%, transparent 60%);
-    background-size: 200px 200px, cover;
-    opacity: 0.05;
+    background-image: radial-gradient(circle at 50% 50%, rgba(47, 137, 252, 0.1) 0%, transparent 60%);
+    background-size: cover;
+    opacity: 0.1;
     pointer-events: none;
     z-index: 0;
 }
@@ -139,12 +106,19 @@ body::before {
 }
 
 #mainNav .navbar-nav .nav-link:hover,
-#mainNav .navbar-nav .nav-link:active {
+#mainNav .navbar-nav .nav-link:active,
+#mainNav .navbar-nav .nav-link.active {
     color: #ffc107;
 }
 
-#mainNav .navbar-nav .nav-link.active {
-    color: #ffc107;
+/* Navigation text */
+.nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--wc-light) !important;
 }
 
 /* Faction Sections Styles */
@@ -187,36 +161,6 @@ body::before {
     color: #495057;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 991.98px) {
-    #mainNav {
-        padding: 0.5rem 0;
-    }
-    
-    .navbar-collapse {
-        background-color: rgba(26, 26, 46, 0.98);
-        padding: 1rem;
-        border-radius: 0.5rem;
-        margin-top: 0.5rem;
-    }
-}
-
-@media (max-width: 767.98px) {
-    .faction-section .row {
-        text-align: center;
-    }
-    
-    .faction-section h2::after {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    
-    .faction-section ul {
-        display: inline-block;
-        text-align: left;
-    }
-}
-
 /* Scroll Effect */
 #mainNav.navbar-scrolled {
     background: rgba(13, 17, 23, 0.98);
@@ -244,35 +188,6 @@ body::before {
     transform: translateX(5px);
 }
 
-/* Mobile Navigation */
-@media (max-width: 991.98px) {
-    #mainNav .navbar-nav {
-        padding: 1rem 0;
-    }
-
-    #mainNav .nav-item {
-        padding: 0.25rem 0;
-    }
-
-    #mainNav .navbar-nav .nav-item .nav-link::before {
-        left: 0;
-        width: 3px;
-        height: 100%;
-        transform: scaleY(0);
-    }
-
-    #mainNav .navbar-nav .nav-item .nav-link:hover::before,
-    #mainNav .navbar-nav .nav-item .nav-link.active::before {
-        transform: scaleY(1);
-    }
-
-    #mainNav .dropdown-menu {
-        background: rgba(13, 17, 23, 0.5);
-        border: none;
-        padding: 0.5rem;
-    }
-}
-
 /* Add scroll animation */
 @keyframes navFadeIn {
     from {
@@ -294,7 +209,7 @@ body::before {
 /* Hero Section */
 .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('images/reforged1.jpg') center/cover;
+        url('images/reforged1.jpg') center/cover;
     min-height: 60vh;
     display: flex;
     align-items: center;
@@ -343,57 +258,29 @@ body::before {
     transition: transform 0.3s ease;
 }
 
-.image-grid .grid-item:hover img {
-    transform: scale(1.05);
-}
-
-.image-grid .grid-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 1rem;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    color: var(--wc-light);
-    text-align: center;
-}
-
-/* Card Styles */
 /* Card Styles */
 .card {
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background-color: var(--wc-light);
     border: none;
     border-radius: 0.5rem;
     overflow: hidden;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    border: none;
-    border-radius: 0.5rem;
-    overflow: hidden;
+    backdrop-filter: blur(5px);
 }
 
-/* Card Styles */
-.card {
-    background-color: var(--wc-light);  /* White background */
-    border: none;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-/* Card text colors */
 .card-title {
-    color: var(--wc-dark) !important;  /* Dark color for titles */
+    color: var(--wc-dark) !important;
     font-weight: 600;
     margin-bottom: 0.75rem;
 }
 
 .card-text {
-    color: var(--wc-dark) !important;  /* Dark color for text */
+    color: var(--wc-dark) !important;
 }
 
 .card-body {
-    background-color: var(--wc-light);  /* White background */
-    color: var(--wc-dark);  /* Dark text */
+    background-color: var(--wc-light);
+    color: var(--wc-dark);
 }
 
 /* Card hover effect */
@@ -404,11 +291,11 @@ body::before {
 
 /* Ensure badges and buttons remain readable */
 .card .badge {
-    color: var(--wc-light) !important;  /* White text for badges */
+    color: var(--wc-light) !important;
 }
 
 .card .btn-primary {
-    color: var(--wc-light) !important;  /* White text for primary buttons */
+    color: var(--wc-light) !important;
 }
 
 /* Social Media Grid */
@@ -459,164 +346,6 @@ body::before {
     color: var(--wc-light);
 }
 
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: var(--wc-dark);
-        color: var(--wc-light);
-    }
-
-    .card {
-        background-color: #1e1e1e;
-        border-color: var(--wc-border);
-        background-color: #1e1e1e;
-        border-color: var(--wc-border);
-    }
-
-    .card-body {
-        color: var(--wc-light);
-    .card-body {
-        color: var(--wc-light);
-    }
-}
-
-/* WarcraftPedia specific styles */
-.card {
-    border: none;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-}
-
-.nav-pills .nav-link {
-    color: var(--wc-light);
-    background-color: rgba(255, 255, 255, 0.05);
-    margin: 0 5px;
-    transition: all 0.3s ease;
-}
-
-.nav-pills .nav-link:hover {
-    background-color: var(--wc-primary);
-    color: var(--wc-light);
-}
-
-.nav-pills .nav-link.active {
-    background-color: var(--wc-primary);
-    color: var(--wc-light);
-}
-
-.accordion-button:not(.collapsed) {
-    background-color: var(--wc-primary);
-    color: var(--wc-light);
-}
-
-/* WarcraftPedia specific styles */
-.card {
-    border: none;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-}
-
-.nav-pills .nav-link {
-    color: var(--wc-light);
-    background-color: rgba(255, 255, 255, 0.05);
-    margin: 0 5px;
-    transition: all 0.3s ease;
-}
-
-.nav-pills .nav-link:hover {
-    background-color: var(--wc-primary);
-    color: var(--wc-light);
-}
-
-.nav-pills .nav-link.active {
-    background-color: var(--wc-primary);
-    color: var(--wc-light);
-}
-
-.accordion-button:not(.collapsed) {
-    background-color: var(--wc-primary);
-    color: var(--wc-light);
-}
-
-.accordion-button:focus {
-    box-shadow: 0 0 0 0.25rem rgba(47, 137, 252, 0.25);
-}
-
-.list-group-item {
-    border: none;
-    padding: 0.75rem 1.25rem;
-    transition: background-color 0.3s ease;
-}
-
-.list-group-item:hover {
-    background-color: var(--wc-gray);
-}
-
-.card-title {
-    color: var(--wc-primary);
-    border-bottom: 2px solid var(--wc-primary);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-/* Animation for content loading */
-.fade-in {
-    animation: fadeIn 0.5s ease-in;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Accessibility */
-.list-group-item {
-    border: none;
-    padding: 0.75rem 1.25rem;
-    transition: background-color 0.3s ease;
-}
-
-.list-group-item:hover {
-    background-color: var(--wc-gray);
-}
-
-.card-title {
-    color: var(--wc-primary);
-    border-bottom: 2px solid var(--wc-primary);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-/* Animation for content loading */
-.fade-in {
-    animation: fadeIn 0.5s ease-in;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 /* Accessibility */
 .visually-hidden {
     position: absolute;
@@ -640,11 +369,64 @@ body::before {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 991.98px) {
+    #mainNav {
+        padding: 0.5rem 0;
+    }
+
+    .navbar-collapse {
+        background-color: rgba(26, 26, 46, 0.98);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    #mainNav .navbar-nav {
+        padding: 1rem 0;
+    }
+
+    #mainNav .nav-item {
+        padding: 0.25rem 0;
+    }
+
+    #mainNav .navbar-nav .nav-item .nav-link::before {
+        left: 0;
+        width: 3px;
+        height: 100%;
+        transform: scaleY(0);
+    }
+
+    #mainNav .navbar-nav .nav-item .nav-link:hover::before,
+    #mainNav .navbar-nav .nav-item .nav-link.active::before {
+        transform: scaleY(1);
+    }
+
+    #mainNav .dropdown-menu {
+        background: rgba(13, 17, 23, 0.5);
+        border: none;
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .faction-section .row {
+        text-align: center;
+    }
+
+    .faction-section h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .faction-section ul {
+        display: inline-block;
+        text-align: left;
+    }
+
     .imageContainer {
         padding: 1rem 0;
     }
-    
+
     .figure {
         margin-bottom: 1rem;
     }
@@ -652,7 +434,7 @@ body::before {
 
 @media (max-width: 576px) {
     .image-grid {
-        grid-template-columns: 1fr; /* Single column on very small devices */
+        grid-template-columns: 1fr;
     }
 }
 
@@ -664,7 +446,7 @@ body::before {
 
 .contactText {
     margin-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Optional: adds a subtle divider */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 1.5rem;
 }
 
@@ -703,11 +485,12 @@ section:hover {
 }
 
 /* Typography enhancements */
-h1, h2, h3 {
+h1, h2, h3, h4, h5, h6 {
     color: var(--wc-primary);
     font-family: 'Raleway', sans-serif;
     position: relative;
     padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 h1::after, h2::after {
@@ -721,68 +504,7 @@ h1::after, h2::after {
     border-radius: 3px;
 }
 
-/* Card adjustments for dark theme */
-.card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-}
-
-.card-body {
-    color: var(--wc-light);
-}
-
-/* Image container enhancement */
-.figure {
-    background: rgba(0, 0, 0, 0.2);
-    padding: 0.5rem;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.figure-caption {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-/* Scrollbar styling */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--wc-primary);
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--wc-primary-hover);
-}
-
-/* Media queries for responsive design */
-@media (max-width: 768px) {
-    .mainContainer {
-        margin: 1rem;
-        padding: 1rem;
-    }
-
-    section {
-        padding: 1.5rem;
-    }
-}
-
-/* Typography and Headings */
-h1, h2, h3, h4, h5, h6 {
-    color: var(--wc-primary);
-    font-family: 'Raleway', sans-serif;
-    position: relative;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
-}
-
+/* Card title and modal title */
 .card-title, .modal-title {
     color: var(--wc-primary);
     border-bottom: 2px solid var(--wc-primary);
@@ -791,42 +513,36 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Section titles */
-section h2, 
-section h3, 
-section h4 {
+section h2, section h3, section h4 {
     color: var(--wc-primary);
 }
 
 /* Sidebar titles */
-aside h2, 
-aside h3, 
-.sidebar-title {
+aside h2, aside h3, .sidebar-title {
     color: var(--wc-light);
 }
 
 /* Footer titles */
-footer h3, 
-footer h4, 
-.footer-title {
+footer h3, footer h4, .footer-title {
     color: var(--wc-light);
 }
 
 /* Bootstrap component titles */
-.accordion-button,
-.nav-tabs .nav-link,
-.dropdown-item {
+.accordion-button, .nav-tabs .nav-link, .dropdown-item {
     color: var(--wc-light) !important;
 }
 
-/* List group titles */
-.list-group-item-heading {
-    color: var(--wc-light);
+/* Figure captions */
+figcaption, .figure-caption {
+    color: rgba(255, 255, 255, 0.7) !important;
 }
 
-/* Figure captions */
-figcaption,
-.figure-caption {
-    color: rgba(255, 255, 255, 0.7) !important;
+/* Figure styling */
+.figure {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Main article title */
@@ -839,7 +555,7 @@ figcaption,
 }
 
 .mainInfo h1::after {
-    background: var(--wc-light); /* Makes the underline white as well */
+    background: var(--wc-light);
 }
 
 /* Icon sizing and styling */
@@ -877,17 +593,43 @@ figcaption,
     background-color: var(--wc-light) !important;
 }
 
-.bg-white h2,
-.bg-white p {
+.bg-white h2, .bg-white p {
     color: var(--wc-dark);
 }
 
-.card {
-    background-color: var(--wc-light);
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
 }
 
-.card-text {
-    color: var(--wc-dark) !important;
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--wc-primary);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--wc-primary-hover);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .mainContainer {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    section {
+        padding: 1.5rem;
+    }
+}
+
+/* Table text */
+table {
+    color: var(--wc-light) !important;
 }
 
 /* Epic Hero Section Styles */
@@ -955,9 +697,20 @@ figcaption,
     animation-delay: var(--delay);
 }
 
-.hero-card:nth-child(1) { top: 0; right: 0; }
-.hero-card:nth-child(2) { top: 30%; left: 0; }
-.hero-card:nth-child(3) { bottom: 0; right: 10%; }
+.hero-card:nth-child(1) {
+    top: 0;
+    right: 0;
+}
+
+.hero-card:nth-child(2) {
+    top: 30%;
+    left: 0;
+}
+
+.hero-card:nth-child(3) {
+    bottom: 0;
+    right: 10%;
+}
 
 .hero-particles {
     position: absolute;
@@ -973,11 +726,11 @@ figcaption,
 @keyframes titleGlow {
     from {
         text-shadow: 0 0 10px rgba(255, 193, 7, 0.2),
-                     0 0 20px rgba(255, 193, 7, 0.1);
+            0 0 20px rgba(255, 193, 7, 0.1);
     }
     to {
         text-shadow: 0 0 12px rgba(255, 193, 7, 0.3),
-                     0 0 25px rgba(255, 193, 7, 0.2);
+            0 0 25px rgba(255, 193, 7, 0.2);
     }
 }
 
@@ -992,13 +745,13 @@ figcaption,
     }
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments for hero section */
 @media (max-width: 991.98px) {
     .hero-showcase {
         height: 400px;
         margin-top: 3rem;
     }
-    
+
     .hero-title {
         font-size: 2.5rem;
     }
@@ -1008,7 +761,7 @@ figcaption,
     .hero-showcase {
         height: 300px;
     }
-    
+
     .hero-title {
         font-size: 2rem;
     }
@@ -1026,46 +779,16 @@ figcaption,
 
 /* Modal styles */
 .modal {
-    transition: opacity 0.15s linear !important;
+    transition: opacity 0.15s linear;
 }
 
 .modal.fade .modal-dialog {
-    transform: none !important;
-    transition: none !important;
+    transition: transform 0.2s ease-out;
+    transform: translate(0, -50px);
 }
 
 .modal.show .modal-dialog {
-    transform: none !important;
-}
-
-/* Remove any hover effects from modal */
-.modal:hover,
-.modal-dialog:hover,
-.modal-content:hover {
-    transform: none !important;
-    transition: none !important;
-}
-
-/* Modal styles with stronger specificity */
-.modal,
-.modal * {
-    transform: none !important;
-    transition: opacity 0.15s linear !important;
-}
-
-.modal.fade .modal-dialog,
-.modal.fade .modal-content,
-.modal.fade .modal-body,
-.modal.fade .card {
-    transform: none !important;
-    transition: none !important;
-}
-
-.modal.show .modal-dialog,
-.modal.show .modal-content,
-.modal.show .modal-body,
-.modal.show .card {
-    transform: none !important;
+    transform: none;
 }
 
 /* Character modal specific styles */
@@ -1085,23 +808,8 @@ figcaption,
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
-/* Modal specific styles */
-.modal {
-    transition: opacity 0.15s linear;
-}
-
-.modal.fade .modal-dialog {
-    transition: transform 0.2s ease-out;
-    transform: translate(0, -50px);
-}
-
-.modal.show .modal-dialog {
-    transform: none;
-}
-
 /* Modal form transitions */
-#loginForm-container,
-#signupForm-container {
+#loginForm-container, #signupForm-container {
     transition: opacity 0.3s ease-in-out;
 }
 
@@ -1156,7 +864,7 @@ figcaption,
     padding: 20px;
     background: white;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .chapter-content h2 {
@@ -1218,10 +926,8 @@ figcaption,
 }
 
 /* Form elements and dropdowns */
-select.form-select,
-select.form-select option,
-.dropdown-menu,
-.dropdown-item {
+select.form-select, select.form-select option,
+.dropdown-menu, .dropdown-item {
     color: var(--wc-dark) !important;
     background-color: var(--wc-light) !important;
 }
@@ -1261,7 +967,7 @@ select.form-select:focus {
 
 .answer-option:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .score-container {
@@ -1275,10 +981,26 @@ select.form-select:focus {
     transition: all 0.3s ease;
 }
 
-.alliance-theme { background-color: #2858a0; color: white; }
-.horde-theme { background-color: #8c1616; color: white; }
-.undead-theme { background-color: #2e2e2e; color: white; }
-.nightelf-theme { background-color: #4b2b82; color: white; }
+/* Faction theme colors */
+.alliance-theme {
+    background-color: #2858a0;
+    color: white;
+}
+
+.horde-theme {
+    background-color: #8c1616;
+    color: white;
+}
+
+.undead-theme {
+    background-color: #2e2e2e;
+    color: white;
+}
+
+.nightelf-theme {
+    background-color: #4b2b82;
+    color: white;
+}
 
 .faction-card {
     transition: transform 0.3s ease;
@@ -1294,4 +1016,123 @@ select.form-select:focus {
     justify-content: center;
     padding: 2rem;
 }
+
+/* Animation for content loading */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--wc-dark);
+        color: var(--wc-light);
+    }
+
+    .card {
+        background-color: #1e1e1e;
+        border-color: var(--wc-border);
+    }
+
+    .card-body {
+        color: var(--wc-light);
+    }
+
+    .nav-pills .nav-link {
+        color: var(--wc-light);
+        background-color: rgba(255, 255, 255, 0.05);
+        margin: 0 5px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-pills .nav-link:hover,
+    .nav-pills .nav-link.active {
+        background-color: var(--wc-primary);
+        color: var(--wc-light);
+    }
+
+    .accordion-button:not(.collapsed) {
+        background-color: var(--wc-primary);
+        color: var(--wc-light);
+    }
+
+    .accordion-button:focus {
+        box-shadow: 0 0 0 0.25rem rgba(47, 137, 252, 0.25);
+    }
+
+    .list-group-item {
+        border: none;
+        padding: 0.75rem 1.25rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .list-group-item:hover {
+        background-color: var(--wc-gray);
+    }
+
+    .card-title {
+        color: var(--wc-primary);
+        border-bottom: 2px solid var(--wc-primary);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--wc-primary);
+    color: var(--wc-light);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.back-to-top:hover {
+    background-color: var(--wc-primary-hover);
+    transform: translateY(-3px);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Loading skeleton animation */
+.skeleton {
+    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
 }

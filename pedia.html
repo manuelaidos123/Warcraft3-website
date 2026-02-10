@@ -1,332 +1,408 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Warcraft 3 - WarcraftPedia</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Comprehensive guide to Warcraft 3 races, strategies, and gameplay mechanics">
-        
-        <!-- Stylesheets -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
-        <link rel="icon" type="image/png" href="images/icons/logo.png">
-    </head>
-    <body class="bg-light">
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-                <div class="container">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="images/icons/logo.png" alt="Warcraft III Logo" width="40" height="40">
-                        Warcraft III
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a class="nav-link" href="story.html">Story</a></li>
-                            <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
-                            <li class="nav-item"><a class="nav-link" href="characters.html">Characters</a></li>
-                            <li class="nav-item"><a class="nav-link active" href="pedia.html">WarcraftPedia</a></li>
-                            <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
 
-        <main class="container py-5 mt-5">
-            <div class="alert-container" role="alert" aria-live="polite"></div>
-            <h1 class="text-center mb-5">Race Strategies, Pros and Cons</h1>
+<head>
+    <title>Warcraft 3 - WarcraftPedia</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive guide to Warcraft 3 races, strategies, and gameplay mechanics">
 
-            <!-- Quick Navigation -->
-            <nav class="nav nav-pills nav-fill mb-5">
-                <a class="nav-link" href="#human">Human</a>
-                <a class="nav-link" href="#orc">Orc</a>
-                <a class="nav-link" href="#nightelf">Night Elf</a>
-                <a class="nav-link" href="#undead">Undead</a>
-            </nav>
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/icons/logo.png">
+</head>
 
-            <!-- Human Section -->
-            <section id="human" class="mb-5">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h2 class="card-title">How To Basic: Human</h2>
-                        <p class="lead">Human units are fragile but utilize advanced technology and magic to overcome their foes.</p>
-                        
-                        <div class="row mt-4">
-                            <div class="col-md-6">
-                                <h3 class="text-success">Advantages</h3>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Versatile unit composition</li>
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Strong defensive capabilities</li>
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Excellent support units</li>
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Powerful spellcasters</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <h3 class="text-danger">Disadvantages</h3>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>High resource costs</li>
-                                    <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Fragile core units</li>
-                                    <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Slow army buildup</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="mt-4">
-                            <h3>Key Strategies</h3>
-                            <div class="accordion" id="humanStrategies">
-                                <div class="accordion-item">
-                                    <h4 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#humanStrat1">
-                                            Fast Expansion
-                                        </button>
-                                    </h4>
-                                    <div id="humanStrat1" class="accordion-collapse collapse show" data-bs-parent="#humanStrategies">
-                                        <div class="accordion-body">
-                                            Utilize Militia and Footmen for early expansion while teching to Rifles and Priests.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h4 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#humanStrat2">
-                                            Tower Defense
-                                        </button>
-                                    </h4>
-                                    <div id="humanStrat2" class="accordion-collapse collapse" data-bs-parent="#humanStrategies">
-                                        <div class="accordion-body">
-                                            Build towers strategically while massing an army of Priests, Sorceresses, and Breakers.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Orc Section -->
-            <section id="orc" class="mb-5">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h2 class="card-title">How To Basic: Orc</h2>
-                        <p class="lead">Orcs excel at aggressive gameplay with powerful melee units and shamanistic support.</p>
-                        
-                        <div class="row mt-4">
-                            <div class="col-md-6">
-                                <h3 class="text-success">Advantages</h3>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Strong melee units</li>
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Excellent hero abilities</li>
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Powerful early game</li>
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Good mobility with Raiders</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <h3 class="text-danger">Disadvantages</h3>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Weak against air units</li>
-                                    <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Limited ranged options</li>
-                                    <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Food-heavy army composition</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="mt-4">
-                            <h3>Key Strategies</h3>
-                            <div class="accordion" id="orcStrategies">
-                                <div class="accordion-item">
-                                    <h4 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#orcStrat1">
-                                            Blademaster Rush
-                                        </button>
-                                    </h4>
-                                    <div id="orcStrat1" class="accordion-collapse collapse show" data-bs-parent="#orcStrategies">
-                                        <div class="accordion-body">
-                                            Use Blademaster's Critical Strike and Wind Walk for early harassment while building up a Grunt force.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h4 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#orcStrat2">
-                                            Raider Kiting
-                                        </button>
-                                    </h4>
-                                    <div id="orcStrat2" class="accordion-collapse collapse" data-bs-parent="#orcStrategies">
-                                        <div class="accordion-body">
-                                            Utilize Raiders' Ensnare ability and speed to control enemy units while dealing damage safely.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Night Elf Section -->
-            <section id="nightelf" class="mb-5">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h2 class="card-title">How To Basic: Night Elf</h2>
-                        <p class="lead">Night Elves utilize stealth and mobility to outmaneuver opponents while leveraging powerful nature magic.</p>
-                        
-                        <div class="row mt-4">
-                            <div class="col-md-6">
-                                <h3 class="text-success">Advantages</h3>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Superior mobility</li>
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Strong economy (Moon Wells)</li>
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Effective harassment options</li>
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Powerful late game units</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <h3 class="text-danger">Disadvantages</h3>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Expensive units</li>
-                                    <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Vulnerable buildings</li>
-                                    <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Complex micro management</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="mt-4">
-                            <h3>Key Strategies</h3>
-                            <div class="accordion" id="elfStrategies">
-                                <div class="accordion-item">
-                                    <h4 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#elfStrat1">
-                                            Demon Hunter Expansion
-                                        </button>
-                                    </h4>
-                                    <div id="elfStrat1" class="accordion-collapse collapse show" data-bs-parent="#elfStrategies">
-                                        <div class="accordion-body">
-                                            Use Demon Hunter's survivability to secure early expansion while teching to Druids or Archers.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h4 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#elfStrat2">
-                                            Bear Druid Combo
-                                        </button>
-                                    </h4>
-                                    <div id="elfStrat2" class="accordion-collapse collapse" data-bs-parent="#elfStrategies">
-                                        <div class="accordion-body">
-                                            Combine Druids of the Claw in bear form with Druid of the Talon support for a powerful late-game army.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Undead Section -->
-            <section id="undead" class="mb-5">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h2 class="card-title">How To Basic: Undead</h2>
-                        <p class="lead">Undead excel at wearing down opponents through attrition and hero-focused strategies.</p>
-                        
-                        <div class="row mt-4">
-                            <div class="col-md-6">
-                                <h3 class="text-success">Advantages</h3>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Strong hero lineup</li>
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Efficient resource gathering</li>
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Good unit sustainability</li>
-                                    <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Powerful base defenses</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <h3 class="text-danger">Disadvantages</h3>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Limited early game options</li>
-                                    <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Weak tier 1 units</li>
-                                    <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Reliant on heroes</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="mt-4">
-                            <h3>Key Strategies</h3>
-                            <div class="accordion" id="undeadStrategies">
-                                <div class="accordion-item">
-                                    <h4 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#undeadStrat1">
-                                            Death Knight Fast Expand
-                                        </button>
-                                    </h4>
-                                    <div id="undeadStrat1" class="accordion-collapse collapse show" data-bs-parent="#undeadStrategies">
-                                        <div class="accordion-body">
-                                            Use Death Knight's Coil and ghouls to secure an early expansion while transitioning to tier 2.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h4 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#undeadStrat2">
-                                            Fiend Statue Control
-                                        </button>
-                                    </h4>
-                                    <div id="undeadStrat2" class="accordion-collapse collapse" data-bs-parent="#undeadStrategies">
-                                        <div class="accordion-body">
-                                            Build a core army of Crypt Fiends supported by Obsidian Statues for sustained pushes and map control.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="bg-dark text-light py-5">
+<body class="bg-light">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <div class="row gy-4">
-                    <div class="col-lg-4">
-                        <h3>Quick Links</h3>
-                        <ul class="list-unstyled">
-                            <li><a class="text-light text-decoration-none" href="#human">Human Guide</a></li>
-                            <li><a class="text-light text-decoration-none" href="#orc">Orc Guide</a></li>
-                            <li><a class="text-light text-decoration-none" href="#nightelf">Night Elf Guide</a></li>
-                            <li><a class="text-light text-decoration-none" href="#undead">Undead Guide</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 text-center">
-                        <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
-                    </div>
-                    <div class="col-lg-4">
-                        <h3>Social Links</h3>
-                        <div class="d-flex gap-3">
-                            <a href="#" class="text-light"><i class="fab fa-instagram fa-2x"></i></a>
-                            <a href="#" class="text-light"><i class="fab fa-telegram fa-2x"></i></a>
-                            <a href="#" class="text-light"><i class="fab fa-twitter fa-2x"></i></a>
-                            <a href="#" class="text-light"><i class="fab fa-facebook fa-2x"></i></a>
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/icons/logo.png" alt="Warcraft III Logo" width="40" height="40">
+                    Warcraft III
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="storyDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Story
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="storyDropdown">
+                                <li><a class="dropdown-item" href="story.html">Campaign Overview</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="story.html?campaign=reign">Reign of Chaos</a></li>
+                                <li><a class="dropdown-item" href="story.html?campaign=frozen">The Frozen Throne</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="guide.html">Campaign Guide</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="characters.html">Characters</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="pedia.html">WarcraftPedia</a></li>
+                        <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container py-5 mt-5">
+        <div class="alert-container" role="alert" aria-live="polite"></div>
+        <h1 class="text-center mb-5">Race Strategies, Pros and Cons</h1>
+
+        <!-- Quick Navigation -->
+        <nav class="nav nav-pills nav-fill mb-5">
+            <a class="nav-link" href="#human">Human</a>
+            <a class="nav-link" href="#orc">Orc</a>
+            <a class="nav-link" href="#nightelf">Night Elf</a>
+            <a class="nav-link" href="#undead">Undead</a>
+        </nav>
+
+        <!-- Human Section -->
+        <section id="human" class="mb-5">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">How To Basic: Human</h2>
+                    <p class="lead">Human units are fragile but utilize advanced technology and magic to overcome their
+                        foes.</p>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <h3 class="text-success">Advantages</h3>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Versatile unit
+                                    composition</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Strong
+                                    defensive capabilities</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Excellent
+                                    support units</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Powerful
+                                    spellcasters</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="text-danger">Disadvantages</h3>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>High resource
+                                    costs</li>
+                                <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Fragile core
+                                    units</li>
+                                <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Slow army
+                                    buildup</li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col text-center">
-                        <p class="mb-0">Email: some-email@gmail.com | Telephone: 0-777-777-123</p>
-                        <p class="text-muted">Andrei Kornev 2024.</p>
+
+                    <div class="mt-4">
+                        <h3>Key Strategies</h3>
+                        <div class="accordion" id="humanStrategies">
+                            <div class="accordion-item">
+                                <h4 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#humanStrat1">
+                                        Fast Expansion
+                                    </button>
+                                </h4>
+                                <div id="humanStrat1" class="accordion-collapse collapse show"
+                                    data-bs-parent="#humanStrategies">
+                                    <div class="accordion-body">
+                                        Utilize Militia and Footmen for early expansion while teching to Rifles and
+                                        Priests.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h4 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#humanStrat2">
+                                        Tower Defense
+                                    </button>
+                                </h4>
+                                <div id="humanStrat2" class="accordion-collapse collapse"
+                                    data-bs-parent="#humanStrategies">
+                                    <div class="accordion-body">
+                                        Build towers strategically while massing an army of Priests, Sorceresses, and
+                                        Breakers.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </footer>
+        </section>
 
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-        <script src="scripts.js" defer></script>
-    </body>
+        <!-- Orc Section -->
+        <section id="orc" class="mb-5">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">How To Basic: Orc</h2>
+                    <p class="lead">Orcs excel at aggressive gameplay with powerful melee units and shamanistic support.
+                    </p>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <h3 class="text-success">Advantages</h3>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Strong melee
+                                    units</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Excellent hero
+                                    abilities</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Powerful early
+                                    game</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Good mobility
+                                    with Raiders</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="text-danger">Disadvantages</h3>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Weak against
+                                    air units</li>
+                                <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Limited ranged
+                                    options</li>
+                                <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Food-heavy army
+                                    composition</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <h3>Key Strategies</h3>
+                        <div class="accordion" id="orcStrategies">
+                            <div class="accordion-item">
+                                <h4 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#orcStrat1">
+                                        Blademaster Rush
+                                    </button>
+                                </h4>
+                                <div id="orcStrat1" class="accordion-collapse collapse show"
+                                    data-bs-parent="#orcStrategies">
+                                    <div class="accordion-body">
+                                        Use Blademaster's Critical Strike and Wind Walk for early harassment while
+                                        building up a Grunt force.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h4 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#orcStrat2">
+                                        Raider Kiting
+                                    </button>
+                                </h4>
+                                <div id="orcStrat2" class="accordion-collapse collapse" data-bs-parent="#orcStrategies">
+                                    <div class="accordion-body">
+                                        Utilize Raiders' Ensnare ability and speed to control enemy units while dealing
+                                        damage safely.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Night Elf Section -->
+        <section id="nightelf" class="mb-5">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">How To Basic: Night Elf</h2>
+                    <p class="lead">Night Elves utilize stealth and mobility to outmaneuver opponents while leveraging
+                        powerful nature magic.</p>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <h3 class="text-success">Advantages</h3>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Superior
+                                    mobility</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Strong economy
+                                    (Moon Wells)</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Effective
+                                    harassment options</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Powerful late
+                                    game units</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="text-danger">Disadvantages</h3>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Expensive units
+                                </li>
+                                <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Vulnerable
+                                    buildings</li>
+                                <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Complex micro
+                                    management</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <h3>Key Strategies</h3>
+                        <div class="accordion" id="elfStrategies">
+                            <div class="accordion-item">
+                                <h4 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#elfStrat1">
+                                        Demon Hunter Expansion
+                                    </button>
+                                </h4>
+                                <div id="elfStrat1" class="accordion-collapse collapse show"
+                                    data-bs-parent="#elfStrategies">
+                                    <div class="accordion-body">
+                                        Use Demon Hunter's survivability to secure early expansion while teching to
+                                        Druids or Archers.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h4 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#elfStrat2">
+                                        Bear Druid Combo
+                                    </button>
+                                </h4>
+                                <div id="elfStrat2" class="accordion-collapse collapse" data-bs-parent="#elfStrategies">
+                                    <div class="accordion-body">
+                                        Combine Druids of the Claw in bear form with Druid of the Talon support for a
+                                        powerful late-game army.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Undead Section -->
+        <section id="undead" class="mb-5">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">How To Basic: Undead</h2>
+                    <p class="lead">Undead excel at wearing down opponents through attrition and hero-focused
+                        strategies.</p>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <h3 class="text-success">Advantages</h3>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Strong hero
+                                    lineup</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Efficient
+                                    resource gathering</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Good unit
+                                    sustainability</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>Powerful base
+                                    defenses</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="text-danger">Disadvantages</h3>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Limited early
+                                    game options</li>
+                                <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Weak tier 1
+                                    units</li>
+                                <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>Reliant on
+                                    heroes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <h3>Key Strategies</h3>
+                        <div class="accordion" id="undeadStrategies">
+                            <div class="accordion-item">
+                                <h4 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#undeadStrat1">
+                                        Death Knight Fast Expand
+                                    </button>
+                                </h4>
+                                <div id="undeadStrat1" class="accordion-collapse collapse show"
+                                    data-bs-parent="#undeadStrategies">
+                                    <div class="accordion-body">
+                                        Use Death Knight's Coil and ghouls to secure an early expansion while
+                                        transitioning to tier 2.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h4 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#undeadStrat2">
+                                        Fiend Statue Control
+                                    </button>
+                                </h4>
+                                <div id="undeadStrat2" class="accordion-collapse collapse"
+                                    data-bs-parent="#undeadStrategies">
+                                    <div class="accordion-body">
+                                        Build a core army of Crypt Fiends supported by Obsidian Statues for sustained
+                                        pushes and map control.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4">
+                    <h3>Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a class="text-light text-decoration-none" href="#human">Human Guide</a></li>
+                        <li><a class="text-light text-decoration-none" href="#orc">Orc Guide</a></li>
+                        <li><a class="text-light text-decoration-none" href="#nightelf">Night Elf Guide</a></li>
+                        <li><a class="text-light text-decoration-none" href="#undead">Undead Guide</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
+                </div>
+                <div class="col-lg-4">
+                    <h3>Social Links</h3>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-light"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-telegram fa-2x"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-twitter fa-2x"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-facebook fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col text-center">
+                    <p class="mb-0">Email: some-email@gmail.com | Telephone: 0-777-777-123</p>
+                    <p class="text-muted">Andrei Kornev 2024.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="scripts.js" defer></script>
+</body>
+
 </html>

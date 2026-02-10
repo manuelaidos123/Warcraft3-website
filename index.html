@@ -1,143 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Warcraft 3</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Official Warcraft 3 fan website featuring game guides, lore, and strategies">
-        <meta name="theme-color" content="#2f89fc">
-        
-        <!-- Preload critical assets -->
-        <link rel="preload" href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" as="style">
-        <link rel="preload" href="style.css" as="style">
-        <link rel="preload" href="scripts.js" as="script">
-        
-        <!-- Stylesheets -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
-        <link rel="icon" type="image/png" href="images/icons/logo.png">
-    </head>
-    <body class="bg-light">
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">
-                    <img src="images/icons/logo.png" alt="Warcraft III Logo" width="30" height="30">
-                    Warcraft III
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="story.html">Story</a></li>
-                        <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
-                        <li class="nav-item"><a class="nav-link" href="characters.html">Characters</a></li>
-                        <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
-                        <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
+
+<head>
+    <title>Warcraft 3</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Official Warcraft 3 fan website featuring game guides, lore, and strategies">
+    <meta name="theme-color" content="#2f89fc">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap"
+        as="style">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="scripts.js" as="script">
+
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/icons/logo.png">
+</head>
+
+<body class="bg-light">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/icons/logo.png" alt="Warcraft III Logo" width="30" height="30">
+                Warcraft III
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="storyDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Story
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="storyDropdown">
+                            <li><a class="dropdown-item" href="story.html">Campaign Overview</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="story.html?campaign=reign">Reign of Chaos</a></li>
+                            <li><a class="dropdown-item" href="story.html?campaign=frozen">The Frozen Throne</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="guide.html">Campaign Guide</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="characters.html">Characters</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
+                    <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero bg-dark text-white py-5 mb-5">
+            <div class="container text-center">
+                <h1 class="display-4">Welcome!</h1>
+                <h3 class="lead">To the Best Warcraft 3 website.</h3>
+            </div>
+        </section>
+
+        <!-- Featured Content Section -->
+        <section class="container py-5">
+            <div class="row g-4">
+                <!-- Featured Story -->
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="images/story-preview.jpg" class="card-img-top" alt="Story Preview">
+                        <div class="card-body">
+                            <h2 class="card-title h4">Epic Campaign</h2>
+                            <p class="card-text">Experience the legendary story of Warcraft III through its epic
+                                campaigns.</p>
+                            <a href="story.html" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Factions -->
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="images/factions-preview.jpg" class="card-img-top" alt="Factions Preview">
+                        <div class="card-body">
+                            <h2 class="card-title h4">Mighty Factions</h2>
+                            <p class="card-text">Choose your allegiance among the powerful factions of Azeroth.</p>
+                            <a href="factions.html" class="btn btn-primary">Explore Factions</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Characters -->
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="images/characters-preview.jpg" class="card-img-top" alt="Characters Preview">
+                        <div class="card-body">
+                            <h2 class="card-title h4">Legendary Heroes</h2>
+                            <p class="card-text">Meet the iconic characters that shaped the world of Warcraft.</p>
+                            <a href="characters.html" class="btn btn-primary">Meet Heroes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4">
+                    <h3>Contact</h3>
+                    <address class="mb-3">
+                        <p>Email: <a class="text-light"
+                                href="mailto:contact@warcraft3website.com">contact@warcraft3website.com</a></p>
+                        <p>Follow us on:
+                            <a class="text-light me-2" href="https://twitter.com/warcraft3" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-twitter" aria-label="Twitter"></i>
+                            </a>
+                            <a class="text-light" href="https://discord.gg/warcraft3" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-discord" aria-label="Discord"></i>
+                            </a>
+                        </p>
+                    </address>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
+                </div>
+                <div class="col-lg-4">
+                    <h3>Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="story.html" class="text-light">Story</a></li>
+                        <li><a href="factions.html" class="text-light">Factions</a></li>
+                        <li><a href="characters.html" class="text-light">Characters</a></li>
+                        <li><a href="pedia.html" class="text-light">WarcraftPedia</a></li>
                     </ul>
                 </div>
             </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main>
-            <!-- Hero Section -->
-            <section class="hero bg-dark text-white py-5 mb-5">
-                <div class="container text-center">
-                    <h1 class="display-4">Welcome!</h1>
-                    <h3 class="lead">To the Best Warcraft 3 website.</h3>
-                </div>
-            </section>
-
-            <!-- Featured Content Section -->
-            <section class="container py-5">
-                <div class="row g-4">
-                    <!-- Featured Story -->
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="images/story-preview.jpg" class="card-img-top" alt="Story Preview">
-                            <div class="card-body">
-                                <h2 class="card-title h4">Epic Campaign</h2>
-                                <p class="card-text">Experience the legendary story of Warcraft III through its epic campaigns.</p>
-                                <a href="story.html" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Featured Factions -->
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="images/factions-preview.jpg" class="card-img-top" alt="Factions Preview">
-                            <div class="card-body">
-                                <h2 class="card-title h4">Mighty Factions</h2>
-                                <p class="card-text">Choose your allegiance among the powerful factions of Azeroth.</p>
-                                <a href="factions.html" class="btn btn-primary">Explore Factions</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Featured Characters -->
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="images/characters-preview.jpg" class="card-img-top" alt="Characters Preview">
-                            <div class="card-body">
-                                <h2 class="card-title h4">Legendary Heroes</h2>
-                                <p class="card-text">Meet the iconic characters that shaped the world of Warcraft.</p>
-                                <a href="characters.html" class="btn btn-primary">Meet Heroes</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <!-- Footer -->
-        <footer class="bg-dark text-light py-5">
-            <div class="container">
-                <div class="row gy-4">
-                    <div class="col-lg-4">
-                        <h3>Contact</h3>
-                        <address class="mb-3">
-                            <p>Email: <a class="text-light" href="mailto:contact@warcraft3website.com">contact@warcraft3website.com</a></p>
-                            <p>Follow us on: 
-                                <a class="text-light me-2" href="https://twitter.com/warcraft3" target="_blank" rel="noopener noreferrer">
-                                    <i class="fab fa-twitter" aria-label="Twitter"></i>
-                                </a>
-                                <a class="text-light" href="https://discord.gg/warcraft3" target="_blank" rel="noopener noreferrer">
-                                    <i class="fab fa-discord" aria-label="Discord"></i>
-                                </a>
-                            </p>
-                        </address>
-                    </div>
-                    <div class="col-lg-4 text-center">
-                        <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
-                    </div>
-                    <div class="col-lg-4">
-                        <h3>Quick Links</h3>
-                        <ul class="list-unstyled">
-                            <li><a href="story.html" class="text-light">Story</a></li>
-                            <li><a href="factions.html" class="text-light">Factions</a></li>
-                            <li><a href="characters.html" class="text-light">Characters</a></li>
-                            <li><a href="pedia.html" class="text-light">WarcraftPedia</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-12">
-                        <p class="text-center mb-0">&copy; 2024 Warcraft III Website. All rights reserved.</p>
-                    </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <p class="text-center mb-0">&copy; 2024 Warcraft III Website. All rights reserved.</p>
                 </div>
             </div>
-        </footer>
+        </div>
+    </footer>
 
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-        <script src="scripts.js" defer></script>
-    </body>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="scripts.js" defer></script>
+</body>
+
 </html>

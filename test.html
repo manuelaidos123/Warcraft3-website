@@ -1,120 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Warcraft 3 - Voice Recognition Test</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Test your knowledge of Warcraft 3 character voices">
-        <meta name="theme-color" content="#2f89fc">
-        
-        <!-- Preload critical assets -->
-        <link rel="preload" href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" as="style">
-        <link rel="preload" href="style.css" as="style">
-        <link rel="preload" href="scripts.js" as="script">
-        
-        <!-- Stylesheets -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
-        <link rel="icon" type="image/png" href="images/icons/logo.png">
-        
-        <!-- Scripts -->
-        <script src="scripts.js" defer></script>
-    </head>
-    <body class="bg-light">
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-                <div class="container">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="images/icons/logo.png" alt="Warcraft III Logo" width="40" height="40">
-                        Warcraft III
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a class="nav-link" href="story.html">Story</a></li>
-                            <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
-                            <li class="nav-item"><a class="nav-link" href="characters.html">Characters</a></li>
-                            <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
-                            <li class="nav-item"><a class="nav-link active" href="test.html">Test</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        <main class="container py-5 mt-5">
-            <div class="alert-container" role="alert" aria-live="polite"></div>
-            <section class="voice-test-section">
-                <h1 class="text-center mb-4">Voice Recognition Test</h1>
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <div id="voiceTest" class="text-center">
-                            <div class="mb-4">
-                                <h3>Test Your Knowledge</h3>
-                                <p>Listen to the voice clip and select the correct character!</p>
-                            </div>
-                            <div class="audio-controls mb-4">
-                                <button id="playSound" class="btn btn-primary btn-lg">
-                                    <i class="fas fa-play me-2"></i>Play Voice
-                                </button>
-                                <audio id="voiceClip" src="" style="display: none;"></audio>
-                            </div>
-                            <div class="options-container mb-4">
-                                <div class="row g-3" id="answerOptions">
-                                    <!-- Options will be dynamically inserted here -->
-                                </div>
-                            </div>
-                            <div class="score-container">
-                                <p class="h4">Score: <span id="score">0</span></p>
-                                <p>Question: <span id="questionNumber">1</span>/10</p>
-                            </div>
-                            <div id="feedback" class="alert mt-3" style="display: none;"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-        <!-- Footer -->
-        <footer class="bg-dark text-light py-5">
+
+<head>
+    <title>Warcraft 3 - Voice Recognition Test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test your knowledge of Warcraft 3 character voices">
+    <meta name="theme-color" content="#2f89fc">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap"
+        as="style">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="scripts.js" as="script">
+
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abyssinica+SIL|Raleway:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/icons/logo.png">
+
+    <!-- Scripts -->
+    <script src="scripts.js" defer></script>
+</head>
+
+<body class="bg-light">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <div class="row gy-4">
-                    <div class="col-lg-4">
-                        <h3>Quick Links</h3>
-                        <ul class="list-unstyled">
-                            <li><a class="text-light text-decoration-none" href="#human">Human Guide</a></li>
-                            <li><a class="text-light text-decoration-none" href="#orc">Orc Guide</a></li>
-                            <li><a class="text-light text-decoration-none" href="#nightelf">Night Elf Guide</a></li>
-                            <li><a class="text-light text-decoration-none" href="#undead">Undead Guide</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 text-center">
-                        <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
-                    </div>
-                    <div class="col-lg-4">
-                        <h3>Social Links</h3>
-                        <div class="d-flex gap-3">
-                            <a href="#" class="text-light"><i class="fab fa-instagram fa-2x"></i></a>
-                            <a href="#" class="text-light"><i class="fab fa-telegram fa-2x"></i></a>
-                            <a href="#" class="text-light"><i class="fab fa-twitter fa-2x"></i></a>
-                            <a href="#" class="text-light"><i class="fab fa-facebook fa-2x"></i></a>
-                        </div>
-                    </div>
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/icons/logo.png" alt="Warcraft III Logo" width="40" height="40">
+                    Warcraft III
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="storyDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Story
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="storyDropdown">
+                                <li><a class="dropdown-item" href="story.html">Campaign Overview</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="story.html?campaign=reign">Reign of Chaos</a></li>
+                                <li><a class="dropdown-item" href="story.html?campaign=frozen">The Frozen Throne</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="guide.html">Campaign Guide</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="factions.html">Factions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="characters.html">Characters</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pedia.html">WarcraftPedia</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="test.html">Test</a></li>
+                    </ul>
                 </div>
-                <div class="row mt-4">
-                    <div class="col text-center">
-                        <p class="mb-0">Email: some-email@gmail.com | Telephone: 0-777-777-123</p>
-                        <p class="text-muted">Andrei Kornev 2024.</p>
+            </div>
+        </nav>
+    </header>
+    <main class="container py-5 mt-5">
+        <div class="alert-container" role="alert" aria-live="polite"></div>
+        <section class="voice-test-section">
+            <h1 class="text-center mb-4">Voice Recognition Test</h1>
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div id="voiceTest" class="text-center">
+                        <div class="mb-4">
+                            <h3>Test Your Knowledge</h3>
+                            <p>Listen to the voice clip and select the correct character!</p>
+                        </div>
+                        <div class="audio-controls mb-4">
+                            <button id="playSound" class="btn btn-primary btn-lg">
+                                <i class="fas fa-play me-2"></i>Play Voice
+                            </button>
+                            <audio id="voiceClip" src="" style="display: none;"></audio>
+                        </div>
+                        <div class="options-container mb-4">
+                            <div class="row g-3" id="answerOptions">
+                                <!-- Options will be dynamically inserted here -->
+                            </div>
+                        </div>
+                        <div class="score-container">
+                            <p class="h4">Score: <span id="score">0</span></p>
+                            <p>Question: <span id="questionNumber">1</span>/10</p>
+                        </div>
+                        <div id="feedback" class="alert mt-3" style="display: none;"></div>
                     </div>
                 </div>
             </div>
-        </footer>
-        <!-- Add Bootstrap JS and its dependencies at the end of the body -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-        <script src="scripts.js" defer></script>
-    </body>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4">
+                    <h3>Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a class="text-light text-decoration-none" href="#human">Human Guide</a></li>
+                        <li><a class="text-light text-decoration-none" href="#orc">Orc Guide</a></li>
+                        <li><a class="text-light text-decoration-none" href="#nightelf">Night Elf Guide</a></li>
+                        <li><a class="text-light text-decoration-none" href="#undead">Undead Guide</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img src="images/icons/footer-logo.png" alt="Warcraft 3 Footer Logo" width="200">
+                </div>
+                <div class="col-lg-4">
+                    <h3>Social Links</h3>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-light"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-telegram fa-2x"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-twitter fa-2x"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-facebook fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col text-center">
+                    <p class="mb-0">Email: some-email@gmail.com | Telephone: 0-777-777-123</p>
+                    <p class="text-muted">Andrei Kornev 2024.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Add Bootstrap JS and its dependencies at the end of the body -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="scripts.js" defer></script>
+</body>
+
 </html>
